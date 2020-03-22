@@ -5,8 +5,6 @@ class FrequencyFunctionWaveFile
 {
 public:
     bool initialized;
-    static int nextid;
-    int id = nextid++;
     exprtk::symbol_table<double> symbol_table_frequency;
     exprtk::symbol_table<double> symbol_table_pulse;
     exprtk::expression<double> expression_frequency;
@@ -22,4 +20,3 @@ public:
     double Amplitude(double t, int32_t n);
     double Frequency();
 };
-

@@ -3,8 +3,6 @@
 #include "stdafx.h"
 #include "FrequencyFunctionWaveFile.h"
 
-int FrequencyFunctionWaveFile::nextid = 0;
-
 void FrequencyFunctionWaveFile::initialize()
 {
     exprtk::parser<double> parser;
@@ -12,17 +10,18 @@ void FrequencyFunctionWaveFile::initialize()
     symbol_table_pulse.add_variable("t", *t);
     symbol_table_pulse.add_variable("n", *n);
     symbol_table_pulse.add_variable("x", *x);
-
+    symbol_table_pulse.add_pi();
     symbol_table_frequency.add_constant("N", h.N);
     symbol_table_frequency.add_variable("t", *t);
     symbol_table_frequency.add_variable("n", *n);
-
+    symbol_table_frequency.add_pi();
     expression_pulse.register_symbol_table(symbol_table_pulse);
     expression_frequency.register_symbol_table(symbol_table_frequency);
 
     parser.compile(frequency, expression_frequency);
     parser.compile(pulse, expression_pulse);
 
+    
     initialized = true;
 }
 

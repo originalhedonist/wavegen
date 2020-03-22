@@ -61,7 +61,8 @@ int main(int argc, char** args)
         json j;
         ifs >> j;
         ifs.close();
-        
+
+        std::string name = j["Naming"]["Specific"];
         std::ofstream ofs;
         ofs.open(args[2], std::ios::binary);
         if (!ofs.is_open()) throw std::exception("Unable to write file");

@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "FrequencyFunctionWaveFile.h"
 #include "headerdata.h"
+#include "wetnessapplier.h"
 #include "channel.h"
 
 using json = nlohmann::json;
@@ -84,6 +85,7 @@ int main(int argc, char** args)
             for(std::vector<channel>::iterator channelit = channels.begin(); channelit != channels.end(); channelit++)
             {
                 double a = 1;
+
                 for(std::vector<FrequencyFunctionWaveFile>::iterator componentit = channelit->components.begin();
                     componentit != channelit->components.end();
                     componentit++)
@@ -93,6 +95,9 @@ int main(int argc, char** args)
                 }
                 if (a < -1 || a > 1)
                     throw std::exception("Amplitude must be -1 to 1");
+
+                a = channelit->wetness.Amplitude(t, n, a);
+                a *= channelit->carrier.Amplitude(t, n);
                 int16_t aLs = (int16_t)((a + 1) * ((double)65535 / 2) - 32768);
                 write_short(ofs, aLs);
             }

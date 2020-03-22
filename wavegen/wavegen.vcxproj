@@ -151,6 +151,7 @@
     <ClCompile Include="FrequencyFunctionWaveFile.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="wavegen.cpp" />
+    <ClCompile Include="wetnessapplier.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="channel.h" />
@@ -159,6 +160,7 @@
     <ClInclude Include="FrequencyFunctionWaveFile.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="wetnessapplier.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

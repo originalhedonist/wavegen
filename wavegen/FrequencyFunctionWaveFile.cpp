@@ -24,8 +24,6 @@ void FrequencyFunctionWaveFile::initialize()
     parser.compile(pulse, expression_pulse);
 
     initialized = true;
-    double initial_f = expression_frequency.value();
-    double initial_p = expression_pulse.value();
 }
 
 FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const nlohmann::json j, const headerdata& h) :

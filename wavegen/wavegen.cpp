@@ -89,6 +89,7 @@ int main(int argc, char** args)
                     componentit++)
                 {
                     auto athis = componentit->Amplitude(t, n);
+                    a *= athis;
                 }
                 if (a < -1 || a > 1)
                     throw std::exception("Amplitude must be -1 to 1");

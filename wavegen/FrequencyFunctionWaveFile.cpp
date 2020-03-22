@@ -2,17 +2,19 @@
 #define exprtk_disable_caseinsensitivity
 #include "stdafx.h"
 #include "FrequencyFunctionWaveFile.h"
-#include "c.h"
 
-FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const std::string& frequency, const std::string& pulse)
+FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const nlohmann::json j, const headerdata& h)
 : t(0), n(-1), x(0), aLast(0)
 {
-    symbol_table_pulse.add_constant("N", c::N);
+    exprtk::parser<double> parser;
+    std::string frequency = j["Frequency"];
+    std::string pulse = j["Pulse"];
+    symbol_table_pulse.add_constant("N", h.N);
     symbol_table_pulse.add_variable("t", t);
     symbol_table_pulse.add_variable("n", n);
     symbol_table_pulse.add_variable("x", x);
 
-    symbol_table_frequency.add_constant("N", c::N);
+    symbol_table_frequency.add_constant("N", h.N);
     symbol_table_frequency.add_variable("t", t);
     symbol_table_frequency.add_variable("n", n);
 

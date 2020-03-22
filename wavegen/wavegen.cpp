@@ -3,7 +3,8 @@
 
 #include "stdafx.h"
 #include "FrequencyFunctionWaveFile.h"
-#include "c.h"
+#include "headerdata.h"
+#include "channel.h"
 
 using json = nlohmann::json;
 
@@ -21,21 +22,30 @@ void write_int(std::ostream& os, int32_t i)
     os << (BYTE)((i >> 24) & 0xff);
 }
 
-void write_header(std::ofstream& ofs)
+void write_header(std::ofstream& ofs, const headerdata& h)
 {
     ofs.write("RIFF", 4);
-    write_int(ofs, c::overallFileSize - 8);
+    write_int(ofs, h.overallFileSize - 8);
     ofs.write("WAVE", 4);
     ofs.write("fmt ", 4);
     write_int(ofs, 16);// length of format data
     write_short(ofs, 1); // type of format (1 = PCM)
-    write_short(ofs, c::channels);
-    write_int(ofs, c::sampling_frequency);
-    write_int(ofs, c::sampling_frequency * c::bytes_per_sample * c::channels);
-    write_short(ofs, c::bytes_per_sample * c::channels);
-    write_short(ofs, c::bytes_per_sample * 8);// bits per sample
+    write_short(ofs, h.channels);
+    write_int(ofs, h.sampling_frequency);
+    write_int(ofs, h.sampling_frequency * h.bytes_per_sample * h.channels);
+    write_short(ofs, h.bytes_per_sample * h.channels);
+    write_short(ofs, h.bytes_per_sample * 8);// bits per sample
     ofs.write("data", 4);
-    write_int(ofs, c::overallDataSize);
+    write_int(ofs, h.overallDataSize);
+}
+
+const int32_t time_span_to_seconds(const std::string& timespan)
+{
+    if (timespan.size() != 8 || timespan[2] != ':' || timespan[5] != ':') throw std::exception("Time span is wrong format");
+    int32_t hours = atoi(timespan.substr(0, 2).c_str());
+    int32_t mins = atoi(timespan.substr(3, 2).c_str());
+    int32_t secs = atoi(timespan.substr(6, 2).c_str());
+    return hours * 3600 + mins * 60 + secs;
 }
 
 int main(int argc, char** args)
@@ -54,25 +64,37 @@ int main(int argc, char** args)
         std::ofstream ofs;
         ofs.open(args[2], std::ios::binary);
         if (!ofs.is_open()) throw std::exception("Unable to write file");
-        write_header(ofs);
 
-        FrequencyFunctionWaveFile l("800 + 200*n/N", "sin(x)");
-        FrequencyFunctionWaveFile r("800 - 200*n/N", "cos(x)");
-        for (int n = 0; n < c::N; n++)
+        std::string track_length_string = j["TrackLength"];
+        int32_t track_length = time_span_to_seconds(track_length_string);
+        std::vector<channel> channels;
+        headerdata h(track_length, (int16_t)j["Channels"].size());
+
+        for (auto channeljson : j["Channels"])
         {
-            double t = (double)c::length_seconds * (double)n / c::N;
+            channels.push_back(channel(channeljson, h));
+        }
 
-            double aLd = l.Amplitude(t, n);
-            if (aLd < -1 || aLd > 1)
-                throw std::exception("Amplitude must be -1 to 1");
-            int16_t aLs = (int16_t)((aLd + 1) * ((double)65535 / 2) - 32768);
-            write_short(ofs, aLs);
+        write_header(ofs, h);
 
-            double aRd = r.Amplitude(t, n);
-            if (aRd < -1 || aRd > 1)
-                throw std::exception("Amplitude must be -1 to 1");
-            int16_t aRs = (int16_t)((aRd + 1) * ((double)65535 / 2) - 32768);
-            write_short(ofs, aRs);
+        for (int n = 0; n < h.N; n++)
+        {
+            double t = (double)h.length_seconds * (double)n / h.N;
+
+            for(std::vector<channel>::iterator channelit = channels.begin(); channelit != channels.end(); channelit++)
+            {
+                double a = 1;
+                for(std::vector<FrequencyFunctionWaveFile>::iterator componentit = channelit->components.begin();
+                    componentit != channelit->components.end();
+                    componentit++)
+                {
+                    auto athis = componentit->Amplitude(t, n);
+                }
+                if (a < -1 || a > 1)
+                    throw std::exception("Amplitude must be -1 to 1");
+                int16_t aLs = (int16_t)((a + 1) * ((double)65535 / 2) - 32768);
+                write_short(ofs, aLs);
+            }
         }
 
         ofs.close();

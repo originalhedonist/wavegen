@@ -147,12 +147,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="channel.cpp" />
     <ClCompile Include="FrequencyFunctionWaveFile.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="wavegen.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="c.h" />
+    <ClInclude Include="channel.h" />
+    <ClInclude Include="headerdata.h" />
     <ClInclude Include="exprtk.hpp" />
     <ClInclude Include="FrequencyFunctionWaveFile.h" />
     <ClInclude Include="json.hpp" />

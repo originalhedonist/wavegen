@@ -7,11 +7,11 @@
   "Channels": {
     "Left": {
       "Components": [{
-          "Frequency": "800",
+          "Frequency": "1000",
           "Pulse": "sin(x)"
         }, {
-          "Frequency": "0.25",
-          "Pulse": "1 - (sin(x)^2) * 0.5"
+          "Frequency": "100",
+          "Pulse": "sin(x)"
         }
       ]
     }

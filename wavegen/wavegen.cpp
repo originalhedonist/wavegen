@@ -65,6 +65,7 @@ int main(int argc, char** args)
         ofs.open(args[2], std::ios::binary);
         if (!ofs.is_open()) throw std::exception("Unable to write file");
 
+        std::cout << "Writing wav using " << args[1] << " to " << args[2] << std::endl;
         std::string track_length_string = j["TrackLength"];
         int32_t track_length = time_span_to_seconds(track_length_string);
         std::vector<channel> channels;

@@ -20,7 +20,6 @@ void FrequencyFunctionWaveFile::initialize()
 
     parser.compile(frequency, expression_frequency);
     parser.compile(pulse, expression_pulse);
-
     
     initialized = true;
 }

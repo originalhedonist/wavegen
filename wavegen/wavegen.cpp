@@ -4,7 +4,6 @@
 #include "stdafx.h"
 #include "FrequencyFunctionWaveFile.h"
 #include "headerdata.h"
-#include "wetnessapplier.h"
 #include "channel.h"
 
 using json = nlohmann::json;
@@ -62,7 +61,6 @@ int main(int argc, char** args)
         ifs >> j;
         ifs.close();
 
-        std::string name = j["Naming"]["Specific"];
         std::ofstream ofs;
         ofs.open(args[2], std::ios::binary);
         if (!ofs.is_open()) throw std::exception("Unable to write file");
@@ -97,8 +95,6 @@ int main(int argc, char** args)
                 if (a < -1 || a > 1)
                     throw std::exception("Amplitude must be -1 to 1");
 
-                a = channelit->wetness.Amplitude(t, n, a);
-                a *= channelit->carrier.Amplitude(t, n);
                 int16_t aLs = (int16_t)((a + 1) * ((double)65535 / 2) - 32768);
                 write_short(ofs, aLs);
             }

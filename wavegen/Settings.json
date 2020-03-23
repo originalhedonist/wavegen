@@ -1,0 +1,21 @@
+{
+  "Version": 2,
+  "Naming": {
+    "Specific": "test"
+  },
+  "TrackLength": "00:02:00",
+  "Channels": {
+    "Left": {
+      "Wetness": "1",
+      "Carrier": {
+        "Frequency": "800",
+        "Pulse": "sin(x)"
+      },
+      "Components": [{
+          "Frequency": "0.25",
+          "Pulse": "1 - (sin(x)^2) * 0.4"
+        }
+      ]
+    }
+  }
+}

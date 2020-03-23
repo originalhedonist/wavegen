@@ -27,9 +27,6 @@
     <ClCompile Include="channel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="wetnessapplier.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="json.hpp">
@@ -48,9 +45,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="channel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="wetnessapplier.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

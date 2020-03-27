@@ -1,0 +1,24 @@
+{
+  "Version": 2,
+  "Naming": {
+    "Specific": "test"
+  },
+  "TrackLength": "00:02:00",
+  "Channels": {
+    "Left": {
+      "Components": [
+        {"Frequency": "499", "Pulse": "2*abs((x%2)-1)-1" },
+        {"Frequency": "998.25", "Pulse": "2*abs((x%2)-1)-1" },
+        {"Frequency": "0.25", "Pulse": "1 - 0.5abs(sin(x)^5)" }
+      ]
+    },
+    "Right": {
+      "Components": [
+        {"Frequency": "502", "Pulse": "2*abs((x%2)-1)-1" },
+        {"Frequency": "1004.25", "Pulse": "2*abs((x%2)-1)-1" },
+        {"Frequency": "0.25", "Pulse": "1 - 0.5abs(cos(x)^5)" }
+      ]
+    }
+  }
+}
+}

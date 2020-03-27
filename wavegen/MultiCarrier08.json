@@ -1,0 +1,26 @@
+{
+  "Version": 2,
+  "Naming": {
+    "Specific": "test"
+  },
+  "TrackLength": "00:02:00",
+  "Channels": {
+    "Left": {
+      "Components": [
+        {"Frequency": "400", "Pulse": "sin(x)" },
+        {"Frequency": "800", "Pulse": "sin(x)" },
+        {"Frequency": "1600", "Pulse": "sin(x)" },
+        {"Frequency": "0.5", "Pulse": "1 - 0.5abs(sin(x)^3)" }
+      ]
+    },
+    "Right": {
+      "Components": [
+        {"Frequency": "401", "Pulse": "sin(x)" },
+        {"Frequency": "800", "Pulse": "sin(x)" },
+        {"Frequency": "1601", "Pulse": "sin(x)" },
+        {"Frequency": "0.5", "Pulse": "1 - 0.5abs(cos(x)^3)" }
+      ]
+    }
+  }
+}
+}

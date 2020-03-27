@@ -27,6 +27,9 @@
     <ClCompile Include="channel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="wavewriter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="json.hpp">

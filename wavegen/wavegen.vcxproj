@@ -151,6 +151,7 @@
     <ClCompile Include="FrequencyFunctionWaveFile.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="wavegen.cpp" />
+    <ClCompile Include="wavewriter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="channel.h" />

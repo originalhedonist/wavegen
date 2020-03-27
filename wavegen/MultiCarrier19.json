@@ -1,0 +1,24 @@
+{
+  "Version": 2,
+  "Naming": {
+    "Specific": "test"
+  },
+  "TrackLength": "00:02:00",
+  "Channels": {
+    "Left": {
+      "Components": [
+        {"Frequency": "1300", "Pulse": "sin(x)" },
+        {"Frequency": "0.5", "Pulse": "1-0.65sin(x)^2" },
+        {"Frequency": "2", "Pulse": "1-0.25sin(x)^2" }
+      ]
+    },
+    "Right": {
+      "Components": [
+        {"Frequency": "1300.2", "Pulse": "sin(x)" },
+        {"Frequency": "0.5", "Pulse": "1-0.65*cos(x)^2" },
+        {"Frequency": "2", "Pulse": "1-0.25sin(x)^2" }
+      ]
+    }
+  }
+}
+}

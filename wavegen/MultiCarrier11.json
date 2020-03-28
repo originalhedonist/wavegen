@@ -15,9 +15,7 @@
     },
     "Right": {
       "Components": [
-        {"Frequency": "401", "Pulse": "sin(x)" },
-        {"Frequency": "800", "Pulse": "sin(x)" },
-        {"Frequency": "1600", "Pulse": "sin(x)" },
+        {"Frequency": "401", "Pulse": "2*abs((x%2)-1)-1" },
         {"Frequency": "0.5", "Pulse": "1 - 0.5abs(cos(x)^3)" }
       ]
     }

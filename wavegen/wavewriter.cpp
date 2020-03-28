@@ -63,8 +63,6 @@ void write_wav(std::ostream& ofs, std::vector<channel>& channels, const headerda
             write_short(ofs, aLs);
         }
     }
-
-    std::cout << "maxshort = " << maxshort << ", minshort = " << minshort << std::endl;
     ifstemp.close();
     remove(tempfilename);
     delete[] maxPerChannel;

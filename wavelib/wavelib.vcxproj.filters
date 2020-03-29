@@ -45,6 +45,9 @@
     <ClInclude Include="json.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="wavfuncs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="wavelib.cpp">
@@ -69,6 +72,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="wavewriter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="wavfuncs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

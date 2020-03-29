@@ -157,6 +157,7 @@
     <ClInclude Include="headerdata.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="wavfuncs.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="channel.cpp" />
@@ -172,6 +173,7 @@
     </ClCompile>
     <ClCompile Include="wavelib.cpp" />
     <ClCompile Include="wavewriter.cpp" />
+    <ClCompile Include="wavfuncs.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

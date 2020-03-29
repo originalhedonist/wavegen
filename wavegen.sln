@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wavegen", "wavegen\wavegen.vcxproj", "{B2F40F87-4BA0-4ECB-9BE6-419E0CF9801B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4445DB6F-7DB3-443C-A066-FDA09384F142} = {4445DB6F-7DB3-443C-A066-FDA09384F142}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wavelib", "wavelib\wavelib.vcxproj", "{4445DB6F-7DB3-443C-A066-FDA09384F142}"
 EndProject

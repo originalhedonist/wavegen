@@ -1,8 +1,7 @@
 #include "pch.h"
 #include "channel.h"
 #include "compositionelement.h"
-
-void write_short(std::ostream& os, int16_t i);
+#include "wavfuncs.h"
 
 void write_wav(std::ostream& ofs, const headerdata& hOverall, int channels, compositionelement& ce)
 {
@@ -15,7 +14,7 @@ void write_wav(std::ostream& ofs, const headerdata& hOverall, int channels, comp
             if (aL > SHRT_MAX) throw std::exception("Exceeded SHRT_MAX");
             if (aL < SHRT_MIN) throw std::exception("Exceeded SHRT_MIN");
             int16_t aLs = (int16_t)aL;
-            write_short(ofs, aLs);
+            wavfuncs::write_short(ofs, aLs);
         }
     }
 }

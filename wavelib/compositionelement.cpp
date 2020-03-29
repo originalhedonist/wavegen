@@ -3,10 +3,16 @@
 #include "wavfuncs.h"
 using json = nlohmann::json;
 
-compositionelement::compositionelement(const compositionelement& c) : header(c.header)
-{
-    maxPerChannel = nullptr;
-}
+//compositionelement::compositionelement(const compositionelement& c) :
+//    header(c.header),
+//    channelNext(c.channelNext),
+//    nNext(c.nNext),
+//    channels(c.channels)
+//{
+//    maxPerChannel = new double(c.channels.size());
+//    memcpy(maxPerChannel, c.maxPerChannel, sizeof(double) * c.channels.size());
+//    memset(tempfilename, 0, FILENAME_MAX);
+//}
 
 compositionelement::compositionelement(const nlohmann::json& j)
     : compositionelement(j, (int16_t)j["Channels"].size()) {}
@@ -32,7 +38,7 @@ int32_t compositionelement::trackLength(const nlohmann::json& j)
 
 compositionelement::~compositionelement()
 {
-    if(maxPerChannel != nullptr) delete[] maxPerChannel;
+    delete[] maxPerChannel;
 }
 
 double compositionelement::get_next(int n, int channel)

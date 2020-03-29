@@ -24,12 +24,18 @@
     <ClCompile Include="element.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="activeelement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="element.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="activeelement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

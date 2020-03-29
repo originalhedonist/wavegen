@@ -11,5 +11,6 @@ public:
     static const int32_t time_span_to_seconds(const std::string& timespan);
     static const nlohmann::json read_json(const std::string& file);
     static void write_wav(std::ostream& ofs, const headerdata& hOverall, int channels, compositionelement& ce);
+    static void write_double_as_short(std::ostream& ofs, double a);
 };
 

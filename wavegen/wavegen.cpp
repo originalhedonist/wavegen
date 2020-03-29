@@ -5,6 +5,7 @@
 #include "FrequencyFunctionWaveFile.h"
 #include "headerdata.h"
 #include "channel.h"
+#include "compositionelement.h"
 
 using json = nlohmann::json;
 
@@ -48,7 +49,7 @@ const int32_t time_span_to_seconds(const std::string& timespan)
     return hours * 3600 + mins * 60 + secs;
 }
 
-void write_wav(std::ostream& ofs, std::vector<channel>& channels, const headerdata& h);
+void write_wav(std::ostream& ofs, const headerdata& hOverall, int channels, compositionelement& ce);
 
 int main(int argc, char** args)
 {
@@ -63,11 +64,8 @@ int main(int argc, char** args)
         ifs >> j;
         ifs.close();
 
-        std::ofstream ofs;
-        ofs.open(args[2], std::ios::binary);
-        if (!ofs.is_open()) throw std::exception("Unable to write file");
-
         std::cout << "Writing wav using " << args[1] << " to " << args[2] << std::endl;
+
         std::string track_length_string = j["TrackLength"];
         int32_t track_length = time_span_to_seconds(track_length_string);
         std::vector<channel> channels;
@@ -78,8 +76,17 @@ int main(int argc, char** args)
             channels.push_back(channel(channeljson, h));
         }
 
+        std::ofstream ofs;
+        ofs.open(args[2], std::ios::binary);
+        if (!ofs.is_open()) throw std::exception("Unable to write file");
+
         write_header(ofs, h);
-        write_wav(ofs, channels, h);
+
+        compositionelement ce(channels, h);
+        ce.calculate();
+        ce.start();
+
+        write_wav(ofs, h, channels.size(), ce);
 
         ofs.close();
         
@@ -91,14 +98,3 @@ int main(int argc, char** args)
         return 1;
     }
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file

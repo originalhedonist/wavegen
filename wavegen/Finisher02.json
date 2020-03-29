@@ -3,7 +3,7 @@
   "Naming": {
     "Specific": "test"
   },
-  "TrackLength": "00:04:00",
+  "TrackLength": "00:01:30",
   "Channels": {
     "Left": {
       "Components": [
@@ -15,9 +15,9 @@
     },
     "Right": {
       "Components": [
-        {"Frequency": "401", "Pulse": "sin(x)" },
-        {"Frequency": "801", "Pulse": "sin(x)" },
-        {"Frequency": "1600", "Pulse": "sin(x)" },
+        {"Frequency": "400", "Pulse": "sin(x)" },
+        {"Frequency": "800", "Pulse": "sin(x)" },
+        {"Frequency": "1601", "Pulse": "sin(x)" },
         {"Frequency": "0.5", "Pulse": "1 - 0.5abs(cos(x)^3)" }
       ]
     }

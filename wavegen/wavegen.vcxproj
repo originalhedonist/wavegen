@@ -148,6 +148,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="channel.cpp" />
+    <ClCompile Include="composition.cpp" />
+    <ClCompile Include="compositionelement.cpp" />
+    <ClCompile Include="compositionelementwrapper.cpp" />
     <ClCompile Include="FrequencyFunctionWaveFile.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="wavegen.cpp" />
@@ -155,6 +158,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="channel.h" />
+    <ClInclude Include="composition.h" />
+    <ClInclude Include="compositionelement.h" />
+    <ClInclude Include="compositionelementwrapper.h" />
     <ClInclude Include="headerdata.h" />
     <ClInclude Include="exprtk.hpp" />
     <ClInclude Include="FrequencyFunctionWaveFile.h" />

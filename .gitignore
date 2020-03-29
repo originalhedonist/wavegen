@@ -342,3 +342,6 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database 
 healthchecksdb
+/wavegen/stimphony1_data/*
+
+/wavegen/stimphony1.aup

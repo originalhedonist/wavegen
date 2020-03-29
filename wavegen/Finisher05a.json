@@ -3,18 +3,18 @@
   "Naming": {
     "Specific": "test"
   },
-  "TrackLength": "00:02:00",
+  "TrackLength": "00:01:00",
   "Channels": {
     "Left": {
       "Components": [
         {"Frequency": "1193", "Pulse": "2*abs((x%2)-1)-1" },
-        {"Frequency": "0.5", "Pulse": "1 - 0.5abs(sin(x)^3)" }
+        {"Frequency": "0.3+0.7n/N", "Pulse": "1 - 0.5abs(sin(x)^3)" }
       ]
     },
     "Right": {
       "Components": [
         {"Frequency": "691", "Pulse": "2*abs((x%2)-1)-1" },
-        {"Frequency": "0.5", "Pulse": "1 - 0.5abs(cos(x)^3)" }
+        {"Frequency": "0.3+0.7n/N", "Pulse": "1 - 0.5abs(cos(x)^3)" }
       ]
     }
   }

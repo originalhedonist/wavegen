@@ -30,6 +30,15 @@
     <ClCompile Include="wavewriter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="composition.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="compositionelementwrapper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="compositionelement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="json.hpp">
@@ -48,6 +57,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="channel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="composition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="compositionelementwrapper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="compositionelement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

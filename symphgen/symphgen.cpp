@@ -38,10 +38,19 @@ int main(int argc, char** args)
             }
         }
 
+        std::vector<std::thread> calcthreads;
+
         for (std::map<std::string, compositionelement*>::iterator it = ces.begin();
             it != ces.end(); it++)
         {
-            it->second->calculate(); //TODO: multithread it
+            calcthreads.push_back(std::thread(&compositionelement::calculate, it->second));
+        }
+
+        for (std::vector<std::thread>::iterator it = calcthreads.begin();
+            it != calcthreads.end();
+            it++)
+        {
+            it->join();
         }
 
         int totalLength = 0;
@@ -88,8 +97,10 @@ int main(int argc, char** args)
                     it != active.end();
                     it++)
                 {
-                    double aThis = it->ce->get_next(n - it->nStart, c);
-                    a += aThis;
+                    int nrel = n - it->nStart;
+                    double aThis = it->ce->get_next(nrel, c);
+                    double fadeatt = it->attenuation(nrel);
+                    a += aThis*fadeatt;
                     if (a > 1 || a < -1) throw std::exception("Additive amplitude outside range");
 
                     if (it->ce->is_complete())

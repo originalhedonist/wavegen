@@ -1,6 +1,4 @@
-#define _USE_MATH_DEFINES
-#define exprtk_disable_caseinsensitivity
-#include "stdafx.h"
+#include "pch.h"
 #include "FrequencyFunctionWaveFile.h"
 
 void FrequencyFunctionWaveFile::initialize()

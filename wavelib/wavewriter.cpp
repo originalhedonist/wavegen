@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "pch.h"
 #include "channel.h"
 #include "compositionelement.h"
 

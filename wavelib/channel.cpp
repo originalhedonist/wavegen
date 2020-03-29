@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "pch.h"
 #include "channel.h"
 
 channel::channel(const nlohmann::json& j, const headerdata& h)

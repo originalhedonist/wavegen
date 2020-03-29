@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "pch.h"
 #include "compositionelement.h"
 
 compositionelement::compositionelement(const std::vector<channel>& channels, const headerdata& header)

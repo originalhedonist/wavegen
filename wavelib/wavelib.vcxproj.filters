@@ -30,9 +30,6 @@
     <ClInclude Include="compositionelement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="compositionelementwrapper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="exprtk.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -63,9 +60,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="compositionelement.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="compositionelementwrapper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FrequencyFunctionWaveFile.cpp">

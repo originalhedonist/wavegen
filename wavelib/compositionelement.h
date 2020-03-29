@@ -6,7 +6,8 @@ class compositionelement
 public:
     std::vector<channel> channels;
     headerdata header;
-    compositionelement(const std::vector<channel>& channels, const headerdata& header);
+    compositionelement(const nlohmann::json& json);
+    compositionelement(const nlohmann::json& json, const int16_t channels);
     virtual ~compositionelement();
 
     double get_next(int n, int channel);
@@ -21,5 +22,7 @@ private:
     double* maxPerChannel;
     char tempfilename[FILENAME_MAX];
     std::ifstream ifstemp;
+
+    static int32_t trackLength(const nlohmann::json& j);
 };
 

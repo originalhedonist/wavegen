@@ -1,12 +1,28 @@
 #include "pch.h"
 #include "compositionelement.h"
+#include "wavfuncs.h"
+using json = nlohmann::json;
 
-compositionelement::compositionelement(const std::vector<channel>& channels, const headerdata& header)
-    :channels(channels), header(header), nNext(0), channelNext(0)
+compositionelement::compositionelement(const nlohmann::json& j)
+    : compositionelement(j, (int16_t)j["Channels"].size()) {}
+
+compositionelement::compositionelement(const nlohmann::json& j, const int16_t numChannels)
+    : header(trackLength(j), numChannels)
 {
+    for (auto channeljson : j["Channels"])
+    {
+        channels.push_back(channel(channeljson, header));
+    }
     maxPerChannel = new double[channels.size()];
     memset(maxPerChannel, 0, sizeof(double) * channels.size());
     memset(tempfilename, 0, FILENAME_MAX);
+}
+
+int32_t compositionelement::trackLength(const nlohmann::json& j)
+{
+    std::string track_length_string = j["TrackLength"];
+    int32_t track_length = wavfuncs::time_span_to_seconds(track_length_string);
+    return track_length;
 }
 
 compositionelement::~compositionelement()

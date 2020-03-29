@@ -6,6 +6,8 @@ class compositionelement
 public:
     std::vector<channel> channels;
     headerdata header;
+
+    compositionelement(const compositionelement& c);
     compositionelement(const nlohmann::json& json);
     compositionelement(const nlohmann::json& json, const int16_t channels);
     virtual ~compositionelement();

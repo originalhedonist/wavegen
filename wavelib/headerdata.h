@@ -11,6 +11,8 @@ public:
     const int32_t overallDataSize;
     const int32_t overallFileSize;
 
+    headerdata(const headerdata& h) : headerdata(h.length_seconds, h.channels) {}
+
     headerdata(int32_t length_seconds, int16_t channels) :
         length_seconds(length_seconds),
         N(length_seconds * sampling_frequency),

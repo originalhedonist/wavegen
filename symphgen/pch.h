@@ -8,6 +8,7 @@
 
 #include <fstream>
 #include <iostream>
+#include <map>
 #include "../wavelib/json.hpp"
 #include "../wavelib/exprtk.hpp"
 #include "../wavelib/json.hpp"

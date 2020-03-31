@@ -33,13 +33,20 @@ void wavfuncs::write_header(std::ofstream& ofs, const headerdata& h)
     write_int(ofs, h.overallDataSize);
 }
 
-const int32_t wavfuncs::time_span_to_seconds(const std::string& timespan)
+const int32_t wavfuncs::time_span_to_seconds(std::string timespan)
 {
+    int neg = 1;
+    if (timespan.size() > 0 && timespan[0] == '-')
+    {
+        neg = -1;
+        timespan = timespan.substr(1, timespan.size() - 1);
+    }
+
     if (timespan.size() != 8 || timespan[2] != ':' || timespan[5] != ':') throw std::exception("Time span is wrong format");
     int32_t hours = atoi(timespan.substr(0, 2).c_str());
     int32_t mins = atoi(timespan.substr(3, 2).c_str());
     int32_t secs = atoi(timespan.substr(6, 2).c_str());
-    return hours * 3600 + mins * 60 + secs;
+    return neg * (hours * 3600 + mins * 60 + secs);
 }
 
 const nlohmann::json wavfuncs::read_json(const std::string& file)

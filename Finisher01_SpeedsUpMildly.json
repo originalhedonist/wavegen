@@ -9,14 +9,14 @@
       "Components": [
         {"Frequency": "1000", "Pulse": "sin(x)" },
         {"Frequency": "100", "Pulse": "sin(x)" },
-        {"Frequency": "0.5", "Pulse": "1 - 0.5abs(sin(x)^3)" }
+        {"Frequency": "0.5+0.25n/N", "Pulse": "1 - 0.5abs(sin(x)^3)" }
       ]
     },
     "Right": {
       "Components": [
         {"Frequency": "1000", "Pulse": "sin(x)" },
         {"Frequency": "101", "Pulse": "sin(x)" },
-        {"Frequency": "0.5", "Pulse": "1 - 0.5abs(cos(x)^3)" }
+        {"Frequency": "0.5+0.25n/N", "Pulse": "1 - 0.5abs(cos(x)^3)" }
       ]
     }
   }

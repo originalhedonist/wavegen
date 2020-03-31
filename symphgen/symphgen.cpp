@@ -17,24 +17,33 @@ int main(int argc, char** args)
         std::map<int, element> elements;
         std::map<std::string, compositionelement*> ces;
 
+        int pos = 0;
         for (auto e : j)
         {
             std::string profile = e["Profile"];
             std::string startstring = e["Start"];
             std::string fadeinstring = e["FadeIn"];
             std::string fadeoutstring = e["FadeOut"];
-            int start = wavfuncs::time_span_to_seconds(startstring);
+            int relstart = wavfuncs::time_span_to_seconds(startstring);
+            int start = pos + relstart;
             int fadein = wavfuncs::time_span_to_seconds(fadeinstring);
             int fadeout = wavfuncs::time_span_to_seconds(fadeoutstring);
             if (elements.find(start) != elements.end()) throw std::exception("Cannot have two elements starting at the same time");
             element el(profile, fadein, fadeout);
+            
             elements.insert(std::pair<int, element>(start, el));
 
-            if (ces.find(profile) == ces.end())
+            auto cex = ces.find(profile);
+            if (cex == ces.end())
             {
                 compositionelement* ce = new compositionelement(wavfuncs::read_json(profile));
                 if (ce->channels.size() != CHANNEL_COUNT) throw std::exception("Wrong number of channels");
                 ces.insert(std::pair<std::string, compositionelement*>(profile, ce));
+                pos = start + ce->header.length_seconds;
+            }
+            else
+            {
+                pos = start + cex->second->header.length_seconds;
             }
         }
 

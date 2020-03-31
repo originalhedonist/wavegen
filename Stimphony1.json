@@ -1,4 +1,4 @@
 [
-{  "Profile": "test.json",  "Start": "00:00:10",  "FadeIn": "00:00:02",  "FadeOut": "00:00:02" },
-{  "Profile": "Finisher01.json",  "Start": "00:00:30",  "FadeIn": "00:00:10",  "FadeOut": "00:00:10" }
+{  "Profile": "MultiCarrier11.json",  "Start": "00:00:00",  "FadeIn": "00:00:30",  "FadeOut": "00:00:30" },
+{  "Profile": "MultiCarrier05.json",  "Start": "00:04:30",  "FadeIn": "00:00:30",  "FadeOut": "00:00:30" }
 ]

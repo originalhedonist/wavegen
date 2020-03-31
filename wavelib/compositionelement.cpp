@@ -3,17 +3,6 @@
 #include "wavfuncs.h"
 using json = nlohmann::json;
 
-//compositionelement::compositionelement(const compositionelement& c) :
-//    header(c.header),
-//    channelNext(c.channelNext),
-//    nNext(c.nNext),
-//    channels(c.channels)
-//{
-//    maxPerChannel = new double(c.channels.size());
-//    memcpy(maxPerChannel, c.maxPerChannel, sizeof(double) * c.channels.size());
-//    memset(tempfilename, 0, FILENAME_MAX);
-//}
-
 compositionelement::compositionelement(const nlohmann::json& j)
     : compositionelement(j, (int16_t)j["Channels"].size()) {}
 
@@ -24,9 +13,6 @@ compositionelement::compositionelement(const nlohmann::json& j, const int16_t nu
     {
         channels.push_back(channel(channeljson, header));
     }
-    maxPerChannel = new double[channels.size()];
-    memset(maxPerChannel, 0, sizeof(double) * channels.size());
-    memset(tempfilename, 0, FILENAME_MAX);
 }
 
 int32_t compositionelement::trackLength(const nlohmann::json& j)
@@ -36,12 +22,7 @@ int32_t compositionelement::trackLength(const nlohmann::json& j)
     return track_length;
 }
 
-compositionelement::~compositionelement()
-{
-    delete[] maxPerChannel;
-}
-
-double compositionelement::get_next(int n, int channel)
+double compositionelement::get_next(int n, int16_t channel)
 {
     if (n != nNext) throw std::exception("Called get_next with n out of sequence");
     if (channel != channelNext) throw std::exception("Called get_next with channel out of sequence");
@@ -63,7 +44,9 @@ bool compositionelement::is_complete() const
 
 void compositionelement::calculate()
 {
-    tmpnam_s(tempfilename, FILENAME_MAX);
+    char tempfilename_s[FILENAME_MAX];
+    tmpnam_s(tempfilename_s, FILENAME_MAX);
+    tempfilename = tempfilename_s;
     std::ofstream ofstemp;
     ofstemp.open(tempfilename, std::ios::trunc | std::ios::binary);
     if (!ofstemp.is_open()) throw std::exception("Could not open temporary file");
@@ -98,15 +81,3 @@ void compositionelement::calculate()
 
     ofstemp.close();
 }
-
-void compositionelement::start()
-{
-    ifstemp.open(tempfilename, std::ios::binary);
-    if (!ifstemp.is_open()) throw std::exception("Could not read temp file");
-}
-
-void compositionelement::stop()
-{
-    ifstemp.close();
-}
-

@@ -2,6 +2,7 @@
 #include "../wavelib/headerdata.h"
 #include "../wavelib/channel.h"
 #include "../wavelib/compositionelement.h"
+#include "../wavelib/compositionreader.h"
 #include "../wavelib/wavfuncs.h"
 
 using json = nlohmann::json;
@@ -28,11 +29,11 @@ int main(int argc, char** args)
         wavfuncs::write_header(ofs, ce.header);
 
         ce.calculate();
-        ce.start();
+
+        compositionreader cr(ce);
 
         wavfuncs::write_wav(ofs, ce.header, ce.channels.size(), ce);
 
-        ce.stop();
         ofs.close();
         
         return 0;

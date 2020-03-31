@@ -1,14 +1,14 @@
 #pragma once
 #include "element.h"
-#include "../wavelib/compositionelement.h"
+#include "../wavelib/compositionreader.h"
 
 class activeelement
 {
 public:
     int nStart;
     element e;
-    compositionelement* ce;
-    activeelement(int nStart, const element& e, compositionelement* ce):
+    compositionreader* ce;
+    activeelement(int nStart, const element& e, compositionreader* ce):
         nStart(nStart), e(e), ce(ce) {}
 
     double attenuation(int nrel) const

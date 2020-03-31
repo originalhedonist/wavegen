@@ -81,9 +81,8 @@ int main(int argc, char** args)
                 //new one becoming active
                 if (n == nextStartn && c == 0)
                 {
-                    compositionelement* ce = ces.find(nextStart->second.profile)->second;
+                    compositionreader* ce = new compositionreader(*ces.find(nextStart->second.profile)->second);
                     active.push_back(activeelement(n, nextStart->second, ce));
-                    ce->start();
                     
                     nextStart++;
                     if (nextStart == elements.end())
@@ -105,7 +104,7 @@ int main(int argc, char** args)
 
                     if (it->ce->is_complete())
                     {
-                        it->ce->stop();
+                        delete it->ce;
                         it = active.erase(it);
                         if (it == active.end())
                         {

@@ -9,19 +9,17 @@ public:
 
     compositionelement(const nlohmann::json& json);
     compositionelement(const nlohmann::json& json, const int16_t channels);
-    virtual ~compositionelement();
 
-    double get_next(int n, int channel);
+    double get_next(int n, int16_t channel);
     bool is_complete() const;
 
     void calculate(); //writes out a temp file
-    void start();
-    void stop();
+
+    std::map<int16_t, double> maxPerChannel;
+    std::string tempfilename;
 
 private:
     int nNext, channelNext; //expected values, used for verification
-    double* maxPerChannel;
-    char tempfilename[FILENAME_MAX];
     std::ifstream ifstemp;
 
     static int32_t trackLength(const nlohmann::json& j);

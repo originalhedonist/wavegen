@@ -1,4 +1,22 @@
 [
-{  "Profile": "MultiCarrier11.json",  "Start": "00:00:00",  "FadeIn": "00:00:30",  "FadeOut": "00:00:30" },
-{  "Profile": "MultiCarrier05.json",  "Start": "00:04:30",  "FadeIn": "00:00:30",  "FadeOut": "00:00:30" }
+{"Profile": "MultiCarrier11.json", "Start": "00:00:00", "FadeIn": "00:00:00", "FadeOut": "00:00:30"},
+{"Profile": "MultiCarrier05.json", "Start": "-00:00:30", "FadeIn": "00:00:30", "FadeOut": "00:00:30"},
+{"Profile": "Finisher04.json", "Start": "-00:00:30", "FadeIn": "00:00:30", "FadeOut": "00:00:30"},
+{"Profile": "MultiCarrier06.json", "Start": "-00:00:30", "FadeIn": "00:00:30", "FadeOut": "00:00:30"},
+{"Profile": "MultiCarrier09.json", "Start": "-00:00:30", "FadeIn": "00:00:30", "FadeOut": "00:00:30"},
+{"Profile": "Finisher02.json", "Start": "-00:00:30", "FadeIn": "00:00:30", "FadeOut": "00:00:30"},
+{"Profile": "MultiCarrier10b.json", "Start": "-00:00:30", "FadeIn": "00:00:30", "FadeOut": "00:00:30"},
+{"Profile": "MultiCarrier19.json", "Start": "-00:00:30", "FadeIn": "00:00:30", "FadeOut": "00:00:30"},
+{"Profile": "Finisher05.json", "Start": "-00:00:30", "FadeIn": "00:00:30", "FadeOut": "00:00:30"},
+{"Profile": "MultiCarrier20.json", "Start": "-00:00:30", "FadeIn": "00:00:30", "FadeOut": "00:00:30"},
+{"Profile": "MultiCarrier07.json", "Start": "-00:00:30", "FadeIn": "00:00:30", "FadeOut": "00:00:30"},
+{"Profile": "Finisher03.json", "Start": "-00:00:30", "FadeIn": "00:00:30", "FadeOut": "00:00:30"},
+{"Profile": "MultiCarrier17.json", "Start": "-00:00:30", "FadeIn": "00:00:30", "FadeOut": "00:00:30"},
+{"Profile": "MultiCarrier15a.json", "Start": "-00:00:30", "FadeIn": "00:00:30", "FadeOut": "00:00:30"},
+{"Profile": "Finisher01.json", "Start": "-00:00:30", "FadeIn": "00:00:30", "FadeOut": "00:00:15"},
+{"Profile": "Finisher04a.json", "Start": "-00:00:15", "FadeIn": "00:00:15", "FadeOut": "00:00:15"},
+{"Profile": "Finisher02a.json", "Start": "-00:00:15", "FadeIn": "00:00:15", "FadeOut": "00:00:15"},
+{"Profile": "Finisher05a.json", "Start": "-00:00:15", "FadeIn": "00:00:15", "FadeOut": "00:00:15"},
+{"Profile": "Finisher03a.json", "Start": "-00:00:15", "FadeIn": "00:00:15", "FadeOut": "00:00:15"},
+{"Profile": "Finisher01a.json", "Start": "-00:00:15", "FadeIn": "00:00:15", "FadeOut": "00:00:15"}
 ]

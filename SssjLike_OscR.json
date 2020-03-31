@@ -1,0 +1,22 @@
+{
+  "Version": 2,
+  "Naming": {
+    "Specific": "test"
+  },
+  "TrackLength": "00:03:00",
+  "Channels": {
+    "Left": {
+      "Components": [
+        {"Frequency": "1561/(2pi)", "Pulse": "2(x-floor(x))-1" },
+        {"Frequency": "0.585", "Pulse": "max(abs(sin(x-0.3))^0.7,0.3)" }
+      ]
+    },
+    "Right": {
+      "Components": [
+        {"Frequency": "(200+(sin(2pi*0.05*t)+1)*900)/(2pi)", "Pulse": "2(x-floor(x))-1" },
+        {"Frequency": "0.585", "Pulse": "max(abs(sin(x))^0.7,0.3)" }
+      ]
+    }
+  }
+}
+}

@@ -1,0 +1,22 @@
+{
+  "Version": 2,
+  "Naming": {
+    "Specific": "test"
+  },
+  "TrackLength": "00:00:30",
+  "Channels": {
+    "Left": {
+      "Components": [
+        {"Frequency": "1561/(2pi)", "Pulse": "2(x-floor(x))-1" },
+        {"Frequency": "0.585", "Pulse": "1-0.5(1-abs(sin(x))^0.8)" }
+      ]
+    },
+    "Right": {
+      "Components": [
+        {"Frequency": "2308/(2pi)", "Pulse": "2(x-floor(x))-1" },
+        {"Frequency": "0.585", "Pulse": "1-0.5(1-abs(sin(x+0.2))^0.8)" }
+      ]
+    }
+  }
+}
+}

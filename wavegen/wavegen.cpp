@@ -7,9 +7,6 @@
 
 using json = nlohmann::json;
 
-
-void write_wav(std::ostream& ofs, const headerdata& hOverall, int channels, compositionelement& ce);
-
 int main(int argc, char** args)
 {
     try
@@ -32,7 +29,7 @@ int main(int argc, char** args)
 
         compositionreader cr(ce);
 
-        wavfuncs::write_wav(ofs, ce.header, ce.channels.size(), ce);
+        wavfuncs::write_wav(ofs, ce.header, ce.channels.size(), cr);
 
         ofs.close();
         

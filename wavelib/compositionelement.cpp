@@ -22,26 +22,6 @@ int32_t compositionelement::trackLength(const nlohmann::json& j)
     return track_length;
 }
 
-double compositionelement::get_next(int n, int16_t channel)
-{
-    if (n != nNext) throw std::exception("Called get_next with n out of sequence");
-    if (channel != channelNext) throw std::exception("Called get_next with channel out of sequence");
-    double a;
-    ifstemp.read(reinterpret_cast<char*>(&a), sizeof(a));
-    double aNorm = a / maxPerChannel[channel]; //normalization
-    if (++channelNext >= channels.size())
-    {
-        nNext++;
-        channelNext = 0;
-    }
-    return aNorm;
-}
-
-bool compositionelement::is_complete() const
-{
-    return nNext >= header.N;
-}
-
 void compositionelement::calculate()
 {
     char tempfilename_s[FILENAME_MAX];

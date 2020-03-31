@@ -81,8 +81,8 @@ int main(int argc, char** args)
                 //new one becoming active
                 if (n == nextStartn && c == 0)
                 {
-                    compositionreader* ce = new compositionreader(*ces.find(nextStart->second.profile)->second);
-                    active.push_back(activeelement(n, nextStart->second, ce));
+                    compositionreader* cr = new compositionreader(*ces.find(nextStart->second.profile)->second);
+                    active.push_back(activeelement(n, nextStart->second, cr));
                     
                     nextStart++;
                     if (nextStart == elements.end())
@@ -93,8 +93,8 @@ int main(int argc, char** args)
 
                 double a = 0;
                 for (std::vector<activeelement>::const_iterator it = active.begin();
-                    it != active.end();
-                    it++)
+                    it != active.end(); // don't it++ in order to avoid double-increment if delete
+                    )
                 {
                     int nrel = n - it->nStart;
                     double aThis = it->ce->get_next(nrel, c);
@@ -110,8 +110,8 @@ int main(int argc, char** args)
                         {
                             break;
                         }
-
                     }
+                    else it++;
                 }
                 wavfuncs::write_double_as_short(ofs, a);
             }
@@ -120,6 +120,7 @@ int main(int argc, char** args)
         ofs.close();
         for (auto e : ces)
         {
+            remove(e.second->tempfilename.c_str());
             delete e.second;
         }
     }

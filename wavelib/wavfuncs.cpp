@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "wavfuncs.h"
-#include "compositionelement.h"
+#include "compositionreader.h"
 
 void wavfuncs::write_short(std::ostream& os, int16_t i)
 {
@@ -62,13 +62,13 @@ void wavfuncs::write_double_as_short(std::ostream& ofs, double a)
     wavfuncs::write_short(ofs, aLs);
 }
 
-void wavfuncs::write_wav(std::ostream& ofs, const headerdata& hOverall, int channels, compositionelement& ce)
+void wavfuncs::write_wav(std::ostream& ofs, const headerdata& hOverall, int channels, compositionreader& cr)
 {
     for (int n = 0; n < hOverall.N; n++)
     {
         for (int c = 0; c < channels; c++)
         {
-            double a = ce.get_next(n, c);
+            double a = cr.get_next(n, c);
             write_double_as_short(ofs, a);
         }
     }

@@ -10,9 +10,6 @@ public:
     compositionelement(const nlohmann::json& json);
     compositionelement(const nlohmann::json& json, const int16_t channels);
 
-    double get_next(int n, int16_t channel);
-    bool is_complete() const;
-
     void calculate(); //writes out a temp file
 
     std::map<int16_t, double> maxPerChannel;

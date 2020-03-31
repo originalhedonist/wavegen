@@ -13,6 +13,9 @@ public:
     bool is_complete() const;
     headerdata header;
 
+    static int nextid;
+    int id = nextid++;
+
 private:
     std::map<int16_t, double> maxPerChannel;
     int nNext, channelNext; //expected values, used for verification

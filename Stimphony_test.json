@@ -1,4 +1,4 @@
 [
 {  "Profile": "test.json",  "Start": "00:00:00",  "FadeIn": "00:00:02",  "FadeOut": "00:00:02" },
-{  "Profile": "test.json",  "Start": "00:00:11",  "FadeIn": "00:00:10",  "FadeOut": "00:00:10" }
+{  "Profile": "test.json",  "Start": "00:00:09",  "FadeIn": "00:00:02",  "FadeOut": "00:00:02" }
 ]

@@ -11,6 +11,7 @@ int main(int argc, char** args)
     {
         const int CHANNEL_COUNT = 2;
 
+
         if (argc != 3) throw std::runtime_error("Wrong number of arguments");
 
         json j = wavfuncs::read_json(args[1]);
@@ -26,6 +27,8 @@ int main(int argc, char** args)
             std::string fadeoutstring = e["FadeOut"];
             int relstart = wavfuncs::time_span_to_seconds(startstring);
             int start = pos + relstart;
+
+			std::cout << profile << " starts at " << wavfuncs::seconds_to_timespan(start) << std::endl;
             int fadein = wavfuncs::time_span_to_seconds(fadeinstring);
             int fadeout = wavfuncs::time_span_to_seconds(fadeoutstring);
             if (elements.find(start) != elements.end()) throw std::runtime_error("Cannot have two elements starting at the same time");

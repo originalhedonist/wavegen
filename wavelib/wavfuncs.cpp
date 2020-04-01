@@ -49,6 +49,24 @@ const int32_t wavfuncs::time_span_to_seconds(std::string timespan)
     return neg * (hours * 3600 + mins * 60 + secs);
 }
 
+const std::string wavfuncs::seconds_to_timespan(int32_t seconds)
+{
+    std::stringstream ss;
+    int32_t hours = seconds / (3600);
+    ss << std::setfill('0') << std::setw(2) << hours;
+
+	seconds -= (hours * 3600);
+	
+	int32_t minutes = seconds / 60;
+	ss << ":" << std::setfill('0') << std::setw(2) << minutes;
+    
+	seconds -= (minutes * 60);
+
+	ss << ":" << std::setfill('0') << std::setw(2) << seconds;
+
+	return ss.str();
+}
+
 const nlohmann::json wavfuncs::read_json(const std::string& file)
 {
     std::ifstream ifs;

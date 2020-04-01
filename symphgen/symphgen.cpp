@@ -11,7 +11,7 @@ int main(int argc, char** args)
     {
         const int CHANNEL_COUNT = 2;
 
-        if (argc != 3) throw std::exception("Wrong number of arguments");
+        if (argc != 3) throw std::runtime_error("Wrong number of arguments");
 
         json j = wavfuncs::read_json(args[1]);
         std::map<int, element> elements;
@@ -28,7 +28,7 @@ int main(int argc, char** args)
             int start = pos + relstart;
             int fadein = wavfuncs::time_span_to_seconds(fadeinstring);
             int fadeout = wavfuncs::time_span_to_seconds(fadeoutstring);
-            if (elements.find(start) != elements.end()) throw std::exception("Cannot have two elements starting at the same time");
+            if (elements.find(start) != elements.end()) throw std::runtime_error("Cannot have two elements starting at the same time");
             element el(profile, fadein, fadeout);
             
             elements.insert(std::pair<int, element>(start, el));
@@ -37,7 +37,7 @@ int main(int argc, char** args)
             if (cex == ces.end())
             {
                 compositionelement* ce = new compositionelement(wavfuncs::read_json(profile));
-                if (ce->channels.size() != CHANNEL_COUNT) throw std::exception("Wrong number of channels");
+                if (ce->channels.size() != CHANNEL_COUNT) throw std::runtime_error("Wrong number of channels");
                 ces.insert(std::pair<std::string, compositionelement*>(profile, ce));
                 pos = start + ce->header.length_seconds;
             }
@@ -75,7 +75,7 @@ int main(int argc, char** args)
         std::ofstream ofs;
 
         ofs.open(args[2], std::ios::trunc | std::ios::binary);
-        if (!ofs.is_open()) throw std::exception("Could not open output file");
+        if (!ofs.is_open()) throw std::runtime_error("Could not open output file");
         wavfuncs::write_header(ofs, htot);
 
         std::map<int, element>::const_iterator nextStart = elements.begin();
@@ -109,7 +109,7 @@ int main(int argc, char** args)
                     double aThis = it->ce->get_next(nrel, c);
                     double fadeatt = it->attenuation(nrel);
                     a += aThis*fadeatt;
-                    if (a > 1 || a < -1) throw std::exception("Additive amplitude outside range");
+                    if (a > 1 || a < -1) throw std::runtime_error("Additive amplitude outside range");
 
                     if (it->ce->is_complete())
                     {
@@ -133,18 +133,18 @@ int main(int argc, char** args)
             delete e.second;
         }
     }
-    catch (std::exception ex)
+    catch (std::runtime_error ex)
     {
         std::cerr << ex.what() << std::endl;
         return 1;
     }
 
 
-    //    if (argc != 3) throw std::exception("Incorrect number of args");
+    //    if (argc != 3) throw std::runtime_error("Incorrect number of args");
 
     //    std::ifstream ifs;
     //    ifs.open(args[1], std::ios::in);
-    //    if (!ifs.is_open()) throw std::exception("Unable to read file");
+    //    if (!ifs.is_open()) throw std::runtime_error("Unable to read file");
     //    json j;
     //    ifs >> j;
     //    ifs.close();

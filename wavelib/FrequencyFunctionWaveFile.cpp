@@ -61,7 +61,7 @@ double FrequencyFunctionWaveFile::Amplitude(double t, int32_t n)
     }
 
     if (n == *this->n) return aLast;
-    if (n != *this->n + 1) throw std::exception("FrequencyFunctionWaveFile::Amplitude called out of sequence");
+    if (n != *this->n + 1) throw std::runtime_error("FrequencyFunctionWaveFile::Amplitude called out of sequence");
     *this->n = n;
     *this->t = t;
     double f = Frequency();
@@ -70,7 +70,7 @@ double FrequencyFunctionWaveFile::Amplitude(double t, int32_t n)
     double a = this->expression_pulse.value();
     if (isnan(a))
     {
-        throw std::exception("Pulse expression returned NaN");
+        throw std::runtime_error("Pulse expression returned NaN");
     }
     aLast = a;
     return a;
@@ -86,7 +86,7 @@ double FrequencyFunctionWaveFile::Frequency()
     double f = expression_frequency.value();
     if (isnan(f))
     {
-        throw std::exception("Frequency expression returned NaN");
+        throw std::runtime_error("Frequency expression returned NaN");
     }
     return f;
 }

@@ -12,6 +12,12 @@
 
 #include "framework.h"
 
+#ifdef MSVC
+#define TMPNAM(f) tmpnam_s(f, FILENAME_MAX)
+#else
+#define TMPNAM(f) tmpnam(f)
+#endif
+
 #include "exprtk.hpp"
 #include "json.hpp"
 #include <cmath>

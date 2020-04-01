@@ -25,11 +25,11 @@ int32_t compositionelement::trackLength(const nlohmann::json& j)
 void compositionelement::calculate()
 {
     char tempfilename_s[FILENAME_MAX];
-    tmpnam_s(tempfilename_s, FILENAME_MAX);
+    TMPNAM(tempfilename_s);
     tempfilename = tempfilename_s;
     std::ofstream ofstemp;
     ofstemp.open(tempfilename, std::ios::trunc | std::ios::binary);
-    if (!ofstemp.is_open()) throw std::exception("Could not open temporary file");
+    if (!ofstemp.is_open()) throw std::runtime_error("Could not open temporary file");
 
     for (int n = 0; n < header.N; n++)
     {
@@ -49,7 +49,7 @@ void compositionelement::calculate()
                 a *= athis;
             }
 
-            if (a < -1 || a > 1) throw std::exception("Amplitude must be -1 to 1");
+            if (a < -1 || a > 1) throw std::runtime_error("Amplitude must be -1 to 1");
 
             double newmax = std::max(maxPerChannel[channelIndex], abs(a));
             maxPerChannel[channelIndex] = newmax;

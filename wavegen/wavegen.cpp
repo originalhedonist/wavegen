@@ -11,7 +11,7 @@ int main(int argc, char** args)
 {
     try
     {
-        if (argc != 3) throw std::exception("Incorrect number of args");
+        if (argc != 3) throw std::runtime_error("Incorrect number of args");
 
 
         std::cout << "Writing wav using " << args[1] << " to " << args[2] << std::endl;
@@ -19,7 +19,7 @@ int main(int argc, char** args)
 
         std::ofstream ofs;
         ofs.open(args[2], std::ios::binary);
-        if (!ofs.is_open()) throw std::exception("Unable to write file");
+        if (!ofs.is_open()) throw std::runtime_error("Unable to write file");
 
         compositionelement ce(wavfuncs::read_json(args[1]));
 
@@ -35,7 +35,7 @@ int main(int argc, char** args)
         
         return 0;
     }
-    catch (std::exception ex)
+    catch (std::runtime_error ex)
     {
         std::cout << ex.what() << std::endl;
         return 1;

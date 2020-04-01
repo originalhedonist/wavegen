@@ -12,7 +12,7 @@ compositionreader::compositionreader(const compositionelement& element) :
     nNext(0)
 {
     ifstemp.open(element.tempfilename, std::ios::binary);
-    if (!ifstemp.is_open()) throw std::exception("Could not read temp file");
+    if (!ifstemp.is_open()) throw std::runtime_error("Could not read temp file");
 }
 
 compositionreader::~compositionreader()
@@ -24,11 +24,11 @@ double compositionreader::get_next(int n, int16_t channel)
 {
     if (n != nNext)
     {
-        throw std::exception("Called get_next with n out of sequence");
+        throw std::runtime_error("Called get_next with n out of sequence");
     }
     if (channel != channelNext)
     {
-        throw std::exception("Called get_next with channel out of sequence");
+        throw std::runtime_error("Called get_next with channel out of sequence");
     }
 
     double a;

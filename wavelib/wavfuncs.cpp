@@ -4,16 +4,16 @@
 
 void wavfuncs::write_short(std::ostream& os, int16_t i)
 {
-    os << (BYTE)(i & 0xff);
-    os << (BYTE)((i >> 8) & 0xff);
+    os << (unsigned char)(i & 0xff);
+    os << (unsigned char)((i >> 8) & 0xff);
 }
 
 void wavfuncs::write_int(std::ostream& os, int32_t i)
 {
-    os << (BYTE)(i & 0xff);
-    os << (BYTE)((i >> 8) & 0xff);
-    os << (BYTE)((i >> 16) & 0xff);
-    os << (BYTE)((i >> 24) & 0xff);
+    os << (unsigned char)(i & 0xff);
+    os << (unsigned char)((i >> 8) & 0xff);
+    os << (unsigned char)((i >> 16) & 0xff);
+    os << (unsigned char)((i >> 24) & 0xff);
 }
 
 void wavfuncs::write_header(std::ofstream& ofs, const headerdata& h)
@@ -42,7 +42,7 @@ const int32_t wavfuncs::time_span_to_seconds(std::string timespan)
         timespan = timespan.substr(1, timespan.size() - 1);
     }
 
-    if (timespan.size() != 8 || timespan[2] != ':' || timespan[5] != ':') throw std::exception("Time span is wrong format");
+    if (timespan.size() != 8 || timespan[2] != ':' || timespan[5] != ':') throw std::runtime_error("Time span is wrong format");
     int32_t hours = atoi(timespan.substr(0, 2).c_str());
     int32_t mins = atoi(timespan.substr(3, 2).c_str());
     int32_t secs = atoi(timespan.substr(6, 2).c_str());
@@ -53,7 +53,7 @@ const nlohmann::json wavfuncs::read_json(const std::string& file)
 {
     std::ifstream ifs;
     ifs.open(file, std::ios::in);
-    if (!ifs.is_open()) throw std::exception("Unable to read file");
+    if (!ifs.is_open()) throw std::runtime_error("Unable to read file");
     nlohmann::json j;
     ifs >> j;
     ifs.close();
@@ -63,8 +63,8 @@ const nlohmann::json wavfuncs::read_json(const std::string& file)
 void wavfuncs::write_double_as_short(std::ostream& ofs, double a)
 {
     int aL = ((a + 1) * ((double)65535 / 2) - 32768);
-    if (aL > SHRT_MAX) throw std::exception("Exceeded SHRT_MAX");
-    if (aL < SHRT_MIN) throw std::exception("Exceeded SHRT_MIN");
+    if (aL > SHRT_MAX) throw std::runtime_error("Exceeded SHRT_MAX");
+    if (aL < SHRT_MIN) throw std::runtime_error("Exceeded SHRT_MIN");
     int16_t aLs = (int16_t)aL;
     wavfuncs::write_short(ofs, aLs);
 }

@@ -1,0 +1,19 @@
+{
+  "Version": 2,
+  "Naming": {
+    "Specific": "test"
+  },
+  "TrackLength": "00:05:00",
+  "Channels": {
+    "Left": {
+      "Components": [
+        {"Frequency": "500", "Pulse": "sin(x)" }
+      ]
+    },
+    "Right": {
+      "Components": [
+        {"Frequency": "500", "Pulse": "sgn(sin(x))*abs(sin(x))^(4*(sin(2*pi*0.1*t)+1.01))" }
+      ]
+    }
+  }
+}

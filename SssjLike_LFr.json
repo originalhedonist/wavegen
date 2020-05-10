@@ -3,7 +3,7 @@
   "Naming": {
     "Specific": "test"
   },
-  "TrackLength": "00:00:30",
+  "TrackLength": "00:02:00",
   "Channels": {
     "Left": {
       "Components": [
@@ -13,8 +13,8 @@
     },
     "Right": {
       "Components": [
-        {"Frequency": "200/(2pi)", "Pulse": "2(x-floor(x))-1" },
-        {"Frequency": "0.585", "Pulse": "max(abs(sin(x))^0.7,0.3)" }
+        {"Frequency": "(400-100sin(2pi*0.05*t))/(2pi)", "Pulse": "2(x-floor(x))-1" },
+        {"Frequency": "0.585", "Pulse": "1-(0.7-0.7*abs(sin(x))^0.7)" }
       ]
     }
   }

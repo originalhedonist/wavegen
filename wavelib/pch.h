@@ -12,7 +12,7 @@
 
 #include "framework.h"
 
-#ifdef MSVC
+#ifdef _MSC_VER
 #define TMPNAM(f) tmpnam_s(f, FILENAME_MAX)
 #else
 #define TMPNAM(f) tmpnam(f)
@@ -27,5 +27,5 @@
 #include <sstream>
 #include <vector>
 #include <stdio.h>
-
+#include <iomanip>
 #endif //PCH_H

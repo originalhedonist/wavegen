@@ -53,6 +53,7 @@ const std::string wavfuncs::seconds_to_timespan(int32_t seconds)
 {
     std::stringstream ss;
     int32_t hours = seconds / (3600);
+    
     ss << std::setfill('0') << std::setw(2) << hours;
 
 	seconds -= (hours * 3600);

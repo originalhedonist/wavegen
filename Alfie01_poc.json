@@ -1,0 +1,20 @@
+{
+  "Version": 2,
+  "Naming": {
+    "Specific": "test"
+  },
+  "TrackLength": "00:00:10",
+  "Channels": {
+    "Left": {
+      "Components": [
+        {"Frequency": "0.2-0.1n/N", "Pulse": "if(x-floor(x)>0.2, sin((pi/2) * (x-floor(x)-0.2)/(1-0.2))^0.5, cos((pi/2) * (x-floor(x))/0.2)^2 )" },
+        {"Frequency": "600 - 200n/N", "Pulse": "sin(x)"}
+      ]
+    },
+    "Right": {
+      "Components": [
+        {"Frequency": "var minf := 400-(n*200/N); var maxf := 500; ((sin(2*pi*0.5*t)+1)/2)*(maxf-minf)+minf", "Pulse": "sin(x)" }
+      ]
+    }
+  }
+}

@@ -15,7 +15,7 @@
 #ifdef _MSC_VER
 #define TMPNAM(f) tmpnam_s(f, FILENAME_MAX)
 #else
-#define TMPNAM(f) tmpnam(f)
+#define TMPNAM(f) mkstemp(f)
 #endif
 
 #include "exprtk.hpp"

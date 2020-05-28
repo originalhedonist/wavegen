@@ -8,10 +8,17 @@ void FrequencyFunctionWaveFile::initialize()
     symbol_table_pulse.add_variable("t", *t);
     symbol_table_pulse.add_variable("n", *n);
     symbol_table_pulse.add_variable("x", *x);
+    symbol_table_pulse.add_variable("m", *gradient);
+    symbol_table_pulse.add_variable("mem0", *mem0);
+    symbol_table_pulse.add_variable("mem1", *mem1);
+    symbol_table_pulse.add_variable("mem2", *mem2);
+    symbol_table_pulse.add_variable("mem3", *mem3);
+    symbol_table_pulse.add_variable("mem4", *mem4);
     symbol_table_pulse.add_pi();
     symbol_table_frequency.add_constant("N", h.N);
     symbol_table_frequency.add_variable("t", *t);
     symbol_table_frequency.add_variable("n", *n);
+
     symbol_table_frequency.add_pi();
     expression_pulse.register_symbol_table(symbol_table_pulse);
     expression_frequency.register_symbol_table(symbol_table_frequency);
@@ -26,6 +33,12 @@ FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const nlohmann::json j, con
     t(new double(0)),
     n(new double(-1)),
     x(new double(0)),
+    mem0(new double(0)),
+    mem1(new double(0)),
+    mem2(new double(0)),
+    mem3(new double(0)),
+    mem4(new double(0)),
+    gradient(new double(0)),
     h(h),
     aLast(0),
     initialized(false)
@@ -38,6 +51,12 @@ FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const FrequencyFunctionWave
     t(new double(*other.t)),
     n(new double(*other.n)),
     x(new double(*other.x)),
+    mem0(new double(0)),
+    mem1(new double(0)),
+    mem2(new double(0)),
+    mem3(new double(0)),
+    mem4(new double(0)),
+    gradient(new double(0)),
     aLast(other.aLast),
     h(other.h),
     frequency(other.frequency),
@@ -51,6 +70,12 @@ FrequencyFunctionWaveFile::~FrequencyFunctionWaveFile()
     delete n;
     delete t;
     delete x;
+    delete mem0,
+    delete mem1,
+    delete mem2;
+    delete mem3;
+    delete mem4;
+    delete gradient;
 }
 
 double FrequencyFunctionWaveFile::Amplitude(double t, int32_t n)
@@ -72,6 +97,7 @@ double FrequencyFunctionWaveFile::Amplitude(double t, int32_t n)
     {
         throw std::runtime_error("Pulse expression returned NaN");
     }
+    *gradient = a - aLast;
     aLast = a;
     return a;
 }

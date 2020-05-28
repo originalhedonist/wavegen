@@ -16,7 +16,6 @@ int main(int argc, char** args)
 
         std::cout << "Writing wav using " << args[1] << " to " << args[2] << std::endl;
 
-
         std::ofstream ofs;
         ofs.open(args[2], std::ios::binary);
         if (!ofs.is_open()) throw std::runtime_error("Unable to write file");
@@ -32,6 +31,8 @@ int main(int argc, char** args)
         wavfuncs::write_wav(ofs, ce.header, ce.channels.size(), cr);
 
         ofs.close();
+
+        remove(ce.tempfilename.c_str());
         
         return 0;
     }

@@ -24,7 +24,7 @@ int32_t compositionelement::trackLength(const nlohmann::json& j)
 
 void compositionelement::calculate()
 {
-    char tempfilename_s[FILENAME_MAX];
+    char tempfilename_s[FILENAME_MAX] = "wavegencomposition_XXXXXX";
     TMPNAM(tempfilename_s);
     tempfilename = tempfilename_s;
     std::ofstream ofstemp;

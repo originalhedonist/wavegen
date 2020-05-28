@@ -13,6 +13,7 @@ public:
     headerdata h;
     void initialize();
     double *t, *n, *x;
+    double *mem0, *mem1, *mem2, *mem3, *mem4, *gradient;
     double aLast;
     FrequencyFunctionWaveFile(const nlohmann::json j, const headerdata& h);
     FrequencyFunctionWaveFile(const FrequencyFunctionWaveFile& other);

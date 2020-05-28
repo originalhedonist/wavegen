@@ -28,12 +28,14 @@ void FrequencyFunctionWaveFile::initialize()
 
     if(!parser.compile(frequency, expression_frequency))
     {
+        std::cerr << std::endl << frequency << std::endl << std::endl;
         std::cerr << parser.error() << std::endl;
         throw std::runtime_error("Compile error in frequency expression");
     }
 
     if(!parser.compile(pulse, expression_pulse))
     {
+        std::cerr << std::endl << pulse << std::endl << std::endl;
         std::cerr << parser.error() << std::endl;
         throw std::runtime_error("Compile error in pulse expression");
     }
@@ -58,8 +60,36 @@ FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const nlohmann::json j, con
     aLast(0),
     initialized(false)
 {
-    j["Frequency"].get_to(this->frequency);
-    j["Pulse"].get_to(this->pulse);
+    std::string frequencyExpressionOrFile, pulseExpressionOrFile;
+
+    j["Frequency"].get_to(frequencyExpressionOrFile);
+    this->frequency = get_expression(frequencyExpressionOrFile);
+
+    j["Pulse"].get_to(pulseExpressionOrFile);
+    this->pulse = get_expression(pulseExpressionOrFile);
+}
+
+std::string FrequencyFunctionWaveFile::get_expression(const std::string& expression)
+{
+    const std::string fileEnding = ".exprtk";
+    if(expression.length() >= fileEnding.length() && 0 == expression.compare(expression.length() - fileEnding.length(), fileEnding.length(), fileEnding))
+    {
+        std::ifstream file;
+        file.open(expression, std::ios::in);
+        if(!file.is_open())
+        {
+            std::cerr << expression << std::endl;
+            throw std::runtime_error("Unable to read file");
+        }
+        std::ostringstream retval;
+        retval << file.rdbuf();
+        file.close();
+        return retval.str();
+    }
+    else
+    {
+        return expression;
+    }
 }
 
 FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const FrequencyFunctionWaveFile& other) :

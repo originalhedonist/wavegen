@@ -10,6 +10,7 @@ public:
     exprtk::expression<double> expression_frequency;
     exprtk::expression<double> expression_pulse;
     std::string frequency, pulse;
+    static std::string get_expression(const std::string& expression);
     headerdata h;
     void initialize();
     double *t, *tprev, *n, *x, *xprev;

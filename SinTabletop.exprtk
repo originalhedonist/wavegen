@@ -1,4 +1,4 @@
-var toplength := 1+n/N;
+var toplength := 4*sin((pi/2)*(n/N))^2;
 if (mem0 > 0 and x > mem0 and x < mem0 + toplength)
 {
     1

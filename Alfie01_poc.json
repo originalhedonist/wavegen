@@ -13,7 +13,8 @@
     },
     "Right": {
       "Components": [
-        {"Frequency": "var minf := 400-(n*200/N); var maxf := 500; ((sin(2*pi*0.5*t)+1)/2)*(maxf-minf)+minf", "Pulse": "sin(x)" }
+        {"Frequency": "var minf := 400-(n*200/N); var maxf := 500; ((sin(2*pi*0.5*t)+1)/2)*(maxf-minf)+minf", "Pulse": "sin(x)" },
+        {"Frequency": "0.1", "Pulse": "1-0.5abs(sin(x))" }
       ]
     }
   }

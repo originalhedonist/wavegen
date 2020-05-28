@@ -3,7 +3,7 @@
   "Naming": {
     "Specific": "test"
   },
-  "TrackLength": "00:00:10",
+  "TrackLength": "00:10:00",
   "Channels": {
     "Left": {
       "Components": [

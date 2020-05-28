@@ -1,0 +1,13 @@
+var toplength := 1+n/N;
+if (mem0 > 0 and x > mem0 and x < mem0 + toplength)
+{
+    1
+}
+else if (mprev > 0 and m <= 0)
+{
+    mem0 := x; mem1 += toplength; 1
+}
+else
+{
+    (1+sin(x - mem1))/2
+}

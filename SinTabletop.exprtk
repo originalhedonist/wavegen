@@ -1,5 +1,9 @@
-var toplength := 4*sin((pi/2)*(n/N))^2;
-if (mem0 > 0 and x > mem0 and x < mem0 + toplength)
+var toplength := max(4*sin((pi/2)*(n/N))^2, 0.01);
+/*
+toplength has to be at least 0.01 otherwise there is an unexplained 'ramp' at the start when the
+track length is >= ~5min, not sure why
+*/
+if (mem0 > 0 and x > mem0 and x <= mem0 + toplength)
 {
     1
 }

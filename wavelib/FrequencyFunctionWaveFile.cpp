@@ -1,6 +1,11 @@
 #include "pch.h"
 #include "FrequencyFunctionWaveFile.h"
 
+double FrequencyFunctionWaveFile::randomdouble()
+{
+    return ((double)rand()) / RAND_MAX; 
+}
+
 void FrequencyFunctionWaveFile::initialize()
 {
     exprtk::parser<double> parser;
@@ -11,20 +16,25 @@ void FrequencyFunctionWaveFile::initialize()
     symbol_table_pulse.add_variable("x", *x);
     symbol_table_pulse.add_variable("m", *gradient);
     symbol_table_pulse.add_variable("mprev", *gradientprev);
-    symbol_table_pulse.add_variable("mem0", *mem0);
-    symbol_table_pulse.add_variable("mem1", *mem1);
-    symbol_table_pulse.add_variable("mem2", *mem2);
-    symbol_table_pulse.add_variable("mem3", *mem3);
-    symbol_table_pulse.add_variable("mem4", *mem4);
+
+    symbol_table_pulse.add_function("randomdouble", FrequencyFunctionWaveFile::randomdouble);
     symbol_table_pulse.add_pi();
 
     symbol_table_frequency.add_constant("N", h.N);
     symbol_table_frequency.add_variable("t", *t);
     symbol_table_frequency.add_variable("n", *n);
-
+    symbol_table_frequency.add_function("randomdouble", FrequencyFunctionWaveFile::randomdouble);
+    
     symbol_table_frequency.add_pi();
     expression_pulse.register_symbol_table(symbol_table_pulse);
     expression_frequency.register_symbol_table(symbol_table_frequency);
+
+    for(std::map<std::string, double*>::const_iterator it = variables.begin(); it != variables.end(); it++)
+    {
+        symbol_table_pulse.add_variable(it->first, *it->second);
+        symbol_table_frequency.add_variable(it->first, *it->second); //they're 'shared', between pulse and frequency. probably not a problem...
+    }
+
 
     if(!parser.compile(frequency, expression_frequency))
     {
@@ -49,11 +59,6 @@ FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const nlohmann::json j, con
     n(new double(-1)),
     x(new double(0)),
     xprev(new double(0)),
-    mem0(new double(0)),
-    mem1(new double(0)),
-    mem2(new double(0)),
-    mem3(new double(0)),
-    mem4(new double(0)),
     gradient(new double(0)),
     gradientprev(new double(0)),
     h(h),
@@ -67,6 +72,38 @@ FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const nlohmann::json j, con
 
     j["Pulse"].get_to(pulseExpressionOrFile);
     this->pulse = get_expression(pulseExpressionOrFile);
+
+    std::string varsFile;
+    if(j.contains("Variables"))
+    {
+        j["Variables"].get_to(varsFile);
+        if(!varsFile.empty())
+        {
+            parse_vars(varsFile);
+        }
+    }
+
+    if(j.contains("MaxGroup"))
+    {
+        j["MaxGroup"].get_to(maxGroup);
+    }
+}
+
+void FrequencyFunctionWaveFile::parse_vars(const std::string& varsFile)
+{
+    std::ifstream file;
+    file.open(varsFile);
+    if(!file.is_open())
+    {
+        std::cerr << varsFile << std::endl;
+        throw std::runtime_error("Unable to open Variables file");
+    }
+    std::string line;
+    while(getline(file, line))
+    {
+        double* val = new double(0);
+        variables.insert(std::pair<std::string, double*>(line, val));
+    }
 }
 
 std::string FrequencyFunctionWaveFile::get_expression(const std::string& expression)
@@ -84,6 +121,7 @@ std::string FrequencyFunctionWaveFile::get_expression(const std::string& express
         std::ostringstream retval;
         retval << file.rdbuf();
         file.close();
+
         return retval.str();
     }
     else
@@ -98,19 +136,20 @@ FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const FrequencyFunctionWave
     n(new double(*other.n)),
     x(new double(*other.x)),
     xprev(new double(*other.xprev)),
-    mem0(new double(*other.mem0)),
-    mem1(new double(*other.mem1)),
-    mem2(new double(*other.mem2)),
-    mem3(new double(*other.mem3)),
-    mem4(new double(*other.mem4)),
     gradient(new double(*other.gradient)),
     gradientprev(new double(*other.gradientprev)),
     aLast(other.aLast),
     h(other.h),
     frequency(other.frequency),
     pulse(other.pulse),
-    initialized(other.initialized)
+    initialized(other.initialized),
+    maxGroup(other.maxGroup)
 {
+    for(auto a : other.variables)
+    {
+        variables.insert(std::pair<std::string, double*>(a.first, new double(*a.second)));
+        // give it its own pointer - as it will be freed. we don't want the copy constructed instance to try and free the same one
+    }
 }
 
 FrequencyFunctionWaveFile::~FrequencyFunctionWaveFile()
@@ -120,13 +159,12 @@ FrequencyFunctionWaveFile::~FrequencyFunctionWaveFile()
     delete tprev;
     delete x;
     delete xprev;
-    delete mem0,
-    delete mem1,
-    delete mem2;
-    delete mem3;
-    delete mem4;
     delete gradient;
     delete gradientprev;
+    for(auto a : variables)
+    {
+        delete a.second;
+    }
 }
 
 double FrequencyFunctionWaveFile::Amplitude(double t, int32_t n)

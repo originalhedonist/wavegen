@@ -1,5 +1,5 @@
 [
-{"Profile": "Alfie02.json", "Start": "00:00:00", "FadeIn": "00:00:10", "FadeOut": "00:00:10"},
-{"Profile": "Alfie02.json", "Start": "00:00:15", "FadeIn": "00:00:20", "FadeOut": "00:00:10"},
-{"Profile": "Alfie02.json", "Start": "00:00:15", "FadeIn": "00:00:20", "FadeOut": "00:00:10"}
+{"Profile": "Alfie01.json", "Start": "00:00:00", "FadeIn": "00:00:10", "FadeOut": "00:00:10"},
+{"Profile": "Alfie02.json", "Start": "00:00:15", "FadeIn": "00:00:30", "FadeOut": "00:00:10"},
+{"Profile": "Alfie03.json", "Start": "00:00:15", "FadeIn": "00:00:30", "FadeOut": "00:00:10"}
 ]

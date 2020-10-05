@@ -7,13 +7,13 @@
   "Channels": {
     "Left": {
       "Components": [
-        {"Frequency": "1", "Pulse": "SinTabletop2.exprtk" },
+        {"Frequency": "1 + 3n/N", "Pulse": "SinTabletop3.exprtk" },
         {"Frequency": "1000", "Pulse": "sin(x)"}
       ]
     },
     "Right": {
       "Components": [
-        {"Frequency": "var maxf := 800; var minf := maxf-(300n/N); ((sin(2*pi*0.5*t)+1)/2)*(maxf-minf)+minf", "Pulse": "sin(x)" },
+        {"Frequency": "var maxf := 600; var minf := maxf-(350n/N); ((sin(2*pi*0.5*t)+1)/2)*(maxf-minf)+minf", "Pulse": "sin(x)" },
         {"Frequency": "0.2", "Pulse": "1-(sin(x)+1)*0.2" }
       ]
     }

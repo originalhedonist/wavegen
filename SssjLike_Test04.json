@@ -1,9 +1,6 @@
 {
   "Version": 2,
-  "Naming": {
-    "Specific": "test"
-  },
-  "TrackLength": "00:04:00",
+  "TrackLength": "00:07:00",
   "Channels": {
     "Left": {
       "Components": [
@@ -18,5 +15,4 @@
       ]
     }
   }
-}
 }

@@ -1,0 +1,11 @@
+[
+  {"Profile": "SssjLike.json", "Start": "00:00:05", "FadeIn": "00:00:08", "FadeOut": "00:00:10"},
+  {"Profile": "SssjLike_Test04.json", "Start": "00:00:00", "FadeIn": "00:00:10", "FadeOut": "00:00:10"},
+  {"Profile": "SssjLike_Test01.json", "Start": "00:00:15", "FadeIn": "00:00:15", "FadeOut": "00:00:10"},
+  {"Profile": "SssjLike_Test01.json", "Start": "00:00:10", "FadeIn": "00:00:10", "FadeOut": "00:00:10"},
+  {"Profile": "SssjLike_Test05.json", "Start": "00:00:15", "FadeIn": "00:00:15", "FadeOut": "00:00:10"},
+  {"Profile": "SssjLike_Test03.json", "Start": "00:00:20", "FadeIn": "00:00:08", "FadeOut": "00:00:10"},
+  {"Profile": "SssjLike.json", "Start": "00:00:05", "FadeIn": "00:00:08", "FadeOut": "00:00:10"},
+  {"Profile": "SssjLike_Test01.json", "Start": "00:00:10", "FadeIn": "00:00:10", "FadeOut": "00:00:10"}
+  ]
+  

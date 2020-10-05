@@ -1,0 +1,6 @@
+if(currentfrequency = 0)
+{
+    currentfrequency := 0.2;
+};
+
+currentfrequency

@@ -5,16 +5,25 @@ class FrequencyFunctionWaveFile
 {
 public:
     bool initialized;
+    std::string maxGroup; // group together components and max them together
+
     exprtk::symbol_table<double> symbol_table_frequency;
     exprtk::symbol_table<double> symbol_table_pulse;
     exprtk::expression<double> expression_frequency;
     exprtk::expression<double> expression_pulse;
     std::string frequency, pulse;
     static std::string get_expression(const std::string& expression);
+
+    static double randomdouble();
+
     headerdata h;
     void initialize();
     double *t, *tprev, *n, *x, *xprev;
-    double *mem0, *mem1, *mem2, *mem3, *mem4, *gradient, *gradientprev;
+    double *gradient, *gradientprev;
+    
+    std::map<std::string, double*> variables;
+    void parse_vars(const std::string& varsFile);
+
     double aLast;
     FrequencyFunctionWaveFile(const nlohmann::json j, const headerdata& h);
     FrequencyFunctionWaveFile(const FrequencyFunctionWaveFile& other);

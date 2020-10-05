@@ -1,0 +1,14 @@
+{
+  "Version": 2,
+  "Naming": {
+    "Specific": "test"
+  },
+  "TrackLength": "00:01:00",
+  "Channels": {
+    "Left": {
+      "Components": [
+        {"Frequency": "1", "Pulse": "randomwave.exprtk"}
+      ]
+    }
+  }
+}

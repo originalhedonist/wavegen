@@ -1,0 +1,22 @@
+var maxfreqmod := -0.1;
+var minfreqmod := -0.01;
+
+/* 
+mem0 is current
+mem1 is prev
+mem2 is current gradient
+mem3 is prev gradient
+*/
+
+mem0 := sin(2pi*0.1x);
+mem2 := mem0 - mem1;
+
+if(mem2 > 0 and mem3 <= 0)
+{
+    var blah := rand();
+};
+
+mem3 := mem2;
+mem1 := mem0;
+
+mem0

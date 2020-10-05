@@ -142,19 +142,4 @@ int main(int argc, char** args)
         return 1;
     }
 
-
-    //    if (argc != 3) throw std::runtime_error("Incorrect number of args");
-
-    //    std::ifstream ifs;
-    //    ifs.open(args[1], std::ios::in);
-    //    if (!ifs.is_open()) throw std::runtime_error("Unable to read file");
-    //    json j;
-    //    ifs >> j;
-    //    ifs.close();
-
-    //    std::cout << "Writing wav using " << args[1] << " to " << args[2] << std::endl;
-
-
-
-    //    return 0;
 }

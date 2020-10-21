@@ -3,14 +3,14 @@
   "Naming": {
     "Specific": "test"
   },
-  "TrackLength": "00:01:00",
+  "TrackLength": "00:03:00",
   "Channels": {
     "Left": {
       "Components": [
           {
               "SubComponents": [
-                {"Frequency": "0.5*1/5", "Pulse": "abs(sin(x))"},
-                {"Frequency": "0.1*1/5", "Pulse": "abs(sin(x))"}
+                {"Frequency": "1*1/5", "Pulse": "abs(sin(x))"},
+                {"Frequency": "0.2*1/5", "Pulse": "abs(sin(x))"}
               ],
               "Aggregation": "max"
           }

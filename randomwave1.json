@@ -7,9 +7,14 @@
   "Channels": {
     "Left": {
       "Components": [
-        {"Frequency": "0.5*1/5", "Pulse": "abs(sin(x)) * abs(sin(2*pi*t/41))", "MaxGroup": "A"},
-        {"Frequency": "0.5*0.3", "Pulse": "abs(sin(x)) * abs(cos(2*pi*t/43))", "MaxGroup": "A"},
-        {"Frequency": "800", "Pulse": "sin(x)"}
+          {
+              "SubComponents": [
+                {"Frequency": "0.5*1/5", "Pulse": "abs(sin(x)) * abs(sin(2*pi*t/41))"},
+                {"Frequency": "0.5*0.3", "Pulse": "abs(sin(x)) * abs(cos(2*pi*t/43))"}
+              ],
+              "Aggregation": "max"
+          },
+          {"Frequency": "800", "Pulse": "sin(x)"}
       ]
     },
     "Right": {

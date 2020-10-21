@@ -82,11 +82,6 @@ FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const nlohmann::json j, con
             parse_vars(varsFile);
         }
     }
-
-    if(j.contains("MaxGroup"))
-    {
-        j["MaxGroup"].get_to(maxGroup);
-    }
 }
 
 void FrequencyFunctionWaveFile::parse_vars(const std::string& varsFile)
@@ -142,13 +137,11 @@ FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const FrequencyFunctionWave
     h(other.h),
     frequency(other.frequency),
     pulse(other.pulse),
-    initialized(other.initialized),
-    maxGroup(other.maxGroup)
+    initialized(other.initialized)
 {
-    for(auto a : other.variables)
+    for(std::map<std::string, double*>::const_iterator it = other.variables.begin(); it != other.variables.end(); it++)
     {
-        variables.insert(std::pair<std::string, double*>(a.first, new double(*a.second)));
-        // give it its own pointer - as it will be freed. we don't want the copy constructed instance to try and free the same one
+        variables.insert(std::pair<std::string, double*>(it->first, new double(*(it->second))));
     }
 }
 
@@ -175,7 +168,10 @@ double FrequencyFunctionWaveFile::Amplitude(double t, int32_t n)
     }
 
     if (n == *this->n) return aLast;
-    if (n != *this->n + 1) throw std::runtime_error("FrequencyFunctionWaveFile::Amplitude called out of sequence");
+    if (n != *this->n + 1) 
+    {
+        throw std::runtime_error("FrequencyFunctionWaveFile::Amplitude called out of sequence");
+    }
     *this->n = n;
     *this->t = t;
     double f = Frequency();

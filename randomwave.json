@@ -7,8 +7,8 @@
   "Channels": {
     "Left": {
       "Components": [
-        {"Frequency": "1/10", "Pulse": "abs(sin(x)) * abs(sin(2*pi*t/41))", "MaxGroup": "A"},
-        {"Frequency": "1.2", "Pulse": "abs(sin(x)) * abs(cos(2*pi*t/43))", "MaxGroup": "A"},
+        {"Frequency": "1/10", "Pulse": "abs(sin(x)) * abs(sin(2*pi*t/41))"},
+        {"Frequency": "1.2", "Pulse": "abs(sin(x)) * abs(cos(2*pi*t/43))"},
         {"Frequency": "600", "Pulse": "sin(x)"}
       ]
     },

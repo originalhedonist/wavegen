@@ -44,35 +44,12 @@ void compositionelement::calculate()
             std::map<std::string, double> maxGroups;
             std::vector<double> ungroupedComponentValues;
 
-            for (std::vector<FrequencyFunctionWaveFile>::iterator componentit = channelit->components.begin();
+            for (std::vector<FrequencyFunctionWaveFileGroup>::iterator componentit = channelit->components.begin();
                 componentit != channelit->components.end();
                 componentit++)
             {
                 auto athis = componentit->Amplitude(t, n);
-
-                if(!componentit->maxGroup.empty())
-                {
-                    if(maxGroups.find(componentit->maxGroup) == maxGroups.end())
-                    {
-                        maxGroups.insert(std::pair<std::string, int>(componentit->maxGroup, 0));
-                    }
-                    maxGroups[componentit->maxGroup] = std::max(maxGroups[componentit->maxGroup], athis);
-                }
-                else
-                {
-                    ungroupedComponentValues.push_back(athis); //this is to apply the ungrouped components (typically the carrier) AFTER the max'ed groups
-                    // reason being, because the max'ed groups will typically be positive only (0 - 1), but the carrier applies the negativity (-1 to 1)
-                }
-            }
-
-            for(auto m : maxGroups)
-            {
-                a *= m.second;
-            }
-
-            for(auto v : ungroupedComponentValues)
-            {
-                a *= v;
+                a *= athis;
             }
 
             if (a < -1 || a > 1) throw std::runtime_error("Amplitude must be -1 to 1");

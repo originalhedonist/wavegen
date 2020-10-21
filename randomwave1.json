@@ -3,25 +3,17 @@
   "Naming": {
     "Specific": "test"
   },
-  "TrackLength": "00:05:00",
+  "TrackLength": "00:01:00",
   "Channels": {
     "Left": {
       "Components": [
           {
               "SubComponents": [
-                {"Frequency": "0.5*1/5", "Pulse": "abs(sin(x)) * abs(sin(2*pi*t/41))"},
-                {"Frequency": "0.5*0.3", "Pulse": "abs(sin(x)) * abs(cos(2*pi*t/43))"}
+                {"Frequency": "0.5*1/5", "Pulse": "abs(sin(x))"},
+                {"Frequency": "0.1*1/5", "Pulse": "abs(sin(x))"}
               ],
               "Aggregation": "max"
-          },
-          {"Frequency": "800", "Pulse": "sin(x)"}
-      ]
-    },
-    "Right": {
-      "Components": [
-        {"Frequency": "0.5*1/5", "Pulse": "abs(sin(x)) * abs(sin(2*pi*t/59))", "MaxGroup": "A"},
-        {"Frequency": "0.5*0.3", "Pulse": "abs(sin(x)) * abs(cos(2*pi*t/61))", "MaxGroup": "A"},
-        {"Frequency": "500", "Pulse": "sin(x)"}
+          }
       ]
     }
   }

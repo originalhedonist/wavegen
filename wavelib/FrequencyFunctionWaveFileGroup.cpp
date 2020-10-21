@@ -17,3 +17,28 @@ FrequencyFunctionWaveFileGroup::FrequencyFunctionWaveFileGroup(const nlohmann::j
         subcomponents.push_back(FrequencyFunctionWaveFile(j, h));
     }
 }
+
+double FrequencyFunctionWaveFileGroup::Amplitude(double t, int32_t n)
+{
+    std::vector<double> values;
+    for(std::vector<FrequencyFunctionWaveFile>::iterator it = subcomponents.begin(); it != subcomponents.end(); it++)
+    {
+        values.push_back(it->Amplitude(t, n));
+    }
+
+    if(aggregation == "max")
+    {
+        return *std::max_element(values.begin(), values.end());
+    }
+    else if(aggregation == "product")
+    {
+        double a = 1;
+        for(auto v : values) a*=v;
+        return a;
+    }
+    else
+    {
+        std::cerr << "Aggregation = " << aggregation << std::endl;
+        throw new std::runtime_error("Unknown aggregation type");
+    }   
+}

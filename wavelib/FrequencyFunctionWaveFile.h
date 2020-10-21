@@ -5,8 +5,7 @@ class FrequencyFunctionWaveFile
 {
 public:
     bool initialized;
-    std::string maxGroup; // group together components and max them together
-
+    
     exprtk::symbol_table<double> symbol_table_frequency;
     exprtk::symbol_table<double> symbol_table_pulse;
     exprtk::expression<double> expression_frequency;

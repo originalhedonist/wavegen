@@ -1,12 +1,5 @@
 [
-{  "Profile": "randomwave1.json",  "Start": "00:00:00",  "FadeIn": "00:00:04",  "FadeOut": "00:00:02" },
-{  "Profile": "randomwave1.json",  "Start": "00:00:05",  "FadeIn": "00:00:04",  "FadeOut": "00:00:02" },
-{  "Profile": "randomwave2.json",  "Start": "00:00:07",  "FadeIn": "00:00:04",  "FadeOut": "00:00:02" },
-{  "Profile": "randomwave2.json",  "Start": "00:00:03",  "FadeIn": "00:00:04",  "FadeOut": "00:00:02" },
-{  "Profile": "randomwave3.json",  "Start": "00:00:11",  "FadeIn": "00:00:04",  "FadeOut": "00:00:02" },
-{  "Profile": "randomwave3.json",  "Start": "00:00:03",  "FadeIn": "00:00:04",  "FadeOut": "00:00:02" },
-{  "Profile": "randomwave4.json",  "Start": "00:00:13",  "FadeIn": "00:00:04",  "FadeOut": "00:00:02" },
-{  "Profile": "randomwave4.json",  "Start": "00:00:03",  "FadeIn": "00:00:04",  "FadeOut": "00:00:02" },
-{  "Profile": "randomwave5.json",  "Start": "00:00:17",  "FadeIn": "00:00:04",  "FadeOut": "00:00:02" },
-{  "Profile": "randomwave5.json",  "Start": "00:00:01",  "FadeIn": "00:00:04",  "FadeOut": "00:00:02" }
+{  "Profile": "randomwave1.json",  "Start": "00:00:00",  "FadeIn": "00:00:04",  "FadeOut": "00:00:02", ":somevar": 0.2, "Attenuation": 0.5 },
+{  "Profile": "randomwave1.json",  "Start": "00:00:05",  "FadeIn": "00:00:04",  "FadeOut": "00:00:02", "Attenuation": 0.75 },
+{  "Profile": "randomwave1.json",  "Start": "00:00:07",  "FadeIn": "00:00:04",  "FadeOut": "00:00:02", "Attenuation": 1 }
 ]

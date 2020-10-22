@@ -7,11 +7,12 @@ public:
     std::vector<channel> channels;
     headerdata header;
 
-    compositionelement(const nlohmann::json& json);
-    compositionelement(const nlohmann::json& json, const int16_t channels);
+    compositionelement(const nlohmann::json& json, const std::map<std::string, double>& constants);
+    compositionelement(const nlohmann::json& json, const std::map<std::string, double>& constants, const int16_t channels);
 
     void calculate(); //writes out a temp file
 
+    std::map<std::string, double> constants;
     std::map<int16_t, double> maxPerChannel;
     std::string tempfilename;
 

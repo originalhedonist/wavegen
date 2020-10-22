@@ -6,6 +6,74 @@ double FrequencyFunctionWaveFile::randomdouble()
     return ((double)rand()) / RAND_MAX; 
 }
 
+FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const nlohmann::json j, const std::map<std::string, double>& constants, const headerdata& h) :
+    t(new double(0)),
+    tprev(new double(0)),
+    n(new double(-1)),
+    x(new double(0)),
+    xprev(new double(0)),
+    gradient(new double(0)),
+    gradientprev(new double(0)),
+    h(h),
+    aLast(0),
+    initialized(false),
+    constants(constants)
+{
+    std::string frequencyExpressionOrFile, pulseExpressionOrFile;
+
+    j["Frequency"].get_to(frequencyExpressionOrFile);
+    this->frequency = get_expression(frequencyExpressionOrFile);
+
+    j["Pulse"].get_to(pulseExpressionOrFile);
+    this->pulse = get_expression(pulseExpressionOrFile);
+
+    std::string varsFile;
+    if(j.contains("Variables"))
+    {
+        j["Variables"].get_to(varsFile);
+        if(!varsFile.empty())
+        {
+            parse_vars(varsFile);
+        }
+    }
+}
+
+FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const FrequencyFunctionWaveFile& other) :
+    t(new double(*other.t)),
+    tprev(new double(*other.tprev)),
+    n(new double(*other.n)),
+    x(new double(*other.x)),
+    xprev(new double(*other.xprev)),
+    gradient(new double(*other.gradient)),
+    gradientprev(new double(*other.gradientprev)),
+    aLast(other.aLast),
+    h(other.h),
+    frequency(other.frequency),
+    pulse(other.pulse),
+    initialized(other.initialized),
+    constants(other.constants)
+{
+    for(std::map<std::string, double*>::const_iterator it = other.variables.begin(); it != other.variables.end(); it++)
+    {
+        variables.insert(std::pair<std::string, double*>(it->first, new double(*(it->second))));
+    }
+}
+
+FrequencyFunctionWaveFile::~FrequencyFunctionWaveFile()
+{
+    delete n;
+    delete t;
+    delete tprev;
+    delete x;
+    delete xprev;
+    delete gradient;
+    delete gradientprev;
+    for(auto a : variables)
+    {
+        delete a.second;
+    }
+}
+
 void FrequencyFunctionWaveFile::initialize()
 {
     exprtk::parser<double> parser;
@@ -25,6 +93,12 @@ void FrequencyFunctionWaveFile::initialize()
     symbol_table_frequency.add_variable("n", *n);
     symbol_table_frequency.add_function("randomdouble", FrequencyFunctionWaveFile::randomdouble);
     
+    for(std::map<std::string, double>::const_iterator it = constants.begin(); it != constants.end(); it++)
+    {
+        symbol_table_frequency.add_constant(it->first, it->second);
+        symbol_table_pulse.add_constant(it->first, it->second);
+    }
+
     symbol_table_frequency.add_pi();
     expression_pulse.register_symbol_table(symbol_table_pulse);
     expression_frequency.register_symbol_table(symbol_table_frequency);
@@ -51,37 +125,6 @@ void FrequencyFunctionWaveFile::initialize()
     }
     
     initialized = true;
-}
-
-FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const nlohmann::json j, const headerdata& h) :
-    t(new double(0)),
-    tprev(new double(0)),
-    n(new double(-1)),
-    x(new double(0)),
-    xprev(new double(0)),
-    gradient(new double(0)),
-    gradientprev(new double(0)),
-    h(h),
-    aLast(0),
-    initialized(false)
-{
-    std::string frequencyExpressionOrFile, pulseExpressionOrFile;
-
-    j["Frequency"].get_to(frequencyExpressionOrFile);
-    this->frequency = get_expression(frequencyExpressionOrFile);
-
-    j["Pulse"].get_to(pulseExpressionOrFile);
-    this->pulse = get_expression(pulseExpressionOrFile);
-
-    std::string varsFile;
-    if(j.contains("Variables"))
-    {
-        j["Variables"].get_to(varsFile);
-        if(!varsFile.empty())
-        {
-            parse_vars(varsFile);
-        }
-    }
 }
 
 void FrequencyFunctionWaveFile::parse_vars(const std::string& varsFile)
@@ -122,41 +165,6 @@ std::string FrequencyFunctionWaveFile::get_expression(const std::string& express
     else
     {
         return expression;
-    }
-}
-
-FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const FrequencyFunctionWaveFile& other) :
-    t(new double(*other.t)),
-    tprev(new double(*other.tprev)),
-    n(new double(*other.n)),
-    x(new double(*other.x)),
-    xprev(new double(*other.xprev)),
-    gradient(new double(*other.gradient)),
-    gradientprev(new double(*other.gradientprev)),
-    aLast(other.aLast),
-    h(other.h),
-    frequency(other.frequency),
-    pulse(other.pulse),
-    initialized(other.initialized)
-{
-    for(std::map<std::string, double*>::const_iterator it = other.variables.begin(); it != other.variables.end(); it++)
-    {
-        variables.insert(std::pair<std::string, double*>(it->first, new double(*(it->second))));
-    }
-}
-
-FrequencyFunctionWaveFile::~FrequencyFunctionWaveFile()
-{
-    delete n;
-    delete t;
-    delete tprev;
-    delete x;
-    delete xprev;
-    delete gradient;
-    delete gradientprev;
-    for(auto a : variables)
-    {
-        delete a.second;
     }
 }
 

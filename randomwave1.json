@@ -9,18 +9,7 @@
       "Components": [
           {
               "SubComponents": [
-                {"Frequency": "1*1/5", "Pulse": "abs(sin(x))"},
-                {"Frequency": "0.2*1/5", "Pulse": "abs(sin(x))"}
-              ],
-              "Aggregation": "max"
-          }
-      ]
-    },
-    "Right": {
-      "Components": [
-          {
-              "SubComponents": [
-                {"Frequency": "1*1/5", "Pulse": "abs(sin(x))"},
+                {"Frequency": "BasePulseFast", "Pulse": "abs(sin(x))"},
                 {"Frequency": "0.2*1/5", "Pulse": "abs(sin(x))"}
               ],
               "Aggregation": "max"

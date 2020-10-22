@@ -20,7 +20,8 @@ int main(int argc, char** args)
         ofs.open(args[2], std::ios::binary);
         if (!ofs.is_open()) throw std::runtime_error("Unable to write file");
 
-        compositionelement ce(wavfuncs::read_json(args[1]));
+        std::map<std::string, double> constants; // none defined yet - these are only used by symphgen
+        compositionelement ce(wavfuncs::read_json(args[1]), constants);
 
         wavfuncs::write_header(ofs, ce.header);
 

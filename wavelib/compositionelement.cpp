@@ -3,15 +3,15 @@
 #include "wavfuncs.h"
 using json = nlohmann::json;
 
-compositionelement::compositionelement(const nlohmann::json& j)
-    : compositionelement(j, (int16_t)j["Channels"].size()) {}
+compositionelement::compositionelement(const nlohmann::json& j, const std::map<std::string, double>& constants)
+    : compositionelement(j, constants, (int16_t)j["Channels"].size()) {}
 
-compositionelement::compositionelement(const nlohmann::json& j, const int16_t numChannels)
-    : header(trackLength(j), numChannels)
+compositionelement::compositionelement(const nlohmann::json& j, const std::map<std::string, double>& constants, const int16_t numChannels)
+    : header(trackLength(j), numChannels), constants(constants)
 {
     for (auto channeljson : j["Channels"])
     {
-        channels.push_back(channel(channeljson, header));
+        channels.push_back(channel(channeljson, constants, header));
     }
 }
 

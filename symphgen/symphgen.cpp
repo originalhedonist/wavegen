@@ -9,14 +9,15 @@ int main(int argc, char** args)
 {
     try
     {
-        const int CHANNEL_COUNT = 2;
+        //const int CHANNEL_COUNT = 2;
 
-
+        int CHANNEL_COUNT = -1;
         if (argc != 3) throw std::runtime_error("Wrong number of arguments");
 
         json j = wavfuncs::read_json(args[1]);
         std::map<int, element> elements;
-        std::map<std::string, compositionelement*> ces;
+        
+        std::map<profilekey, compositionelement*> ces;
 
         int pos = 0;
         for (auto e : j)
@@ -39,16 +40,37 @@ int main(int argc, char** args)
             int fadeout = wavfuncs::time_span_to_seconds(fadeoutstring);
             if (elements.find(start) != elements.end()) throw std::runtime_error("Cannot have two elements starting at the same time");
 
-            element el(profile, fadein, fadeout, attenuation);
+
+            std::map<std::string, double> constants;
             
+            for(nlohmann::json::const_iterator it = e.begin(); it != e.end(); it++)
+            {
+                if(strcmp(it.key().substr(0,1).c_str(), ":") == 0)
+                {
+                    auto constname = it.key().substr(1);
+                    double constval = 0;
+                    it.value().get_to(constval);
+                    constants.insert(std::pair<std::string, double>(constname, constval));
+                }
+            }
+
+            profilekey pk(profile, constants);
+            element el(pk, fadein, fadeout, attenuation);
             elements.insert(std::pair<int, element>(start, el));
 
-            auto cex = ces.find(profile);
+            auto cex = ces.find(pk);
             if (cex == ces.end())
             {
-                compositionelement* ce = new compositionelement(wavfuncs::read_json(profile));
-                if (ce->channels.size() != CHANNEL_COUNT) throw std::runtime_error("Wrong number of channels");
-                ces.insert(std::pair<std::string, compositionelement*>(profile, ce));
+                compositionelement* ce = new compositionelement(wavfuncs::read_json(profile), constants);
+                if(CHANNEL_COUNT == -1) // they can have any number of channels, but they must all have the same number, once CHANNEL_COUNT is first set, they must all have that number of channels
+                {
+                    CHANNEL_COUNT = ce->channels.size();
+                }
+                else if (ce->channels.size() != CHANNEL_COUNT)
+                {
+                    throw std::runtime_error("Wrong number of channels");
+                }
+                ces.insert(std::pair<profilekey, compositionelement*>(pk, ce));
                 pos = start + ce->header.length_seconds;
             }
             else
@@ -59,7 +81,7 @@ int main(int argc, char** args)
 
         std::vector<std::thread> calcthreads;
 
-        for (std::map<std::string, compositionelement*>::iterator it = ces.begin();
+        for (std::map<profilekey, compositionelement*>::iterator it = ces.begin();
             it != ces.end(); it++)
         {
             calcthreads.push_back(std::thread(&compositionelement::calculate, it->second));

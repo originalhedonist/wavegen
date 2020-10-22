@@ -25,6 +25,12 @@ int main(int argc, char** args)
             std::string startstring = e["Start"];
             std::string fadeinstring = e["FadeIn"];
             std::string fadeoutstring = e["FadeOut"];
+            double attenuation = 1;
+            if(e.contains("Attenuation"))
+            {
+                e["Attenuation"].get_to(attenuation);
+            }
+
             int relstart = wavfuncs::time_span_to_seconds(startstring);
             int start = pos + relstart;
 
@@ -32,7 +38,8 @@ int main(int argc, char** args)
             int fadein = wavfuncs::time_span_to_seconds(fadeinstring);
             int fadeout = wavfuncs::time_span_to_seconds(fadeoutstring);
             if (elements.find(start) != elements.end()) throw std::runtime_error("Cannot have two elements starting at the same time");
-            element el(profile, fadein, fadeout);
+
+            element el(profile, fadein, fadeout, attenuation);
             
             elements.insert(std::pair<int, element>(start, el));
 

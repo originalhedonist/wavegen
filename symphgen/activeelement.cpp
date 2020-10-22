@@ -8,6 +8,11 @@ activeelement::activeelement(int nStart, const element& e, compositionreader* ce
 
 double activeelement::attenuation(int nrel) const
 {
+    return attenuation_fadeinout(nrel) * e.attenuation;
+}
+
+double activeelement::attenuation_fadeinout(int nrel) const
+{
     int fadeinsmp = e.fadein * ce->header.sampling_frequency;
     int fadeoutsmp = e.fadeout * ce->header.sampling_frequency;
     int lensmp = ce->header.length_seconds * ce->header.sampling_frequency;

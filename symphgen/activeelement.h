@@ -10,6 +10,7 @@ public:
     compositionreader* ce;
     activeelement(int nStart, const element& e, compositionreader* ce);
 
+    double attenuation_fadeinout(int nrel) const;
     double attenuation(int nrel) const;
 };
 

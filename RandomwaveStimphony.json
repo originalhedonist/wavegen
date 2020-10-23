@@ -1,5 +1,9 @@
 [
-{  "Profile": "randomwave1.json",  "Start": "00:00:00",  "FadeIn": "00:00:04",  "FadeOut": "00:00:02", ":BasePulseFast": 0.2, "Attenuation": 0.5 },
-{  "Profile": "randomwave1.json",  "Start": "00:00:05",  "FadeIn": "00:00:04",  "FadeOut": "00:00:02", ":BasePulseFast": 1, "Attenuation": 0.75 },
-{  "Profile": "randomwave1.json",  "Start": "00:00:07",  "FadeIn": "00:00:04",  "FadeOut": "00:00:02", ":BasePulseFast": 4, "Attenuation": 1 }
+{  "Profile": "randomwave1.json", "Start": "00:00:00", "FadeIn": "00:00:04",  "FadeOut": "00:00:02", "Attenuation": 1,
+        ":Periodicity": 0.05,
+        ":SlowFrequency": 1.2,
+        ":FastFrequency": 1.2,
+        ":SlowWetness": 0.2,
+        ":FastWetness": 0.2
+     }
 ]

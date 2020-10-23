@@ -9,8 +9,7 @@
       "Components": [
           {
               "SubComponents": [
-                {"Frequency": "BasePulseFast", "Pulse": "abs(sin(x))"},
-                {"Frequency": "0.2*1/5", "Pulse": "abs(sin(x))"}
+                {"Frequency": "1", "Pulse": "randomwave_pulse.exprtk"}
               ],
               "Aggregation": "max"
           }

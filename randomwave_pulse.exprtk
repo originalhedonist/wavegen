@@ -1,1 +1,10 @@
-sin(x)
+
+var slowpulseamplitudedry := (1+sin(2pi*SlowFrequency*t))/2;
+var slowpulseamplitude := slowpulseamplitudedry * (1 - SlowWetness) + SlowWetness;
+var fastpulseamplitudedry := (1+sin(2pi*FastFrequency*t))/2;
+var fastpulseamplitude := fastpulseamplitudedry * (1 - FastWetness) + FastWetness;
+var periodindex := (1+sin(2pi*Periodicity*t)) / 2; /* 0 to 1: 0 means 'all slow, no fast', 1 means 'all fast , no slow' */
+
+var amountslow := (1-periodindex) * slowpulseamplitude;
+var amountfast := periodindex * fastpulseamplitude;
+amountslow + amountfast

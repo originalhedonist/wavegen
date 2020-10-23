@@ -1,9 +1,9 @@
 [
 {  "Profile": "randomwave1.json", "Start": "00:00:00", "FadeIn": "00:00:04",  "FadeOut": "00:00:02", "Attenuation": 1,
-        ":Periodicity": 0.05,
-        ":SlowFrequency": 1.2,
-        ":FastFrequency": 1.2,
-        ":SlowWetness": 0.2,
-        ":FastWetness": 0.2
+        ":periodicity": 0.01,
+        ":slowfrequency": 0.2,
+        ":fastfrequency": 1.2,
+        ":slowwetness": 0.2,
+        ":fastwetness": 0.2
      }
 ]

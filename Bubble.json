@@ -1,9 +1,96 @@
 [
-{  "Profile": "randomwave1.json", "Start": "00:00:00", "FadeIn": "00:00:04",  "FadeOut": "00:00:02", "Attenuation": 1,
+    {  "Profile": "BubbleElement.json", "Start": "00:00:00", "FadeIn": "00:00:04",  "FadeOut": "00:00:02", "Attenuation": 0.57,
+        ":periodicity": 0.01,
+        ":slowfrequency": 0.4,
+        ":fastfrequency": 0.4,
+        ":slowwetness": 0.2,
+        ":fastwetness": 0.2
+     },
+    {  "Profile": "BubbleElement.json", "Start": "00:00:00", "FadeIn": "00:00:04",  "FadeOut": "00:00:02", "Attenuation": 0.57,
+        ":periodicity": 0.01,
+        ":slowfrequency": 0.4,
+        ":fastfrequency": 0.4,
+        ":slowwetness": 0.2,
+        ":fastwetness": 0.2
+     },
+
+
+    {  "Profile": "BubbleElement.json", "Start": "00:00:00", "FadeIn": "00:00:04",  "FadeOut": "00:00:02", "Attenuation": 0.64,
+        ":periodicity": 0.01,
+        ":slowfrequency": 0.3333333,
+        ":fastfrequency": 0.4,
+        ":slowwetness": 0.25,
+        ":fastwetness": 0.2
+     },
+    {  "Profile": "BubbleElement.json", "Start": "00:00:00", "FadeIn": "00:00:04",  "FadeOut": "00:00:02", "Attenuation": 0.64,
+        ":periodicity": 0.01,
+        ":slowfrequency": 0.3333333,
+        ":fastfrequency": 0.4,
+        ":slowwetness": 0.25,
+        ":fastwetness": 0.2
+     },
+
+
+    {  "Profile": "BubbleElement.json", "Start": "00:00:10", "FadeIn": "00:00:04",  "FadeOut": "00:00:02", "Attenuation": 0.72,
         ":periodicity": 0.01,
         ":slowfrequency": 0.2,
-        ":fastfrequency": 1.2,
-        ":slowwetness": 0.2,
+        ":fastfrequency": 0.5,
+        ":slowwetness": 0.3,
+        ":fastwetness": 0.2
+     },
+    {  "Profile": "BubbleElement.json", "Start": "00:00:10", "FadeIn": "00:00:04",  "FadeOut": "00:00:02", "Attenuation": 0.72,
+        ":periodicity": 0.01,
+        ":slowfrequency": 0.2,
+        ":fastfrequency": 0.5,
+        ":slowwetness": 0.3,
+        ":fastwetness": 0.2
+     },
+
+
+    {  "Profile": "BubbleElement.json", "Start": "00:00:10", "FadeIn": "00:00:04",  "FadeOut": "00:00:02", "Attenuation": 0.81,
+        ":periodicity": 0.01,
+        ":slowfrequency": 0.142857,
+        ":fastfrequency": 0.666667,
+        ":slowwetness": 0.35,
+        ":fastwetness": 0.2
+     },
+    {  "Profile": "BubbleElement.json", "Start": "00:00:10", "FadeIn": "00:00:04",  "FadeOut": "00:00:02", "Attenuation": 0.81,
+        ":periodicity": 0.01,
+        ":slowfrequency": 0.142857,
+        ":fastfrequency": 0.666667,
+        ":slowwetness": 0.35,
+        ":fastwetness": 0.2
+     },
+
+
+    {  "Profile": "BubbleElement.json", "Start": "00:00:10", "FadeIn": "00:00:04",  "FadeOut": "00:00:02", "Attenuation": 0.9,
+        ":periodicity": 0.01,
+        ":slowfrequency": 0.111111,
+        ":fastfrequency": 1,
+        ":slowwetness": 0.4,
+        ":fastwetness": 0.2
+     },
+    {  "Profile": "BubbleElement.json", "Start": "00:00:10", "FadeIn": "00:00:04",  "FadeOut": "00:00:02", "Attenuation": 0.9,
+        ":periodicity": 0.01,
+        ":slowfrequency": 0.111111,
+        ":fastfrequency": 1,
+        ":slowwetness": 0.4,
+        ":fastwetness": 0.2
+     },
+
+     
+    {  "Profile": "BubbleElement.json", "Start": "00:00:10", "FadeIn": "00:00:04",  "FadeOut": "00:00:02", "Attenuation": 1,
+        ":periodicity": 0.01,
+        ":slowfrequency": 0.0909090909,
+        ":fastfrequency": 1.5,
+        ":slowwetness": 0.45,
+        ":fastwetness": 0.2
+     },
+    {  "Profile": "BubbleElement.json", "Start": "00:00:10", "FadeIn": "00:00:04",  "FadeOut": "00:00:02", "Attenuation": 1,
+        ":periodicity": 0.01,
+        ":slowfrequency": 0.0909090909,
+        ":fastfrequency": 1.5,
+        ":slowwetness": 0.45,
         ":fastwetness": 0.2
      }
 ]

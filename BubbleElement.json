@@ -1,19 +1,14 @@
 {
-  "Version": 2,
-  "Naming": {
-    "Specific": "test"
-  },
-  "TrackLength": "00:08:00",
-  "Channels": {
-    "Left": {
-      "Components": [
-          {
-              "SubComponents": [
-                {"Frequency": "1", "Pulse": "randomwave_pulse.exprtk"}
-              ],
-              "Aggregation": "max"
-          }
-      ]
+    "Version": 2,
+    "Naming": {
+        "Specific": "test"
+    },
+    "TrackLength": "00:04:00",
+    "Channels": {
+        "Left": {
+            "Components": [
+                { "Frequency": "1", "Pulse": "Bubble_pulse.exprtk" }
+            ]
+        }
     }
-  }
 }

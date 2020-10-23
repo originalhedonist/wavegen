@@ -1,20 +1,20 @@
 #include "pch.h"
 #include "FrequencyFunctionWaveFileGroup.h"
 
-FrequencyFunctionWaveFileGroup::FrequencyFunctionWaveFileGroup(const nlohmann::json j, const std::map<std::string, double>& constants, const headerdata& h)
+FrequencyFunctionWaveFileGroup::FrequencyFunctionWaveFileGroup(const nlohmann::json j, const std::map<std::string, double>& constants, double channelindex, const headerdata& h)
 {
     if(j.contains("SubComponents"))
     {
         j["Aggregation"].get_to(aggregation);
         for(auto sc : j["SubComponents"])
         {
-            subcomponents.push_back(FrequencyFunctionWaveFile(sc, constants, h));
+            subcomponents.push_back(FrequencyFunctionWaveFile(sc, constants, channelindex, h));
         }
     }
     else
     {
         aggregation = "max";
-        subcomponents.push_back(FrequencyFunctionWaveFile(j, constants, h));
+        subcomponents.push_back(FrequencyFunctionWaveFile(j, constants, channelindex, h));
     }
 }
 

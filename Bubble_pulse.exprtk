@@ -1,20 +1,21 @@
 var bubblefrequencyfactor := 10;
 var bubblemodulation := 0.08;
 
-var slowpulseamplitudedry := (1+sin(2pi*slowfrequency*t))/2;
+var slowpulseamplitudedry := (1+sinorcos(channelindex, 2pi*slowfrequency*t))/2;
 var slowpulseamplitude := slowpulseamplitudedry * (1 - slowwetness) + slowwetness;
-
-var slowpulsebubble := sin(2pi*slowfrequency * bubblefrequencyfactor * t) * bubblemodulation;
+var slowpulsebubble := sinorcos(channelindex, 2pi*slowfrequency * bubblefrequencyfactor * t) * bubblemodulation;
 slowpulseamplitude := (slowpulseamplitude + slowpulsebubble) / (1 + slowpulsebubble);
 
-var fastpulseamplitudedry := (1+sin(2pi*fastfrequency*t))/2;
+var fastpulseamplitudedry := (1+sinorcos(channelindex,2pi*fastfrequency*t))/2;
 var fastpulseamplitude := fastpulseamplitudedry * (1 - fastwetness) + fastwetness;
-
-var fastpulsebubble := sin(2pi*fastfrequency * bubblefrequencyfactor * t) * bubblemodulation;
+var fastpulsebubble := sinorcos(channelindex, 2pi*fastfrequency * bubblefrequencyfactor * t) * bubblemodulation;
 fastpulseamplitude := (fastpulseamplitude + fastpulsebubble) / (1 + fastpulsebubble);
 
-var slowfastindex := ((sin(2pi*periodicity*t) + 1) / 2);
 
+var channelstretch := (1 + channelindex)*0.03; /* right has channelindex = 1, left 0 */
+
+var slowfastindex := (sin(2pi*periodicity*channelstretch*t) + 1) / 2;
 var amountslow := slowfastindex * slowpulseamplitude;
 var amountfast := (1-slowfastindex) * fastpulseamplitude;
+
 amountslow + amountfast

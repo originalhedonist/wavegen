@@ -9,9 +9,11 @@ compositionelement::compositionelement(const nlohmann::json &j, const std::map<s
 compositionelement::compositionelement(const nlohmann::json &j, const std::map<std::string, double> &constants, const int16_t numChannels)
     : header(trackLength(j), numChannels), constants(constants)
 {
+    int channelindex = 0;
     for (auto channeljson : j["Channels"])
     {
-        channels.push_back(channel(channeljson, constants, header));
+
+        channels.push_back(channel(channeljson, constants, (double)(channelindex++), header));
     }
 }
 
@@ -51,7 +53,12 @@ void compositionelement::calculate()
                      componentit != channelit->components.end();
                      componentit++)
                 {
-                    auto athis = componentit->Amplitude(t, n);
+                    double athis = componentit->Amplitude(t, n);
+                    if(isnan(athis) || a < -1 || a > 1)
+                    {
+                        std::cout << "t=" << t << ", n=" << n << ", athis=" << athis << std::endl;
+                        throw std::runtime_error("Component returned NaN or out of range");
+                    }
                     a *= athis;
                 }
 

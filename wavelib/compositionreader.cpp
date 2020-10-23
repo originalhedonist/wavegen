@@ -33,11 +33,16 @@ double compositionreader::get_next(int n, int16_t channel)
 
     double a;
     ifstemp.read(reinterpret_cast<char*>(&a), sizeof(a));
-    double aNorm = a / maxPerChannel[channel]; //normalization
+    double aNorm = a == 0 ? 0 : a / maxPerChannel[channel]; //normalization
     if (++channelNext >= header.channels)
     {
         nNext++;
         channelNext = 0;
+    }
+    if(isnan(aNorm) || aNorm < -1 || aNorm > 1)
+    {
+        std::cout << "a=" << a << ", maxPerChannel=" << maxPerChannel[channel] << ", aNorm=" << aNorm << std::endl;
+        throw std::runtime_error("aNorm out of range");
     }
     return aNorm;
 }

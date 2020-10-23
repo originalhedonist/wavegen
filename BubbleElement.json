@@ -9,6 +9,11 @@
             "Components": [
                 { "Frequency": "1", "Pulse": "Bubble_pulse.exprtk" }
             ]
+        },
+        "Right": {
+            "Components": [
+                { "Frequency": "1", "Pulse": "Bubble_pulse.exprtk" }
+            ]
         }
     }
 }

@@ -83,7 +83,11 @@ void wavfuncs::write_double_as_short(std::ostream& ofs, double a)
 {
     int aL = ((a + 1) * ((double)65535 / 2) - 32768);
     if (aL > SHRT_MAX) throw std::runtime_error("Exceeded SHRT_MAX");
-    if (aL < SHRT_MIN) throw std::runtime_error("Exceeded SHRT_MIN");
+    if (aL < SHRT_MIN)
+    {
+        std::cout << "a=" << a << ", aL=" << aL << ", SHRT_MIN=" << SHRT_MIN << std::endl;
+        throw std::runtime_error("Exceeded SHRT_MIN");
+    } 
     int16_t aLs = (int16_t)aL;
     wavfuncs::write_short(ofs, aLs);
 }

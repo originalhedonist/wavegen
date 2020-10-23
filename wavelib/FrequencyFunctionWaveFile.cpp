@@ -6,7 +6,12 @@ double FrequencyFunctionWaveFile::randomdouble()
     return ((double)rand()) / RAND_MAX; 
 }
 
-FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const nlohmann::json j, const std::map<std::string, double>& constants, const headerdata& h) :
+double FrequencyFunctionWaveFile::sinorcos(double channelindex, double arg)
+{
+    return channelindex == 1 ? sin(arg) : cos(arg);
+}
+
+FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const nlohmann::json j, const std::map<std::string, double>& constants, double channelindex, const headerdata& h) :
     t(new double(0)),
     tprev(new double(0)),
     n(new double(-1)),
@@ -17,7 +22,8 @@ FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const nlohmann::json j, con
     h(h),
     aLast(0),
     initialized(false),
-    constants(constants)
+    constants(constants),
+    channelindex(channelindex)
 {
     std::string frequencyExpressionOrFile, pulseExpressionOrFile;
 
@@ -51,7 +57,8 @@ FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const FrequencyFunctionWave
     frequency(other.frequency),
     pulse(other.pulse),
     initialized(other.initialized),
-    constants(other.constants)
+    constants(other.constants),
+    channelindex(other.channelindex)
 {
     for(std::map<std::string, double*>::const_iterator it = other.variables.begin(); it != other.variables.end(); it++)
     {
@@ -86,13 +93,18 @@ void FrequencyFunctionWaveFile::initialize()
     symbol_table_pulse.add_variable("mprev", *gradientprev);
 
     symbol_table_pulse.add_function("randomdouble", FrequencyFunctionWaveFile::randomdouble);
+    symbol_table_pulse.add_function("sinorcos", FrequencyFunctionWaveFile::sinorcos);
     symbol_table_pulse.add_pi();
 
     symbol_table_frequency.add_constant("N", h.N);
     symbol_table_frequency.add_variable("t", *t);
     symbol_table_frequency.add_variable("n", *n);
     symbol_table_frequency.add_function("randomdouble", FrequencyFunctionWaveFile::randomdouble);
-    
+    symbol_table_frequency.add_function("sinorcos", FrequencyFunctionWaveFile::sinorcos);
+
+    symbol_table_frequency.add_constant("channelindex", channelindex);
+    symbol_table_pulse.add_constant("channelindex", channelindex);
+
     for(std::map<std::string, double>::const_iterator it = constants.begin(); it != constants.end(); it++)
     {
         symbol_table_frequency.add_constant(it->first, it->second);
@@ -189,6 +201,11 @@ double FrequencyFunctionWaveFile::Amplitude(double t, int32_t n)
     if (isnan(a))
     {
         throw std::runtime_error("Pulse expression returned NaN");
+    }
+    if(a < -1 || a > 1)
+    {
+        std::cout << "a=" << a << std::endl;
+        throw std::runtime_error("Pulse expression returned out of range value");
     }
 
     *tprev = t;

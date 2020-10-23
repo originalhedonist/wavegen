@@ -1,0 +1,9 @@
+[
+    {  "Profile": "BubbleElement.json", "Start": "00:00:00", "FadeIn": "00:00:04",  "FadeOut": "00:00:02", "Attenuation": 0.57,
+        ":periodicity": 0.01,
+        ":slowfrequency": 0.1,
+        ":fastfrequency": 1,
+        ":slowwetness": 0.2,
+        ":fastwetness": 0.2
+     }
+]

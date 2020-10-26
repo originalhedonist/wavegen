@@ -1,0 +1,9 @@
+
+var slowfrequency := 0.6;
+var bubblemodulation := 0.1;
+var bubblefrequencyfactor := 10;
+var slowpulseamplitudedry := sin(2pi*slowfrequency*t);
+var slowpulsebubble := sin(2pi*slowfrequency * bubblefrequencyfactor * t) * bubblemodulation;
+var slowpulseamplitude := slowpulseamplitudedry + slowpulsebubble;
+
+slowpulseamplitude / 1.4;

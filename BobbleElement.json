@@ -3,11 +3,11 @@
     "Naming": {
         "Specific": "Bubble"
     },
-    "TrackLength": "00:05:00",
+    "TrackLength": "00:01:00",
     "Channels": {
         "Left": {
             "Components": [
-                { "Frequency": "1", "Pulse": "Bubble_pulse.exprtk" }
+                { "Frequency": "1", "Pulse": "Bobble_pulse.exprtk" }
             ]
         }
     }

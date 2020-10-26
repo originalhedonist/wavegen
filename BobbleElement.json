@@ -7,7 +7,16 @@
     "Channels": {
         "Left": {
             "Components": [
-                { "Frequency": "1", "Pulse": "Bobble_pulse.exprtk" }
+                { "Frequency": "1", "Pulse": "Bobble_pulse.exprtk" },
+                { "Frequency": "1000", "Pulse": "x-round(x)" },
+                { "Frequency": "1", "Pulse": "Envelope.exprtk" }
+            ]
+        },
+        "Right": {
+            "Components": [
+                { "Frequency": "1", "Pulse": "Bobble_pulse.exprtk" },
+                { "Frequency": "750", "Pulse": "x-round(x)" },
+                { "Frequency": "1", "Pulse": "Envelope.exprtk" }
             ]
         }
     }

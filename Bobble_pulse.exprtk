@@ -1,9 +1,8 @@
 var bubblefrequencyfactor := 12;
-var bubblemodulation := 0.06;
 
 var pulseamplitudedry := (1+sin(x))/2;
 var pulseamplitude := pulseamplitudedry * (1 - wetness) + wetness;
-var pulsebubble := sin(bubblefrequencyfactor * x) * bubblemodulation;
-pulseamplitude := (pulseamplitude + pulsebubble) / (1 + 2*bubblemodulation);
+var pulsebubble := sin(bubblefrequencyfactor * x) * modulation;
+pulseamplitude := (pulseamplitude + pulsebubble) / (1 + 2*modulation);
 
-pulseamplitude
+pulseamplitude ^ powerindex

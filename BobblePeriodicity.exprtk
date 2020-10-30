@@ -1,8 +1,0 @@
-var minperiodicity := 1/120;
-var maxperiodicity := 1/20;
-if(periodicity = 0 or sgn(mprev) != sgn(m))
-{
-    periodicity := randomdouble() * (maxperiodicity - minperiodicity) + minperiodicity;
-};
-
-periodicity

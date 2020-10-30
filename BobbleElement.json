@@ -3,7 +3,7 @@
     "Naming": {
         "Specific": "Bobble"
     },
-    "TrackLength": "00:05:00",
+    "TrackLength": "00:40:00",
     "Channels": {
         "Left": {
             "Components": [
@@ -13,19 +13,46 @@
                         {
                             "Aggregation": "product",
                             "SubComponents": [
-                                { "Frequency": "0.1-0.08n/N", "Pulse": "Bobble_pulse.exprtk", ":wetness": 0.2},
-                                { "Variables": "Bobble.vars", "Frequency": "BobblePeriodicity.exprtk", "Pulse": "((sin(x)+1)/2)^max(min(f,0.5),2)", "Comments": "weighting (must be complementary to other weighting)"}
+                                { "Frequency": "0.01-0.008n/N", "Pulse": "Bobble_pulse.exprtk", ":wetness": 0.1, ":powerindex": 0.5, ":modulation": 0.02},
+                                { "Variables": "Bobble.vars", "Frequency": "1/20", "Pulse": "((sin(x)+1)/2)", "Comments": "weighting (must be complementary to other weighting)"}
                             ]
                         },
                         {
                             "Aggregation": "product",
                             "SubComponents": [
-                                { "Frequency": "1.2+0.2n/N", "Pulse": "Bobble_pulse.exprtk", ":wetness": 0.2},
-                                { "Variables": "Bobble.vars", "Frequency": "BobblePeriodicity.exprtk", "Pulse": "1-((sin(x)+1)/2)^max(min(f,0.5),2)", "Comments": "weighting (must be complementary to other weighting)"}
+                                { "Frequency": "0.7+0.5n/N", "Pulse": "Bobble_pulse.exprtk", ":wetness": 0.2, ":powerindex": 0.5, ":modulation": 0.06},
+                                { "Variables": "Bobble.vars", "Frequency": "1/20", "Pulse": "1-((sin(x)+1)/2)", "Comments": "weighting (must be complementary to other weighting)"}
                             ]
                         }
                     ]
-                }
+                },
+                { "Frequency": "749", "Pulse": "sin(x)" },
+                { "Frequency": "1", "Pulse": "Envelope.exprtk" }
+            ]
+        },
+        "Right": {
+            "Components": [
+                {
+                    "Aggregation": "sum",
+                    "SubComponents": [
+                        {
+                            "Aggregation": "product",
+                            "SubComponents": [
+                                { "Frequency": "0.01-0.008n/N", "Pulse": "Bobble_pulse.exprtk", ":wetness": 0.1, ":powerindex": 0.5, ":modulation": 0.02},
+                                { "Variables": "Bobble.vars", "Frequency": "1/20", "Pulse": "((sin(x)+1)/2)", "Comments": "weighting (must be complementary to other weighting)"}
+                            ]
+                        },
+                        {
+                            "Aggregation": "product",
+                            "SubComponents": [
+                                { "Frequency": "0.7+0.5n/N", "Pulse": "Bobble_pulse.exprtk", ":wetness": 0.2, ":powerindex": 0.5, ":modulation": 0.06},
+                                { "Variables": "Bobble.vars", "Frequency": "1/20", "Pulse": "1-((sin(x)+1)/2)", "Comments": "weighting (must be complementary to other weighting)"}
+                            ]
+                        }
+                    ]
+                },
+                { "Frequency": "750", "Pulse": "sin(x)" },
+                { "Frequency": "1", "Pulse": "Envelope.exprtk" }
             ]
         }
     }

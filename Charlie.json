@@ -1,0 +1,19 @@
+{
+    "TrackLength": "00:10:00",
+    "Channels": {
+        "Left": {
+            "Components": [
+                {"Frequency": "Charlie_Frequency.exprtk", "Pulse": "Charlie_Pulse.exprtk", "Variables": "Charlie.vars", ":wetness": 0.2},
+                { "Frequency": "500", "Pulse": "sin(x)" },
+                { "Frequency": "1", "Pulse": "Envelope.exprtk" }
+            ]
+        },
+        "Right": {
+            "Components": [
+                {"Frequency": "Charlie_Frequency.exprtk", "Pulse": "Charlie_Pulse.exprtk", "Variables": "Charlie.vars", ":wetness": 0.2},
+                { "Frequency": "600-200n/N", "Pulse": "sin(x)" },
+                { "Frequency": "1", "Pulse": "Envelope.exprtk" }
+            ]
+        }
+    }
+}

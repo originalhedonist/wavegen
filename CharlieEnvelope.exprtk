@@ -1,0 +1,23 @@
+var numrises := 3;
+var numbreaks := 3*numrises; /* numbreaks MUST be a multiple of numrises, for smoothness */
+
+var currentrise := round(n*numrises/N - 0.5);
+
+var riseattenuation := (0.8^(numrises-currentrise));
+
+var breaktime := 7;
+var breaksamples := breaktime * n/t;
+var fadeintime := 5;
+var fadeinsamples := fadeintime * n/t;
+var fadeouttime := 2;
+var fadeoutsamples := fadeouttime * n/t;
+
+var currentbreak := round(n*numbreaks/N - 0.5);
+
+var breaksectionstart := (currentbreak * N/numbreaks) + (breaksamples/2); /* half the break's in one section, half in the other */ 
+var breaksectionend := ((currentbreak + 1) * N/numbreaks) - (breaksamples/2);
+
+var fadeinattenuation := max(0, min(1, (n-breaksectionstart)/fadeinsamples));
+var fadeoutattenuation := max(0, min(1, (breaksectionend-n)/fadeoutsamples));
+
+riseattenuation * fadeinattenuation * fadeoutattenuation;

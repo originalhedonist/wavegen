@@ -1,0 +1,50 @@
+var minwavelength := 0.7;
+var maxwavelength := 10;
+
+var minwaves := 2;
+var maxwaves := 5;
+var maxwavelengthchange := 0.25; /* of its current value, in either direction */
+
+if(wavelengthchangedirection = 0)
+{
+    wavelengthchangedirection := 1;
+};
+
+if(wavesleftatcurrentfrequency <= 0)
+{
+    var currentwavelength := 1/currentfrequency;
+    var wavelengthchange := 1 + (randomdouble() * maxwavelengthchange * wavelengthchangedirection);
+
+    var newdesiredwavelength := currentwavelength * wavelengthchange;
+    var newwavelength;
+
+    if(newdesiredwavelength > maxwavelength)
+    {
+        newwavelength := maxwavelength;
+        wavelengthchangedirection := -1; /* turn round to going down again */
+    }
+    else if (newdesiredwavelength < minwavelength)
+    {
+        newwavelength := minwavelength; /* turn round to going up again */
+        wavelengthchangedirection := 1;
+    }
+    else
+    {
+        newwavelength := newdesiredwavelength;
+    };
+
+    /* turn round half way if getting slower (i.e. start getting faster again without getting to slowest point ) */
+    if(newwavelength >= maxwavelength * 0.4 * randomdouble() and wavelengthchangedirection = 1) /* this is the point at which is starts getting faster again */
+    {
+        if(randomdouble() > 0.4) /* this is how likely it is to run round again */
+        {
+            wavelengthchangedirection := -1;
+        };
+    };
+
+    currentfrequency := 1 / newwavelength;
+    wavesleftatcurrentfrequency := randomdouble() * (maxwaves - minwaves) + minwaves;
+};
+
+currentfrequency
+

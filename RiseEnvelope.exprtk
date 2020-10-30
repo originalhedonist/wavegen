@@ -1,0 +1,15 @@
+var numbreaks := 5;
+
+var breaktime := 7;
+var breaksamples := breaktime * n/t;
+var currentbreak := round(n*numbreaks/N - 0.5);
+var nextbreak := currentbreak + 1;
+
+var breaksectionstart := (currentbreak * N/numbreaks) + (breaksamples/2); /* half the break's in one section, half in the other */ 
+
+var breakattmin := 0.8^(numbreaks-currentbreak);
+var breakattmax := 0.8^(numbreaks-nextbreak);
+
+var attenuation := max(breakattmin, min(breakattmax, (n-breaksectionstart)/breaksamples));
+
+attenuation

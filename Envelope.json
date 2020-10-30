@@ -1,0 +1,10 @@
+{
+    "TrackLength": "00:05:00",
+    "Channels": {
+        "Left": {
+            "Components": [
+                {"Frequency": "1", "Pulse": "RiseEnvelope.exprtk"}
+            ]
+        }
+    }
+}

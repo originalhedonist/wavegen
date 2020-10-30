@@ -1,15 +1,33 @@
-var numbreaks := 5;
+var numrises := 3;
 
-var breaktime := 7;
-var breaksamples := breaktime * n/t;
-var currentbreak := round(n*numbreaks/N - 0.5);
-var nextbreak := currentbreak + 1;
+var numsections := numrises+1;
 
-var breaksectionstart := (currentbreak * N/numbreaks) + (breaksamples/2); /* half the break's in one section, half in the other */ 
+var time := 5;
+var samples := time * n/t;
+var current := round(n*numsections/N);
+var next := current + 1;
 
-var breakattmin := 0.8^(numbreaks-currentbreak);
-var breakattmax := 0.8^(numbreaks-nextbreak);
+var sectionstart := (current * N/numsections) - (samples/2); /* half's in one section, half in the other */ 
+var sectionend :=   (current * N/numsections) + (samples/2); /* half's in one section, half in the other */ 
 
-var attenuation := max(breakattmin, min(breakattmax, (n-breaksectionstart)/breaksamples));
-
-attenuation
+var attmin := 0.8^(numsections-current);
+var attmax := 0.8^(numsections-next);
+if(sectionstart < 0  or n > sectionend)
+{
+    attmax
+}
+else if(n < sectionstart)
+{
+    attmin
+}
+else if(n > sectionend or attmax = attmin)
+{
+    attmax
+}
+else
+{
+    var samplesalong := n-sectionstart;
+    var proportionalong := max(0,min(1,samplesalong / samples));
+    var att := proportionalong * (attmax-attmin) + attmin;
+    max(min(att,1),0)
+};

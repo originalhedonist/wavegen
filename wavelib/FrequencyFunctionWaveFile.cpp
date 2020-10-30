@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "FrequencyFunctionWaveFile.h"
 
+std::map<std::string, double*> FrequencyFunctionWaveFile::variables;
+
 double FrequencyFunctionWaveFile::randomdouble()
 {
     return ((double)rand()) / RAND_MAX; 
@@ -17,6 +19,7 @@ FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const nlohmann::json j, con
     n(new double(-1)),
     x(new double(0)),
     xprev(new double(0)),
+    f(new double(0)),
     gradient(new double(0)),
     gradientprev(new double(0)),
     h(h),
@@ -69,8 +72,7 @@ FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const FrequencyFunctionWave
     pulse(other.pulse),
     initialized(other.initialized),
     _constants(other._constants),
-    channelindex(other.channelindex),
-    variables(other.variables)
+    channelindex(other.channelindex)
 {
 }
 
@@ -88,7 +90,7 @@ void FrequencyFunctionWaveFile::initialize()
     symbol_table_pulse.add_variable("x", *x);
     symbol_table_pulse.add_variable("m", *gradient);
     symbol_table_pulse.add_variable("mprev", *gradientprev);
-
+    symbol_table_pulse.add_variable("f", *f);
     symbol_table_pulse.add_function("randomdouble", FrequencyFunctionWaveFile::randomdouble);
     symbol_table_pulse.add_function("sinorcos", FrequencyFunctionWaveFile::sinorcos);
     symbol_table_pulse.add_pi();
@@ -96,6 +98,8 @@ void FrequencyFunctionWaveFile::initialize()
     symbol_table_frequency.add_constant("N", h.N);
     symbol_table_frequency.add_variable("t", *t);
     symbol_table_frequency.add_variable("n", *n);
+    symbol_table_frequency.add_variable("m", *gradient);
+    symbol_table_frequency.add_variable("mprev", *gradientprev);
     symbol_table_frequency.add_function("randomdouble", FrequencyFunctionWaveFile::randomdouble);
     symbol_table_frequency.add_function("sinorcos", FrequencyFunctionWaveFile::sinorcos);
 
@@ -191,8 +195,8 @@ double FrequencyFunctionWaveFile::Amplitude(double t, int32_t n)
     }
     *this->n = n;
     *this->t = t;
-    double f = Frequency();
-    double dx = 2 * M_PI * f / 44100;
+    *f = Frequency();
+    double dx = 2 * M_PI * (*f) / 44100;
     *x += dx;
     double a = this->expression_pulse.value();
     if (isnan(a))

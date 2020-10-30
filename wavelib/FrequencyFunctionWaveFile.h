@@ -25,11 +25,11 @@ public:
 
     headerdata h;
     void initialize();
-    double *t, *tprev, *n, *x, *xprev;
+    double *t, *tprev, *n, *x, *xprev, *f;
     double *gradient, *gradientprev;
     double channelindex;
 
-    std::map<std::string, double*> variables;
+    static std::map<std::string, double*> variables;
     std::map<std::string, double> _constants;
     void parse_vars(const std::string& varsFile);
 

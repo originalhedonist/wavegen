@@ -1,21 +1,21 @@
 {
     "Version": 2,
     "Naming": {
-        "Specific": "Bubble"
+        "Specific": "Bobble"
     },
-    "TrackLength": "00:01:00",
+    "TrackLength": "00:05:00",
     "Channels": {
         "Left": {
             "Components": [
-                { "Frequency": "1", "Pulse": "Bobble_pulse.exprtk" },
-                { "Frequency": "1000", "Pulse": "x-round(x)" },
+                { "Frequency": "0.005+0.005n/N", "Pulse": "Bobble_pulse.exprtk", ":slowfrequencystart": 0.2},
+                { "Frequency": "699.9", "Pulse": "x-round(x)" },
                 { "Frequency": "1", "Pulse": "Envelope.exprtk" }
             ]
         },
         "Right": {
             "Components": [
-                { "Frequency": "1", "Pulse": "Bobble_pulse.exprtk" },
-                { "Frequency": "750", "Pulse": "x-round(x)" },
+                { "Frequency": "0.005+0.005n/N", "Pulse": "Bobble_pulse.exprtk", ":slowfrequencystart": 0.2 },
+                { "Frequency": "700", "Pulse": "x-round(x)" },
                 { "Frequency": "1", "Pulse": "Envelope.exprtk" }
             ]
         }

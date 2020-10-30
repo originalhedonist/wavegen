@@ -23,7 +23,7 @@ public:
     double channelindex;
 
     std::map<std::string, double*> variables;
-    std::map<std::string, double> constants;
+    std::map<std::string, double> _constants;
     void parse_vars(const std::string& varsFile);
 
     double aLast;

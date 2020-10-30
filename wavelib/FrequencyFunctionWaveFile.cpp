@@ -22,7 +22,7 @@ FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const nlohmann::json j, con
     h(h),
     aLast(0),
     initialized(false),
-    constants(constants),
+    _constants(constants),
     channelindex(channelindex)
 {
     std::string frequencyExpressionOrFile, pulseExpressionOrFile;
@@ -42,6 +42,17 @@ FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const nlohmann::json j, con
             parse_vars(varsFile);
         }
     }
+
+    for(nlohmann::json::const_iterator it = j.begin(); it != j.end(); it++)
+    {
+        if(strcmp(it.key().substr(0,1).c_str(), ":") == 0)
+        {
+            auto constname = it.key().substr(1);
+            double constval = 0;
+            it.value().get_to(constval);
+            _constants.insert(std::pair<std::string, double>(constname, constval));
+        }
+    }
 }
 
 FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const FrequencyFunctionWaveFile& other) :
@@ -57,7 +68,7 @@ FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const FrequencyFunctionWave
     frequency(other.frequency),
     pulse(other.pulse),
     initialized(other.initialized),
-    constants(other.constants),
+    _constants(other._constants),
     channelindex(other.channelindex)
 {
     for(std::map<std::string, double*>::const_iterator it = other.variables.begin(); it != other.variables.end(); it++)
@@ -105,7 +116,7 @@ void FrequencyFunctionWaveFile::initialize()
     symbol_table_frequency.add_constant("channelindex", channelindex);
     symbol_table_pulse.add_constant("channelindex", channelindex);
 
-    for(std::map<std::string, double>::const_iterator it = constants.begin(); it != constants.end(); it++)
+    for(std::map<std::string, double>::const_iterator it = _constants.begin(); it != _constants.end(); it++)
     {
         symbol_table_frequency.add_constant(it->first, it->second);
         symbol_table_pulse.add_constant(it->first, it->second);

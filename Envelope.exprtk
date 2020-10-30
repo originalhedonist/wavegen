@@ -1,9 +1,9 @@
-var numrises := 5;
-var numbreaks := 10;
+var numrises := 3;
+var numbreaks := 3*numrises; /* numbreaks MUST be a multiple of numrises, for smoothness */
 
 var currentrise := round(n*numrises/N - 0.5);
 
-var riseattenuation := (0.9^(numrises-currentrise));
+var riseattenuation := (0.8^(numrises-currentrise));
 
 var breaktime := 7;
 var breaksamples := breaktime * n/t;

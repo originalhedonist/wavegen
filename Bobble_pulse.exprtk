@@ -1,31 +1,9 @@
-var slowfrequencyend := 0.1;
-var slowfrequency := (slowfrequencystart - slowfrequencyend) * (1-n/N) + slowfrequencystart; /* this doesn't work with end and start flipped, and n/N instead of 1-n/N. has to be positive seemingly */
-
-var fastfrequencystart := 1.0;
-var fastfrequencyend := 1.5;
-var fastfrequency := (fastfrequencyend - fastfrequencystart) * (n/N) + fastfrequencystart;
-
 var bubblefrequencyfactor := 12;
 var bubblemodulation := 0.06;
 
-var slowwetnessstart := 0.1;
-var slowwetnessend := 0.5;
-var slowwetness := (slowwetnessend - slowwetnessstart) * (n/N) + slowwetnessstart;
+var pulseamplitudedry := (1+sin(x))/2;
+var pulseamplitude := pulseamplitudedry * (1 - wetness) + wetness;
+var pulsebubble := sin(bubblefrequencyfactor * x) * bubblemodulation;
+pulseamplitude := (pulseamplitude + pulsebubble) / (1 + 2*bubblemodulation);
 
-var fastwetness := 0.2; /* keep it the same all the way through, might revisit */
-
-var slowpulseamplitudedry := (1+sin(2pi*slowfrequency*t))/2;
-var slowpulseamplitude := slowpulseamplitudedry * (1 - slowwetness) + slowwetness;
-var slowpulsebubble := sin(2pi*slowfrequency * bubblefrequencyfactor * t) * bubblemodulation;
-slowpulseamplitude := (slowpulseamplitude + slowpulsebubble) / (1 + 2*bubblemodulation);
-
-var fastpulseamplitudedry := (1+sin(2pi*fastfrequency*t))/2;
-var fastpulseamplitude := fastpulseamplitudedry * (1 - fastwetness) + fastwetness;
-var fastpulsebubble := sin(2pi*fastfrequency * bubblefrequencyfactor * t) * bubblemodulation;
-fastpulseamplitude := (fastpulseamplitude + fastpulsebubble) / (1 + 2*bubblemodulation);
-
-var slowfastindex := ((sin(x) + 1) / 2) ^0.5; /* the power gives more time to the slow sections */ 
-var amountslow := slowfastindex * slowpulseamplitude;
-var amountfast := (1-slowfastindex) * fastpulseamplitude;
-
-amountslow + amountfast
+pulseamplitude

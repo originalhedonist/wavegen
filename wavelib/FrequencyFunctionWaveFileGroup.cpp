@@ -3,27 +3,30 @@
 
 FrequencyFunctionWaveFileGroup::FrequencyFunctionWaveFileGroup(const nlohmann::json j, const std::map<std::string, double>& constants, double channelindex, const headerdata& h)
 {
+    // this probably leaks memory - as they are not deleted. can't delete in destructor as copy constructed instance will try again.
+    // but process will end soon enough. if it were a web server could use smart pointers
     if(j.contains("SubComponents"))
     {
         j["Aggregation"].get_to(aggregation);
         for(auto sc : j["SubComponents"])
         {
-            subcomponents.push_back(FrequencyFunctionWaveFile(sc, constants, channelindex, h));
+            subcomponents.push_back(new FrequencyFunctionWaveFileGroup(sc, constants, channelindex, h));
         }
     }
     else
     {
         aggregation = "max";
-        subcomponents.push_back(FrequencyFunctionWaveFile(j, constants, channelindex, h));
+        subcomponents.push_back(new FrequencyFunctionWaveFile(j, constants, channelindex, h));
     }
 }
 
 double FrequencyFunctionWaveFileGroup::Amplitude(double t, int32_t n)
 {
     std::vector<double> values;
-    for(std::vector<FrequencyFunctionWaveFile>::iterator it = subcomponents.begin(); it != subcomponents.end(); it++)
+    for(std::vector<FrequencyFunctionWaveFileOrGroup*>::iterator it = subcomponents.begin(); it != subcomponents.end(); it++)
     {
-        values.push_back(it->Amplitude(t, n));
+        FrequencyFunctionWaveFileOrGroup* item = *it;
+        values.push_back(item->Amplitude(t, n));
     }
 
     if(aggregation == "max")
@@ -34,6 +37,12 @@ double FrequencyFunctionWaveFileGroup::Amplitude(double t, int32_t n)
     {
         double a = 1;
         for(auto v : values) a*=v;
+        return a;
+    }
+    else if (aggregation == "sum")
+    {
+        double a = 0;
+        for(auto v : values) a+=v;
         return a;
     }
     else

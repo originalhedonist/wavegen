@@ -69,27 +69,13 @@ FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const FrequencyFunctionWave
     pulse(other.pulse),
     initialized(other.initialized),
     _constants(other._constants),
-    channelindex(other.channelindex)
+    channelindex(other.channelindex),
+    variables(other.variables)
 {
-    for(std::map<std::string, double*>::const_iterator it = other.variables.begin(); it != other.variables.end(); it++)
-    {
-        variables.insert(std::pair<std::string, double*>(it->first, new double(*(it->second))));
-    }
 }
 
 FrequencyFunctionWaveFile::~FrequencyFunctionWaveFile()
 {
-    delete n;
-    delete t;
-    delete tprev;
-    delete x;
-    delete xprev;
-    delete gradient;
-    delete gradientprev;
-    for(auto a : variables)
-    {
-        delete a.second;
-    }
 }
 
 void FrequencyFunctionWaveFile::initialize()

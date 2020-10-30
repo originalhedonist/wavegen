@@ -1,7 +1,14 @@
 #pragma once
 #include "headerdata.h"
 
-class FrequencyFunctionWaveFile
+class FrequencyFunctionWaveFileOrGroup
+{
+public:
+    virtual double Amplitude(double t, int32_t n) = 0;
+    virtual ~FrequencyFunctionWaveFileOrGroup() {};
+};
+
+class FrequencyFunctionWaveFile : public FrequencyFunctionWaveFileOrGroup
 {
 public:
     bool initialized;

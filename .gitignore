@@ -1,5 +1,7 @@
 *.wav
 *.mp3
+wavegencomposition_*
+
 
 *.swp
 *.d

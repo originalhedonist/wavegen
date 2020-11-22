@@ -1,0 +1,7 @@
+if(m < 0 and mprev >= 0)
+{
+    wavesleftatcurrentfrequency -= 1;
+};
+
+var dry:=(1+sin(x))/2;
+1-dry*(1-wetness)

@@ -3,6 +3,11 @@
 
 std::map<std::string, double*> FrequencyFunctionWaveFile::variables;
 
+double FrequencyFunctionWaveFile::randombetween(double bottom, double top)
+{
+    return bottom + (FrequencyFunctionWaveFile::randomdouble() * (top - bottom));
+}
+
 double FrequencyFunctionWaveFile::randomdouble()
 {
     return ((double)rand()) / RAND_MAX; 
@@ -26,7 +31,10 @@ FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const nlohmann::json j, con
     aLast(0),
     initialized(false),
     _constants(constants),
-    channelindex(channelindex)
+    channelindex(channelindex),
+    startTime(-1),
+    endTime(-1),
+    everFiltered(false)
 {
     std::string frequencyExpressionOrFile, pulseExpressionOrFile;
 
@@ -54,6 +62,15 @@ FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const nlohmann::json j, con
             double constval = 0;
             it.value().get_to(constval);
             _constants.insert(std::pair<std::string, double>(constname, constval));
+
+            if(it.key().compare(":starttime") == 0)
+            {
+                startTime = constval;
+            }
+            if(it.key().compare(":endtime") == 0)
+            {
+                endTime = constval;
+            }
         }
     }
 }
@@ -72,7 +89,10 @@ FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const FrequencyFunctionWave
     pulse(other.pulse),
     initialized(other.initialized),
     _constants(other._constants),
-    channelindex(other.channelindex)
+    channelindex(other.channelindex),
+    startTime(other.startTime),
+    endTime(other.endTime),
+    everFiltered(other.everFiltered)
 {
 }
 
@@ -92,6 +112,7 @@ void FrequencyFunctionWaveFile::initialize()
     symbol_table_pulse.add_variable("mprev", *gradientprev);
     symbol_table_pulse.add_variable("f", *f);
     symbol_table_pulse.add_function("randomdouble", FrequencyFunctionWaveFile::randomdouble);
+    symbol_table_pulse.add_function("randombetween", FrequencyFunctionWaveFile::randombetween);
     symbol_table_pulse.add_function("sinorcos", FrequencyFunctionWaveFile::sinorcos);
     symbol_table_pulse.add_pi();
 
@@ -101,6 +122,7 @@ void FrequencyFunctionWaveFile::initialize()
     symbol_table_frequency.add_variable("m", *gradient);
     symbol_table_frequency.add_variable("mprev", *gradientprev);
     symbol_table_frequency.add_function("randomdouble", FrequencyFunctionWaveFile::randomdouble);
+    symbol_table_frequency.add_function("randombetween", FrequencyFunctionWaveFile::randombetween);
     symbol_table_frequency.add_function("sinorcos", FrequencyFunctionWaveFile::sinorcos);
 
     symbol_table_frequency.add_constant("channelindex", channelindex);
@@ -121,7 +143,6 @@ void FrequencyFunctionWaveFile::initialize()
         symbol_table_pulse.add_variable(it->first, *it->second);
         symbol_table_frequency.add_variable(it->first, *it->second); //they're 'shared', between pulse and frequency. probably not a problem...
     }
-
 
     if(!parser.compile(frequency, expression_frequency))
     {
@@ -181,6 +202,21 @@ std::string FrequencyFunctionWaveFile::get_expression(const std::string& express
     }
 }
 
+bool FrequencyFunctionWaveFile::shouldCalculateForTime(const double& t)
+{
+    if(endTime > startTime && startTime >= 0)
+    {
+        // are they defined? (default to -1)
+        // if so, filter.
+        bool include = t >= startTime && t <= endTime;
+        if(!include) everFiltered = true;
+
+        return include;
+    }
+
+    return true;
+}
+
 double FrequencyFunctionWaveFile::Amplitude(double t, int32_t n)
 {
     if (!initialized)
@@ -189,9 +225,14 @@ double FrequencyFunctionWaveFile::Amplitude(double t, int32_t n)
     }
 
     if (n == *this->n) return aLast;
-    if (n != *this->n + 1) 
+
+    if(!everFiltered)
     {
-        throw std::runtime_error("FrequencyFunctionWaveFile::Amplitude called out of sequence");
+        if (n != *this->n + 1) 
+        {
+            std::cout << "FrequencyFunctionWaveFile::Amplitude called out of sequence" << std::endl;
+            throw std::runtime_error("FrequencyFunctionWaveFile::Amplitude called out of sequence");
+        }
     }
     *this->n = n;
     *this->t = t;

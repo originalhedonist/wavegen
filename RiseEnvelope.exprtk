@@ -1,5 +1,3 @@
-var numrises := 3;
-
 var numsections := numrises+1;
 
 var time := 5;

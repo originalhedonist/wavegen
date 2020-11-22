@@ -1,0 +1,10 @@
+{
+    "TrackLength": "00:05:00",
+    "Channels": {
+        "Left": {
+            "Components": [
+                { "Frequency": "Jack_Frequency.exprtk", "Pulse": "sin(x)", "Variables": "Jack.vars" }
+            ]
+        }
+    }
+}

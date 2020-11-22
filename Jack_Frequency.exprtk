@@ -1,0 +1,19 @@
+if(currentamplitude = 0)
+{
+    currentamplitude := randombetween(0.2, 1);
+};
+
+y := sin(2pi*t) * currentamplitude;
+
+if(sgn(prev) != sgn(y))
+{
+    currentamplitude := randombetween(0.2, 1);
+};
+
+prev := y;
+var ypositive := (y+1)/2;
+
+var minfrequency := 0.1;
+var maxfrequency := 10;
+
+minfrequency + ypositive * (maxfrequency - minfrequency);

@@ -1,0 +1,9 @@
+if(t < starttime or t > endtime)
+{
+    0
+}
+else
+{
+    var frequency := 0.25; /* so the rise (quarter wavelength) is one second */
+    sin(2pi * frequency * (t - starttime))
+};

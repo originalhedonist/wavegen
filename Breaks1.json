@@ -1,0 +1,19 @@
+{
+    "TrackLength": "00:10:00",
+    "Channels": {
+        "Left": {
+            "Components": [
+                {"Frequency": "1", "Pulse": "sin(x)^2" },
+                { "Frequency": "600", "Pulse": "sin(x)" },
+                { "Frequency": "1", "Pulse": "max(0,sgn(sin(2x)))"}
+            ]
+        },
+        "Right": {
+            "Components": [
+                {"Frequency": "1.01", "Pulse": "sin(x)^2" },
+                { "Frequency": "600", "Pulse": "sin(x)" },
+                { "Frequency": "1.01", "Pulse": "max(0,sgn(sin(2x)))"}
+            ]
+        }
+    }
+}

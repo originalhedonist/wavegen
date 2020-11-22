@@ -1,9 +1,10 @@
 {
-    "TrackLength": "00:05:00",
+    "TrackLength": "00:10:00",
     "Channels": {
         "Left": {
             "Components": [
-                {"Frequency": "1", "Pulse": "RiseEnvelope.exprtk"}
+                { "Frequency": "1", "Pulse": "RiseEnvelope.exprtk",  ":numrises": 3 },
+                { "Frequency": "1", "Pulse": "BreakEnvelope.exprtk",  ":numbreaks": 10 }
             ]
         }
     }

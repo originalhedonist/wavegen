@@ -1,0 +1,19 @@
+
+var numsections := numbreaks+1;
+
+var breaktime := 7;
+var breaksamples := breaktime * n/t;
+var fadeintime := 5;
+var fadeinsamples := fadeintime * n/t;
+var fadeouttime := 2;
+var fadeoutsamples := fadeouttime * n/t;
+
+var currentbreak := round(n*numsections/N - 0.5);
+
+var breaksectionstart := (currentbreak * N/numsections) + (breaksamples/2); /* half the break's in one section, half in the other */ 
+var breaksectionend := ((currentbreak + 1) * N/numsections) - (breaksamples/2);
+
+var fadeinattenuation := max(0, min(1, (n-breaksectionstart)/fadeinsamples));
+var fadeoutattenuation := max(0, min(1, (breaksectionend-n)/fadeoutsamples));
+
+fadeinattenuation * fadeoutattenuation;

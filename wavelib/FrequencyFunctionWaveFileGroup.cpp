@@ -26,8 +26,14 @@ double FrequencyFunctionWaveFileGroup::Amplitude(double t, int32_t n)
     for(std::vector<FrequencyFunctionWaveFileOrGroup*>::iterator it = subcomponents.begin(); it != subcomponents.end(); it++)
     {
         FrequencyFunctionWaveFileOrGroup* item = *it;
-        values.push_back(item->Amplitude(t, n));
+        if(item->shouldCalculateForTime(t))
+        {
+            values.push_back(item->Amplitude(t, n));
+        }
     }
+
+
+    if(values.size() == 0) return 0;
 
     if(aggregation == "max")
     {

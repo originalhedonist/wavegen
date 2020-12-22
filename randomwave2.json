@@ -9,14 +9,14 @@
       "Components": [
         {"Frequency": "0.5*1/8", "Pulse": "abs(sin(x)) * abs(sin(2*pi*t/41))", "MaxGroup": "A"},
         {"Frequency": "0.5*0.7", "Pulse": "abs(sin(x)) * abs(cos(2*pi*t/43))", "MaxGroup": "A"},
-        {"Frequency": "800", "Pulse": "sin(x)"}
+        {"Frequency": "320", "Pulse": "sin(x)"}
       ]
     },
     "Right": {
       "Components": [
         {"Frequency": "0.5*1/8", "Pulse": "abs(sin(x)) * abs(sin(2*pi*t/59))", "MaxGroup": "A"},
         {"Frequency": "0.5*0.7", "Pulse": "abs(sin(x)) * abs(cos(2*pi*t/61))", "MaxGroup": "A"},
-        {"Frequency": "500", "Pulse": "sin(x)"}
+        {"Frequency": "320", "Pulse": "sin(x)"}
       ]
     }
   }

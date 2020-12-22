@@ -1,0 +1,14 @@
+var toplength := 1/f;
+if(m <= 0 and mprev > 0)
+{
+    lasttopstart := t;
+};
+
+if(lasttopstart > 0 and t - lasttopstart <= toplength)
+{
+    1
+}
+else
+{
+    sin(x)
+}

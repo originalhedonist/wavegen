@@ -8,8 +8,8 @@ var next := current + 1;
 var sectionstart := (current * N/numsections) - (samples/2); /* half's in one section, half in the other */ 
 var sectionend :=   (current * N/numsections) + (samples/2); /* half's in one section, half in the other */ 
 
-var attmin := 0.8^(numsections-current);
-var attmax := 0.8^(numsections-next);
+var attmin := (5/6)^(numsections-current);
+var attmax := (5/6)^(numsections-next);
 if(sectionstart < 0  or n > sectionend)
 {
     attmax

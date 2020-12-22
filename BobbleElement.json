@@ -3,7 +3,7 @@
     "Naming": {
         "Specific": "Bobble"
     },
-    "TrackLength": "00:40:00",
+    "TrackLength": "01:00:00",
     "Channels": {
         "Left": {
             "Components": [
@@ -27,7 +27,7 @@
                     ]
                 },
                 { "Frequency": "749", "Pulse": "sin(x)" },
-                { "Frequency": "1", "Pulse": "Envelope.exprtk" }
+                { "Frequency": "1", "Pulse": "BreakEnvelope.exprtk", ":numbreaks": 6 }
             ]
         },
         "Right": {
@@ -52,7 +52,7 @@
                     ]
                 },
                 { "Frequency": "750", "Pulse": "sin(x)" },
-                { "Frequency": "1", "Pulse": "Envelope.exprtk" }
+                { "Frequency": "1", "Pulse": "BreakEnvelope.exprtk", ":numbreaks": 6 }
             ]
         }
     }

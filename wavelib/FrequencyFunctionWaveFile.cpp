@@ -104,6 +104,7 @@ void FrequencyFunctionWaveFile::initialize()
 {
     exprtk::parser<double> parser;
     symbol_table_pulse.add_constant("N", h.N);
+    symbol_table_pulse.add_constant("T", h.length_seconds);
     symbol_table_pulse.add_variable("t", *t);
     symbol_table_pulse.add_variable("tprev", *tprev);
     symbol_table_pulse.add_variable("n", *n);
@@ -117,6 +118,7 @@ void FrequencyFunctionWaveFile::initialize()
     symbol_table_pulse.add_pi();
 
     symbol_table_frequency.add_constant("N", h.N);
+    symbol_table_frequency.add_constant("T", h.length_seconds);
     symbol_table_frequency.add_variable("t", *t);
     symbol_table_frequency.add_variable("n", *n);
     symbol_table_frequency.add_variable("m", *gradient);

@@ -1,4 +1,4 @@
-var proportiontop := 0.2;
+var proportiontop := 0.1 + 0.3n/N;
 
 var toplength := proportiontop/f;
 var nontoplength := (1-proportiontop)/f;

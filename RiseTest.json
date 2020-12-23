@@ -4,7 +4,7 @@
     "Channels": {
         "Left": {
             "Components": [
-                { "Frequency": "1", "Pulse": "DoubleSin.exprtk", "Variables": "DoubleSin.vars", ":wetness": 0.3 }
+                { "Frequency": "1", "Pulse": "RiseEnvelope.exprtk", ":numsections": 3, ":riseamount": 0.2, ":riselength": 2 }
             ]
         }
     }

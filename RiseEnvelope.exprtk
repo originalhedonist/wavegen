@@ -1,31 +1,38 @@
-var numsections := numrises+1;
+/* pass in:
+numsections
+riselength
+riseamount
+ */
 
-var time := 5;
-var samples := time * n/t;
-var current := round(n*numsections/N);
-var next := current + 1;
+ var attenuation := 1/(1+riseamount);
 
-var sectionstart := (current * N/numsections) - (samples/2); /* half's in one section, half in the other */ 
-var sectionend :=   (current * N/numsections) + (samples/2); /* half's in one section, half in the other */ 
+var sectionlength := T/numsections;
+var section := floor(numsections*n/N);
+var startofsection := section * sectionlength;
+var endofsection := (section + 1) * sectionlength;
+var startoflastrise := startofsection - riselength/2;
+var endoflastrise := startofsection + riselength/2;
 
-var attmin := (5/6)^(numsections-current);
-var attmax := (5/6)^(numsections-next);
-if(sectionstart < 0  or n > sectionend)
+var startofnextrise := endofsection - riselength/2;
+var endofnextrise := endofsection + riselength/2;
+
+var nextsectionquiescent := attenuation^(numsections-section-2);
+var thissectionquiescent := attenuation^(numsections-section-1);
+var lastsectionquiescent := attenuation^(numsections-section);
+
+thissectionquiescent
+
+if(t < endoflastrise and section > 0)
 {
-    attmax
+    var proportion := (t-startoflastrise)/(endoflastrise-startoflastrise);
+    min(1, lastsectionquiescent + (proportion * (thissectionquiescent - lastsectionquiescent)))
 }
-else if(n < sectionstart)
+else if(t > startofnextrise)
 {
-    attmin
-}
-else if(n > sectionend or attmax = attmin)
-{
-    attmax
+    var proportion := (t-startofnextrise)/(endofnextrise-startofnextrise);
+    min(1, thissectionquiescent + (proportion * (nextsectionquiescent - thissectionquiescent)))
 }
 else
 {
-    var samplesalong := n-sectionstart;
-    var proportionalong := max(0,min(1,samplesalong / samples));
-    var att := proportionalong * (attmax-attmin) + attmin;
-    max(min(att,1),0)
+    thissectionquiescent
 };

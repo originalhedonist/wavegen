@@ -163,6 +163,8 @@ void FrequencyFunctionWaveFile::initialize()
     initialized = true;
 }
 
+int FrequencyFunctionWaveFile::nextid = 0;
+
 void FrequencyFunctionWaveFile::parse_vars(const std::string& varsFile)
 {
     std::ifstream file;

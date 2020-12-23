@@ -1,0 +1,23 @@
+var toplength := 0.3*(f^-1.15); /* more negative powers make the low frequency tops more dramatic. -1 (or less) and the high frequency is going to look more dramatic */
+
+if(m <= 0 and mprev > 0)
+{
+    lasttopstart2 := t;
+};
+
+if(lasttopstart2 > 0 and t - lasttopstart2 <= toplength)
+{
+    intop2 := 1;
+    1
+}
+else
+{
+    if(intop2 = 1)
+    {
+        xatlasttopend2 := x; /* just coming out of a top */
+        intop2 := 0;
+    };
+
+    var power := (cos(x - xatlasttopend2) + 1) / 2;
+    (power + wetness) / (1+wetness)
+}

@@ -1,10 +1,10 @@
 {
     "Version": 2,
-    "TrackLength": "00:05:00",
+    "TrackLength": "00:10:00",
     "Channels": {
         "Left": {
             "Components": [
-                { "Frequency": "FluctuatingWavelength.exprtk", ":periodicity": 360, ":minwavelength": 0.5, ":maxwavelength": 5.0, "Pulse": "DoubleSin.exprtk", "Variables": "DoubleSin.vars", ":wetness": 0.3 }
+                { "Frequency": "FluctuatingWavelength.exprtk", ":periodicity": 180, ":minwavelength": 0.5, ":maxwavelength": 5.0, "Pulse": "DoubleSin.exprtk", "Variables": "DoubleSin.vars", ":wetness": 0.3 }
             ]
         }
     }

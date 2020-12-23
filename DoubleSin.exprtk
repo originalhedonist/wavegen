@@ -1,4 +1,4 @@
-var toplength := 0.3*(f^-1.15);
+var toplength := 0.3*(f^-1.15); /* more negative powers make the low frequency tops more dramatic. -1 (or less) and the high frequency is going to look more dramatic */
 
 if(m <= 0 and mprev > 0)
 {

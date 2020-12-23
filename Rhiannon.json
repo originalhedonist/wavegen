@@ -6,7 +6,16 @@
             "Components": [
                 { "Frequency": "FluctuatingWavelength.exprtk", ":periodicity": 120, ":minwavelength": 0.5, ":maxwavelength": 5.0, "Pulse": "DoubleSin.exprtk", "Variables": "DoubleSin.vars", ":wetness": 0.3 },
                 { "Frequency": "1", "Pulse": "BreakEnvelope.exprtk", ":numbreaks": 4 },
-                { "Frequency": "1", "Pulse": "RiseEnvelope.exprtk", ":numsections": 4, ":riselength": 10, ":riseamount": 0.2}
+                { "Frequency": "1", "Pulse": "RiseEnvelope.exprtk", ":numsections": 4, ":riselength": 10, ":riseamount": 0.2},
+                { "Frequency": "1200", "Pulse": "sin(x)" }
+            ]
+        },
+        "Right": {
+            "Components": [
+                { "Frequency": "FluctuatingFrequency.exprtk", ":periodicity": 120, ":minfrequency": 0.1, ":maxfrequency": 2, "Pulse": "DoubleSin.exprtk", "Variables": "DoubleSin.vars", ":wetness": 0.3 },
+                { "Frequency": "1", "Pulse": "BreakEnvelope.exprtk", ":numbreaks": 4 },
+                { "Frequency": "1", "Pulse": "RiseEnvelope.exprtk", ":numsections": 4, ":riselength": 10, ":riseamount": 0.2},
+                { "Frequency": "1200", "Pulse": "sin(x)"}
             ]
         }
     }

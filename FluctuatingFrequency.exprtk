@@ -10,6 +10,6 @@ FluctuatingFrequency spends more time at shorter wavelengths (higher frequencies
 */
 
 var frequency := 1/periodicity;
-var period := sin(2*pi*frequency*t);
+var period := sinorcos(channelindex, 2*pi*frequency*t);
 var normalized := (1+period)/2;
 minfrequency + (normalized * (maxfrequency - minfrequency))

@@ -1,9 +1,4 @@
-var proportiontop := 0.1 + 0.3n/N;
-
-var toplength := proportiontop/f;
-var nontoplength := (1-proportiontop)/f;
-var requiredfrequency := 1/nontoplength;
-var frequencyfactor := f*requiredfrequency;
+var toplength := 0.3*(f^-1.15);
 
 if(m <= 0 and mprev > 0)
 {
@@ -23,6 +18,6 @@ else
         intop := 0;
     };
 
-    var power := (cos( (x - xatlasttopend) * frequencyfactor ) + 1) / 2;
+    var power := (cos(x - xatlasttopend) + 1) / 2;
     (power + wetness) / (1+wetness)
 }

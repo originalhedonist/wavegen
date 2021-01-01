@@ -110,7 +110,7 @@ public:
                             double&            default_value,
                             std::string&       error_message)
     {
-        std::cout << "unknown symbol caught: " << unknown_symbol << ", " << error_message << std::endl;
+        std::cout << "unknown symbol caught: " << unknown_symbol << std::endl;
         unknownsymbols.push_back(unknown_symbol);
         return false;
     }
@@ -162,8 +162,6 @@ void FrequencyFunctionWaveFile::initialize()
     }
 
     symbol_table_frequency.add_pi();
-    expression_pulse.register_symbol_table(symbol_table_pulse);
-    expression_frequency.register_symbol_table(symbol_table_frequency);
 
     for(std::map<std::string, double*>::const_iterator it = variables.begin(); it != variables.end(); it++)
     {
@@ -171,52 +169,48 @@ void FrequencyFunctionWaveFile::initialize()
         symbol_table_frequency.add_variable(it->first, *it->second); //they're 'shared', between pulse and frequency. probably not a problem...
     }
 
-    
-    if(trycompile(frequency, symbol_table_frequency, expression_frequency))
+    if(!trycompile(frequency, symbol_table_frequency, expression_frequency))
     {
         std::cerr << std::endl << frequency << std::endl << std::endl;
         throw std::runtime_error("Compile error in frequency expression");
     }
-
-    if(trycompile(pulse, symbol_table_pulse, expression_pulse))
+    
+    if(!trycompile(pulse, symbol_table_pulse, expression_pulse))
     {
         std::cerr << std::endl << pulse << std::endl << std::endl;
         throw std::runtime_error("Compile error in pulse expression");
     }
-    
+
+    expression_pulse.register_symbol_table(symbol_table_pulse);
+    expression_frequency.register_symbol_table(symbol_table_frequency);
+
     initialized = true;
 }
 
 bool FrequencyFunctionWaveFile::trycompile(const std::string& expression_string, exprtk::symbol_table<double>& symbol_table, exprtk::expression<double>& expression)
 {
     exprtk::parser<double> parser;
-    //unknownsymbolresolver usr;
-    //parser.enable_unknown_symbol_resolver(usr);
-    if(parser.compile(expression_string, expression))
+    unknownsymbolresolver usr;
+    parser.enable_unknown_symbol_resolver(usr);
+    if(!parser.compile(expression_string, expression))
     {
-        std::cout << "compiles first time" << std::endl;
-        return true;
+        std::cerr << parser.error() << std::endl;
+        return false;
     }
 
-    // while(usr.unknownsymbols.size() > 0)
-    // {
-    //     for(auto s : usr.unknownsymbols)
-    //     {
-    //         std::cout << "adding unknown symbol " << s << std::endl;
-    //         double* val = new double(0);
-    //         variables.insert(std::pair<std::string, double*>(s, val));
-    //         symbol_table.add_variable(s, *val);
-    //     }
-    //     usr.unknownsymbols.clear();
-    //     if(parser.compile(expression_string, expression))
-    //     {
-    //         std::cout << "Now compiles" << std::endl;
-    //         return true;
-    //     }
-    // }
+    while(usr.unknownsymbols.size() > 0)
+    {
+        for(auto s : usr.unknownsymbols)
+        {
+            std::cout << "Adding unknown symbol " << s << std::endl;
+            double* val = new double(0);
+            variables.insert(std::pair<std::string, double*>(s, val));
 
-    std::cerr << parser.error() << std::endl;
-    return false;
+            symbol_table.add_variable(s, *val);
+        }
+    }
+
+    return true;
 }
 
 int FrequencyFunctionWaveFile::nextid = 0;
@@ -300,7 +294,7 @@ double FrequencyFunctionWaveFile::Amplitude(double t, int32_t n)
     double dx = 2 * M_PI * (*f) / 44100;
     *x += dx;
     double a = this->expression_pulse.value();
-    if (isnan(a))
+    if (std::isnan(a))
     {
         throw std::runtime_error("Pulse expression returned NaN");
     }
@@ -326,7 +320,7 @@ double FrequencyFunctionWaveFile::Frequency()
     }
 
     double f = expression_frequency.value();
-    if (isnan(f))
+    if (std::isnan(f))
     {
         throw std::runtime_error("Frequency expression returned NaN");
     }

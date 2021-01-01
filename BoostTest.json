@@ -1,0 +1,10 @@
+{
+    "TrackLength": "00:05:00",
+    "Channels": {
+        "Left": {
+            "Components": [
+                { "Frequency": "0.5", "Pulse": "BoostEnvelope.exprtk", ":start": 90, ":end": 30, ":up": 5, ":top": 10, ":down": 5, ":att": 0.83, "Variables": "BoostL.vars"  }
+            ]
+        }
+    }
+}

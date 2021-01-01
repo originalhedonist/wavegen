@@ -1,0 +1,26 @@
+/* pass start, end, up, top, down. e.g. start=300, end=30, up=5, top=10, down=5, att=0.83 */
+var timebetweenboosts := start - ((start-end)*n/N); /* high at start, low at end */
+
+if(t-timeoflastboostR >=timebetweenboosts)
+{
+    timeoflastboostR := t;
+};
+
+if(t-timeoflastboostR < up)
+{
+    var proportionalong := (t-timeoflastboostR)/up;
+    att + (1-att)*proportionalong
+}
+else if(t-timeoflastboostR < up+top)
+{
+    1
+}
+else if(t-timeoflastboostR < up+top+down)
+{
+    var proportionalong := (t-(timeoflastboostR+up+top))/down;
+    1- (1-att)*proportionalong
+}
+else
+{
+    att
+};

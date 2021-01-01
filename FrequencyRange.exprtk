@@ -1,0 +1,3 @@
+var wave := sin(2*pi*periodicity*t);
+var proportion := (1+wave)/2;
+low+(proportion*(high-low))

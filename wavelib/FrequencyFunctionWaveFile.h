@@ -33,6 +33,7 @@ public:
     static double randombetween(double bottom, double top);
     static double sinorcos(double index, double arg);
 
+    bool trycompile(const std::string& expression_string, exprtk::symbol_table<double>& symbol_table, exprtk::expression<double>& expression);
     headerdata h;
     void initialize();
     double *t, *tprev, *n, *x, *xprev, *f;

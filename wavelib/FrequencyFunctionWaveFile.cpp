@@ -100,9 +100,34 @@ FrequencyFunctionWaveFile::~FrequencyFunctionWaveFile()
 {
 }
 
+class unknownsymbolresolver : public exprtk::parser<double>::unknown_symbol_resolver
+{
+public:
+    std::vector<std::string> unknownsymbols;
+
+    bool process(const std::string& unknown_symbol,
+                            usr_symbol_type&   st,
+                            double&            default_value,
+                            std::string&       error_message)
+    {
+        std::cout << "unknown symbol caught: " << unknown_symbol << ", " << error_message << std::endl;
+        unknownsymbols.push_back(unknown_symbol);
+        return false;
+    }
+
+        // virtual bool process(const std::string& unknown_symbol,
+        //                     exprtk::symbol_table<double>& symbol_table,
+        //                     std::string& error_message)
+        // {
+        //     std::cout << "process2 " << unknown_symbol << " error = " << error_message << std::endl;
+        // return false;
+        // }
+
+};
+
 void FrequencyFunctionWaveFile::initialize()
 {
-    exprtk::parser<double> parser;
+    
     symbol_table_pulse.add_constant("N", h.N);
     symbol_table_pulse.add_constant("T", h.length_seconds);
     symbol_table_pulse.add_variable("t", *t);
@@ -146,21 +171,52 @@ void FrequencyFunctionWaveFile::initialize()
         symbol_table_frequency.add_variable(it->first, *it->second); //they're 'shared', between pulse and frequency. probably not a problem...
     }
 
-    if(!parser.compile(frequency, expression_frequency))
+    
+    if(trycompile(frequency, symbol_table_frequency, expression_frequency))
     {
         std::cerr << std::endl << frequency << std::endl << std::endl;
-        std::cerr << parser.error() << std::endl;
         throw std::runtime_error("Compile error in frequency expression");
     }
 
-    if(!parser.compile(pulse, expression_pulse))
+    if(trycompile(pulse, symbol_table_pulse, expression_pulse))
     {
         std::cerr << std::endl << pulse << std::endl << std::endl;
-        std::cerr << parser.error() << std::endl;
         throw std::runtime_error("Compile error in pulse expression");
     }
     
     initialized = true;
+}
+
+bool FrequencyFunctionWaveFile::trycompile(const std::string& expression_string, exprtk::symbol_table<double>& symbol_table, exprtk::expression<double>& expression)
+{
+    exprtk::parser<double> parser;
+    //unknownsymbolresolver usr;
+    //parser.enable_unknown_symbol_resolver(usr);
+    if(parser.compile(expression_string, expression))
+    {
+        std::cout << "compiles first time" << std::endl;
+        return true;
+    }
+
+    // while(usr.unknownsymbols.size() > 0)
+    // {
+    //     for(auto s : usr.unknownsymbols)
+    //     {
+    //         std::cout << "adding unknown symbol " << s << std::endl;
+    //         double* val = new double(0);
+    //         variables.insert(std::pair<std::string, double*>(s, val));
+    //         symbol_table.add_variable(s, *val);
+    //     }
+    //     usr.unknownsymbols.clear();
+    //     if(parser.compile(expression_string, expression))
+    //     {
+    //         std::cout << "Now compiles" << std::endl;
+    //         return true;
+    //     }
+    // }
+
+    std::cerr << parser.error() << std::endl;
+    return false;
 }
 
 int FrequencyFunctionWaveFile::nextid = 0;

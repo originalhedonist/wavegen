@@ -1,25 +1,25 @@
 /* pass start, end, up, top, down. e.g. start=300, end=30, up=5, top=10, down=5, att=0.83 */
 var timebetweenboosts := start - ((start-end)*n/N); /* high at start, low at end */
 
-if(t-timeoflastboostR >=timebetweenboosts)
+if(t-timeoflastboostL >=timebetweenboosts)
 {
-    timeoflastboostR := t;
+    timeoflastboostL := t;
 };
 
 if(t >= timebetweenboosts)
 {
-    if(t-timeoflastboostR < up)
+    if(t-timeoflastboostL < up)
     {
-        var proportionalong := (t-timeoflastboostR)/up;
+        var proportionalong := (t-timeoflastboostL)/up;
         att + (1-att)*proportionalong
     }
-    else if(t-timeoflastboostR < up+top)
+    else if(t-timeoflastboostL < up+top)
     {
         1
     }
-    else if(t-timeoflastboostR < up+top+down)
+    else if(t-timeoflastboostL < up+top+down)
     {
-        var proportionalong := (t-(timeoflastboostR+up+top))/down;
+        var proportionalong := (t-(timeoflastboostL+up+top))/down;
         1- (1-att)*proportionalong
     }
     else

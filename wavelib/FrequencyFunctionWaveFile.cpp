@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "FrequencyFunctionWaveFile.h"
+#include "unknownsymbolresolver.h"
 
 std::map<std::string, double*> FrequencyFunctionWaveFile::variables;
 
@@ -102,7 +103,7 @@ FrequencyFunctionWaveFile::~FrequencyFunctionWaveFile()
 
 void FrequencyFunctionWaveFile::initialize()
 {
-    exprtk::parser<double> parser;
+    exprtk::parser<double> parser_frequency, parser_pulse;
     symbol_table_pulse.add_constant("N", h.N);
     symbol_table_pulse.add_constant("T", h.length_seconds);
     symbol_table_pulse.add_variable("t", *t);
@@ -146,21 +147,48 @@ void FrequencyFunctionWaveFile::initialize()
         symbol_table_frequency.add_variable(it->first, *it->second); //they're 'shared', between pulse and frequency. probably not a problem...
     }
 
-    if(!parser.compile(frequency, expression_frequency))
+    std::vector<std::string> frequency_missing_variables = get_missing_variables(symbol_table_frequency, frequency);
+    for(auto mv : frequency_missing_variables)
+    {
+        double* val = new double(0);
+        variables.insert(std::pair<std::string, double*>(mv, val));
+        symbol_table_frequency.add_variable(mv, *val);
+    }
+
+    std::vector<std::string> pulse_missing_variables = get_missing_variables(symbol_table_pulse, pulse);
+    for(auto mv : pulse_missing_variables)
+    {
+        double* val = new double(0);
+        variables.insert(std::pair<std::string, double*>(mv, val));
+        symbol_table_pulse.add_variable(mv, *val);
+    }
+
+    if(!parser_frequency.compile(frequency, expression_frequency))
     {
         std::cerr << std::endl << frequency << std::endl << std::endl;
-        std::cerr << parser.error() << std::endl;
+        std::cerr << parser_frequency.error() << std::endl;
         throw std::runtime_error("Compile error in frequency expression");
     }
 
-    if(!parser.compile(pulse, expression_pulse))
+    if(!parser_pulse.compile(pulse, expression_pulse))
     {
         std::cerr << std::endl << pulse << std::endl << std::endl;
-        std::cerr << parser.error() << std::endl;
+        std::cerr << parser_pulse.error() << std::endl;
         throw std::runtime_error("Compile error in pulse expression");
     }
     
     initialized = true;
+}
+
+std::vector<std::string> FrequencyFunctionWaveFile::get_missing_variables(exprtk::symbol_table<double> symbol_table, const std::string& expression_string)
+{
+    exprtk::parser<double> parser;
+    exprtk::expression<double> expression;
+    expression.register_symbol_table(symbol_table);
+    unknownsymbolresolver usr;
+    parser.enable_unknown_symbol_resolver(usr);
+    parser.compile(expression_string, expression);
+    return usr.unknownsymbols;
 }
 
 int FrequencyFunctionWaveFile::nextid = 0;

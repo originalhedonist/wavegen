@@ -2,8 +2,6 @@
 #include "FrequencyFunctionWaveFile.h"
 #include "unknownsymbolresolver.h"
 
-std::map<std::string, double*> FrequencyFunctionWaveFile::variables;
-
 double FrequencyFunctionWaveFile::randombetween(double bottom, double top)
 {
     return bottom + (FrequencyFunctionWaveFile::randomdouble() * (top - bottom));
@@ -163,24 +161,50 @@ void FrequencyFunctionWaveFile::initialize()
         symbol_table_pulse.add_variable(mv, *val);
     }
 
-    if(!parser_frequency.compile(frequency, expression_frequency))
-    {
-        std::cerr << std::endl << frequency << std::endl << std::endl;
-        std::cerr << parser_frequency.error() << std::endl;
-        throw std::runtime_error("Compile error in frequency expression");
-    }
-
-    if(!parser_pulse.compile(pulse, expression_pulse))
-    {
-        std::cerr << std::endl << pulse << std::endl << std::endl;
-        std::cerr << parser_pulse.error() << std::endl;
-        throw std::runtime_error("Compile error in pulse expression");
-    }
+    compile("frequency", frequency, symbol_table_frequency, expression_frequency);
+    compile("pulse", pulse, symbol_table_pulse, expression_pulse);
     
     initialized = true;
 }
 
-std::vector<std::string> FrequencyFunctionWaveFile::get_missing_variables(exprtk::symbol_table<double> symbol_table, const std::string& expression_string)
+void FrequencyFunctionWaveFile::compile(const std::string& description, const std::string& expression_string, exprtk::symbol_table<double> symbol_table   /* invokes copy constructor */, exprtk::expression<double>& expression)
+{
+    std::vector<std::string> missing_variables = FrequencyFunctionWaveFile::get_missing_variables(symbol_table, expression_string);
+    for(auto mv : missing_variables)
+    {
+        // std::stringstream uniquename_stream;
+        // uniquename_stream << mv << id;
+        // const std::string& uniquename = uniquename_stream.str();
+        // std::stringstream replacepattern_stream;
+        // //replacepattern_stream << "\\b" << mv << "\\b";
+        // std::regex replaceregex("\\b" + mv + "\\b");
+        // expression_string = std::regex_replace(expression_string, replaceregex, uniquename);
+        
+        std::map<std::string, double*>::const_iterator var = variables.find(mv);
+        double* val;
+        if(var != variables.end())
+        {
+            val = var->second;
+        }
+        else
+        {
+            val = new double(0);
+            variables.insert(std::pair<std::string, double*>(mv, val));
+        }
+        symbol_table.add_variable(mv, *val);
+    }
+
+    exprtk::parser<double> parser;
+    if(!parser.compile(expression_string, expression))
+    {
+        std::cerr << parser.error() << std::endl;
+        std::cerr << "Compile error in " << description << " expression:" << std::endl;
+        std::cerr << expression_string << std::endl;
+        throw std::runtime_error("Compile failed");
+    }
+}
+
+std::vector<std::string> FrequencyFunctionWaveFile::get_missing_variables(exprtk::symbol_table<double> symbol_table  /* invokes copy constructor */, const std::string& expression_string)
 {
     exprtk::parser<double> parser;
     exprtk::expression<double> expression;

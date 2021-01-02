@@ -1,5 +1,6 @@
 #pragma once
 #include "headerdata.h"
+#include "exprtk.hpp"
 
 class FrequencyFunctionWaveFileOrGroup
 {
@@ -26,6 +27,9 @@ public:
     exprtk::symbol_table<double> symbol_table_pulse;
     exprtk::expression<double> expression_frequency;
     exprtk::expression<double> expression_pulse;
+
+    void compile(const std::string& description, const std::string& expression_string, exprtk::symbol_table<double> symbol_table   /* invokes copy constructor */, exprtk::expression<double>& expression);
+
     std::string frequency, pulse;
     static std::string get_expression(const std::string& expression);
     static std::vector<std::string> get_missing_variables(exprtk::symbol_table<double> symbol_table, const std::string& expression);
@@ -39,7 +43,7 @@ public:
     double *gradient, *gradientprev;
     double channelindex;
 
-    static std::map<std::string, double*> variables;
+    std::map<std::string, double*> variables;
     std::map<std::string, double> _constants;
     void parse_vars(const std::string& varsFile);
 

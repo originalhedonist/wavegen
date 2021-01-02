@@ -21,6 +21,7 @@
 #include "exprtk.hpp"
 #include "json.hpp"
 #include <cmath>
+#include <climits>
 #include <iostream>
 #include <fstream>
 #include <sstream>

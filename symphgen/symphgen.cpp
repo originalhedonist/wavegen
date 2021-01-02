@@ -140,7 +140,7 @@ int main(int argc, char** args)
                     int nrel = n - it->nStart;
                     double aThis = it->ce->get_next(nrel, c);
                 
-                    if(isnan(aThis) || aThis < -1 || aThis > 1)
+                    if(std::isnan(aThis) || aThis < -1 || aThis > 1)
                     {
                         std::cout << "aThis=" << aThis << std::endl;
                         throw std::runtime_error("aThis out of range or NaN");

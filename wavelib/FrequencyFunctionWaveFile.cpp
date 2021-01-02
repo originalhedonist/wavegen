@@ -239,7 +239,7 @@ double FrequencyFunctionWaveFile::Amplitude(double t, int32_t n)
     double dx = 2 * M_PI * (*f) / 44100;
     *x += dx;
     double a = this->expression_pulse.value();
-    if (isnan(a))
+    if (std::isnan(a))
     {
         throw std::runtime_error("Pulse expression returned NaN");
     }
@@ -265,7 +265,7 @@ double FrequencyFunctionWaveFile::Frequency()
     }
 
     double f = expression_frequency.value();
-    if (isnan(f))
+    if (std::isnan(f))
     {
         throw std::runtime_error("Frequency expression returned NaN");
     }

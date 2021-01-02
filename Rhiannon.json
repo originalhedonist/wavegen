@@ -3,7 +3,7 @@
     "Channels": {
         "Left": {
             "Components": [
-                { "Frequency": "FluctuatingWavelength.exprtk", ":periodicity": 180, ":minwavelength": 0.5, ":maxwavelength": 5.0, "Pulse": "DoubleSin.exprtk", "Variables": "DoubleSin.vars", ":wetness": 0.7 },
+                { "Frequency": "FluctuatingWavelength.exprtk", ":periodicity": 180, ":minwavelength": 0.5, ":maxwavelength": 5.0, "Pulse": "DoubleSin.exprtk", ":wetness": 0.7 },
                 { "Frequency": "1800", "Pulse": "sin(x)" },
                 { "Frequency": "1", "Pulse": "BreakEnvelope.exprtk", ":numbreaks": 4},
                 { "Frequency": "1", "Pulse": "RiseEnvelope.exprtk", ":numsections": 3, ":riseamount": 0.2, ":riselength": 10 }
@@ -11,7 +11,7 @@
         },
         "Right": {
             "Components": [
-                { "Frequency": "FluctuatingWavelength.exprtk", ":periodicity": 180, ":minwavelength": 0.5, ":maxwavelength": 5.0, "Pulse": "DoubleSin2.exprtk", "Variables": "DoubleSin2.vars", ":wetness": 0.7 },
+                { "Frequency": "FluctuatingWavelength.exprtk", ":periodicity": 180, ":minwavelength": 0.5, ":maxwavelength": 5.0, "Pulse": "DoubleSin2.exprtk", ":wetness": 0.7 },
                 { "Frequency": "1800", "Pulse": "sin(x+pi)" },
                 { "Frequency": "1", "Pulse": "BreakEnvelope.exprtk", ":numbreaks": 3},
                 { "Frequency": "1", "Pulse": "RiseEnvelope.exprtk", ":numsections": 4, ":riseamount": 0.2, ":riselength": 10 }

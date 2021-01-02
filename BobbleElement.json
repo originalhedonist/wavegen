@@ -14,14 +14,14 @@
                             "Aggregation": "product",
                             "SubComponents": [
                                 { "Frequency": "0.01-0.008n/N", "Pulse": "Bobble_pulse.exprtk", ":wetness": 0.1, ":powerindex": 0.5, ":modulation": 0.02},
-                                { "Variables": "Bobble.vars", "Frequency": "1/20", "Pulse": "((sin(x)+1)/2)", "Comments": "weighting (must be complementary to other weighting)"}
+                                { "Frequency": "1/20", "Pulse": "((sin(x)+1)/2)", "Comments": "weighting (must be complementary to other weighting)"}
                             ]
                         },
                         {
                             "Aggregation": "product",
                             "SubComponents": [
                                 { "Frequency": "0.7+0.5n/N", "Pulse": "Bobble_pulse.exprtk", ":wetness": 0.2, ":powerindex": 0.5, ":modulation": 0.06},
-                                { "Variables": "Bobble.vars", "Frequency": "1/20", "Pulse": "1-((sin(x)+1)/2)", "Comments": "weighting (must be complementary to other weighting)"}
+                                { "Frequency": "1/20", "Pulse": "1-((sin(x)+1)/2)", "Comments": "weighting (must be complementary to other weighting)"}
                             ]
                         }
                     ]
@@ -39,14 +39,14 @@
                             "Aggregation": "product",
                             "SubComponents": [
                                 { "Frequency": "0.01-0.008n/N", "Pulse": "Bobble_pulse.exprtk", ":wetness": 0.1, ":powerindex": 0.5, ":modulation": 0.02},
-                                { "Variables": "Bobble.vars", "Frequency": "1/20", "Pulse": "((sin(x)+1)/2)", "Comments": "weighting (must be complementary to other weighting)"}
+                                { "Frequency": "1/20", "Pulse": "((sin(x)+1)/2)", "Comments": "weighting (must be complementary to other weighting)"}
                             ]
                         },
                         {
                             "Aggregation": "product",
                             "SubComponents": [
                                 { "Frequency": "0.7+0.5n/N", "Pulse": "Bobble_pulse.exprtk", ":wetness": 0.2, ":powerindex": 0.5, ":modulation": 0.06},
-                                { "Variables": "Bobble.vars", "Frequency": "1/20", "Pulse": "1-((sin(x)+1)/2)", "Comments": "weighting (must be complementary to other weighting)"}
+                                { "Frequency": "1/20", "Pulse": "1-((sin(x)+1)/2)", "Comments": "weighting (must be complementary to other weighting)"}
                             ]
                         }
                     ]

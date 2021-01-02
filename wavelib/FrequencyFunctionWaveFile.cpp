@@ -43,16 +43,6 @@ FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const nlohmann::json j, con
     j["Pulse"].get_to(pulseExpressionOrFile);
     this->pulse = get_expression(pulseExpressionOrFile);
 
-    std::string varsFile;
-    if(j.contains("Variables"))
-    {
-        j["Variables"].get_to(varsFile);
-        if(!varsFile.empty())
-        {
-            parse_vars(varsFile);
-        }
-    }
-
     for(nlohmann::json::const_iterator it = j.begin(); it != j.end(); it++)
     {
         if(strcmp(it.key().substr(0,1).c_str(), ":") == 0)
@@ -139,28 +129,6 @@ void FrequencyFunctionWaveFile::initialize()
     expression_pulse.register_symbol_table(symbol_table_pulse);
     expression_frequency.register_symbol_table(symbol_table_frequency);
 
-    for(std::map<std::string, double*>::const_iterator it = variables.begin(); it != variables.end(); it++)
-    {
-        symbol_table_pulse.add_variable(it->first, *it->second);
-        symbol_table_frequency.add_variable(it->first, *it->second); //they're 'shared', between pulse and frequency. probably not a problem...
-    }
-
-    std::vector<std::string> frequency_missing_variables = get_missing_variables(symbol_table_frequency, frequency);
-    for(auto mv : frequency_missing_variables)
-    {
-        double* val = new double(0);
-        variables.insert(std::pair<std::string, double*>(mv, val));
-        symbol_table_frequency.add_variable(mv, *val);
-    }
-
-    std::vector<std::string> pulse_missing_variables = get_missing_variables(symbol_table_pulse, pulse);
-    for(auto mv : pulse_missing_variables)
-    {
-        double* val = new double(0);
-        variables.insert(std::pair<std::string, double*>(mv, val));
-        symbol_table_pulse.add_variable(mv, *val);
-    }
-
     compile("frequency", frequency, symbol_table_frequency, expression_frequency);
     compile("pulse", pulse, symbol_table_pulse, expression_pulse);
     
@@ -172,14 +140,6 @@ void FrequencyFunctionWaveFile::compile(const std::string& description, const st
     std::vector<std::string> missing_variables = FrequencyFunctionWaveFile::get_missing_variables(symbol_table, expression_string);
     for(auto mv : missing_variables)
     {
-        // std::stringstream uniquename_stream;
-        // uniquename_stream << mv << id;
-        // const std::string& uniquename = uniquename_stream.str();
-        // std::stringstream replacepattern_stream;
-        // //replacepattern_stream << "\\b" << mv << "\\b";
-        // std::regex replaceregex("\\b" + mv + "\\b");
-        // expression_string = std::regex_replace(expression_string, replaceregex, uniquename);
-        
         std::map<std::string, double*>::const_iterator var = variables.find(mv);
         double* val;
         if(var != variables.end())
@@ -216,23 +176,6 @@ std::vector<std::string> FrequencyFunctionWaveFile::get_missing_variables(exprtk
 }
 
 int FrequencyFunctionWaveFile::nextid = 0;
-
-void FrequencyFunctionWaveFile::parse_vars(const std::string& varsFile)
-{
-    std::ifstream file;
-    file.open(varsFile);
-    if(!file.is_open())
-    {
-        std::cerr << varsFile << std::endl;
-        throw std::runtime_error("Unable to open Variables file");
-    }
-    std::string line;
-    while(getline(file, line))
-    {
-        double* val = new double(0);
-        variables.insert(std::pair<std::string, double*>(line, val));
-    }
-}
 
 std::string FrequencyFunctionWaveFile::get_expression(const std::string& expression)
 {

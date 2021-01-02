@@ -29,5 +29,4 @@
 #include <vector>
 #include <stdio.h>
 #include <iomanip>
-#include <regex>
 #endif //PCH_H

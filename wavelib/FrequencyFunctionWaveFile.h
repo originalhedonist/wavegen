@@ -45,7 +45,6 @@ public:
 
     std::map<std::string, double*> variables;
     std::map<std::string, double> _constants;
-    void parse_vars(const std::string& varsFile);
 
     double aLast;
     FrequencyFunctionWaveFile(const nlohmann::json j, const std::map<std::string, double>& constants, double channel, const headerdata& h);

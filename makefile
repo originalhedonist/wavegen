@@ -25,6 +25,9 @@ obj/wavegen:
 obj/symphgen:
 	mkdir -p obj/symphgen
 
+%.wav: %.json bin/wavegen
+	bin/wavegen $< $@
+
 bin:
 	mkdir bin
 

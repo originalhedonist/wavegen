@@ -3,14 +3,8 @@
     "Channels": {
         "Left": {
             "Components": [
-                { "Frequency": "0.5", "Pulse": "BoostEnvelope.exprtk", ":start": 90, ":end": 30, ":up": 5, ":top": 10, ":down": 5, ":att": 0.83  }
-            ]
-        },
-        "Right": {
-            "Components": [
-                { "Frequency": "0.5", "Pulse": "BoostEnvelope.exprtk", ":start": 30, ":end": 90, ":up": 5, ":top": 10, ":down": 5, ":att": 0.83  }
+                { "Frequency": "0.5", "Pulse": "BoostEnvelopeWithGradualDecline.exprtk", ":start": 90, ":end": 30, ":up": 5, ":att": 0.83  }
             ]
         }
-
     }
 }

@@ -29,7 +29,7 @@ obj/symphgen:
 	bin/wavegen $< $@
 
 %.mp3 : %.wav
-	lame %.wav	
+	lame $<
 
 bin:
 	mkdir bin

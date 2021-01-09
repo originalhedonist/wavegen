@@ -3,18 +3,18 @@
     "Channels": {
         "Left": {
             "Components": [
-                { "Frequency": "FrequencyRange.exprtk", ":low": 0.3, ":high": 1, ":periodicity": 31, "Pulse": "SinWithWetness.exprtk", ":wetness": 0.3 },
+                { "Frequency": "FrequencyRange.exprtk", ":low": 0.4, ":high": 1, ":periodwavelength": 61, "Pulse": "SinWithWetness.exprtk", ":wetness": 0.3 },
                 { "Frequency": "320", "Pulse": "sin(x)" },
-                { "Frequency": "1", "Pulse": "BoostEnvelope.exprtk", ":start": 300, ":end": 15, ":up": 5, ":top": 10, ":down": 5, ":att": 0.83 },
+                { "Frequency": "1", "Pulse": "BoostEnvelopeGrowing.exprtk", ":start": 300, ":end": 15, ":up": 5, ":topstart": 10, ":topend": 25, ":down": 5, ":att": 0.83 },
                 { "Frequency": "1", "Pulse": "BreakEnvelope.exprtk", ":numbreaks": 3},
                 {"Frequency": "1", "Pulse": "1-0.2(N-n)/N", "description": "simple rise"}
             ]
         },
         "Right": {
             "Components": [
-                { "Frequency": "FrequencyRange.exprtk", ":low": 0.3, ":high": 1, ":periodicity": 37, "Pulse": "SinWithWetness.exprtk", ":wetness": 0.3 },
-                { "Frequency": "641", "Pulse": "sin(x)" },
-                { "Frequency": "1", "Pulse": "BoostEnvelope.exprtk", ":start": 300, ":end": 15, ":up": 5, ":top": 10, ":down": 5, ":att": 0.83 },
+                { "Frequency": "FrequencyRange.exprtk", ":low": 0.4, ":high": 1, ":periodicity": 61, "Pulse": "SinWithWetness.exprtk", ":wetness": 0.3 },
+                { "Frequency": "961", "Pulse": "sin(x)" },
+                { "Frequency": "1", "Pulse": "BoostEnvelopeGrowing.exprtk", ":start": 300, ":end": 15, ":up": 5, ":topstart": 10, ":topend": 25, ":down": 5, ":att": 0.83 },
                 { "Frequency": "1", "Pulse": "BreakEnvelope.exprtk", ":numbreaks": 3},
                 {"Frequency": "1", "Pulse": "1-0.2(N-n)/N", "description": "simple rise"}
             ]

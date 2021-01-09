@@ -1,0 +1,10 @@
+{
+    "TrackLength": "00:02:00",
+    "Channels": {
+        "Left": {
+            "Components": [
+                { "Frequency": "FrequencyRange.exprtk", ":low": 0.4, ":high": 1, ":periodwavelength": 61, "Pulse": "SinWithWetness.exprtk", ":wetness": 0.3 }
+            ]
+        }
+    }
+}

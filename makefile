@@ -28,6 +28,9 @@ obj/symphgen:
 %.wav: %.json bin/wavegen
 	bin/wavegen $< $@
 
+%.mp3 : %.wav
+	lame %.wav	
+
 bin:
 	mkdir bin
 

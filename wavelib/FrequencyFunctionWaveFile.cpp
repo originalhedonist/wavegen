@@ -137,21 +137,26 @@ void FrequencyFunctionWaveFile::initialize()
 
 void FrequencyFunctionWaveFile::compile(const std::string& description, const std::string& expression_string, exprtk::symbol_table<double> symbol_table   /* invokes copy constructor */, exprtk::expression<double>& expression)
 {
-    std::vector<std::string> missing_variables = FrequencyFunctionWaveFile::get_missing_variables(symbol_table, expression_string);
-    for(auto mv : missing_variables)
+    for(std::vector<std::string> missing_variables = FrequencyFunctionWaveFile::get_missing_variables(symbol_table, expression_string);
+        missing_variables.size() > 0;
+        missing_variables = FrequencyFunctionWaveFile::get_missing_variables(symbol_table, expression_string))
     {
-        std::map<std::string, double*>::const_iterator var = variables.find(mv);
-        double* val;
-        if(var != variables.end())
+        for(auto mv : missing_variables)
         {
-            val = var->second;
+            std::map<std::string, double*>::const_iterator var = variables.find(mv);
+            double* val;
+            if(var != variables.end())
+            {
+                val = var->second;
+            }
+            else
+            {
+                val = new double(0);
+                std::cout << id << ": adding implicit variable " << mv << std::endl;
+                variables.insert(std::pair<std::string, double*>(mv, val));
+            }
+            symbol_table.add_variable(mv, *val);
         }
-        else
-        {
-            val = new double(0);
-            variables.insert(std::pair<std::string, double*>(mv, val));
-        }
-        symbol_table.add_variable(mv, *val);
     }
 
     exprtk::parser<double> parser;

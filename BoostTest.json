@@ -3,7 +3,7 @@
     "Channels": {
         "Left": {
             "Components": [
-                { "Frequency": "0.5", "Pulse": "BoostEnvelopeGrowing.exprtk", ":start": 90, ":end": 0, ":topstart": 5, ":topend": 10, ":up": 5, ":down": 5, ":att": 0.83  }
+                { "Frequency": "0.5", "Pulse": "BoostEnvelopeGrowing.exprtk", ":start": 90,  ":topstart": 5, ":topend": 10, ":up": 5, ":down": 5, ":att": 0.83  }
             ]
         }
     }

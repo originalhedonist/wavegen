@@ -4,7 +4,7 @@
         "Phase": {
             "CalculationOnly": true,
             "Components": [
-                { "Frequency": "1", "Pulse": "sin(x)" }
+                { "Frequency": "1", "Pulse": "x-floor(x)" }
             ]
         },
         "Left": {

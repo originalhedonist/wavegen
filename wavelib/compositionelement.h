@@ -1,12 +1,15 @@
 #pragma once
 #include "channel.h"
 #include "headerdata.h"
+#include "channelfunction.h"
+
 class compositionelement
 {
 public:
     std::vector<channel> channels;
     headerdata header;
 
+    channelfunction thechannelfunction;
     compositionelement(const nlohmann::json& json, const std::map<std::string, double>& constants);
     compositionelement(const nlohmann::json& json, const std::map<std::string, double>& constants, const int16_t channels);
 

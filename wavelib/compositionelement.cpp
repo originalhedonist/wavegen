@@ -7,12 +7,12 @@ compositionelement::compositionelement(const nlohmann::json &j, const std::map<s
     : compositionelement(j, constants, (int16_t)j["Channels"].size()) {}
 
 compositionelement::compositionelement(const nlohmann::json &j, const std::map<std::string, double> &constants, const int16_t numChannels)
-    : header(trackLength(j), numChannels), constants(constants)
+    : header(trackLength(j), numChannels), constants(constants) , thechannelfunction(numChannels)
 {
     int channelindex = 0;
     for (auto channeljson : j["Channels"])
     {
-        channels.push_back(channel(channeljson, constants, (double)(channelindex++), header));
+        channels.push_back(channel(channeljson, constants, (double)(channelindex++), header, &thechannelfunction));
     }
 }
 

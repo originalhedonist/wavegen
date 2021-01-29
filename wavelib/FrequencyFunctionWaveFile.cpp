@@ -17,7 +17,7 @@ double FrequencyFunctionWaveFile::sinorcos(double channelindex, double arg)
     return channelindex == 1 ? sin(arg) : cos(arg);
 }
 
-FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const nlohmann::json j, const std::map<std::string, double>& constants, double channelindex, const headerdata& h) :
+FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const nlohmann::json j, const std::map<std::string, double>& constants, double channelindex, const headerdata& h, const channelfunction* thechannelfunction) :
     t(new double(0)),
     tprev(new double(0)),
     n(new double(-1)),
@@ -33,7 +33,8 @@ FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const nlohmann::json j, con
     channelindex(channelindex),
     startTime(-1),
     endTime(-1),
-    everFiltered(false)
+    everFiltered(false),
+    thechannelfunction(thechannelfunction)
 {
     std::string frequencyExpressionOrFile, pulseExpressionOrFile;
 
@@ -81,7 +82,8 @@ FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const FrequencyFunctionWave
     channelindex(other.channelindex),
     startTime(other.startTime),
     endTime(other.endTime),
-    everFiltered(other.everFiltered)
+    everFiltered(other.everFiltered),
+    thechannelfunction(other.thechannelfunction)
 {
 }
 

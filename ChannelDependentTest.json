@@ -1,0 +1,21 @@
+{
+    "TrackLength": "00:01:00",
+    "Channels": {
+        "Phase": {
+            "CalculationOnly": true,
+            "Components": [
+                { "Frequency": "1", "Pulse": "sin(x)" }
+            ]
+        },
+        "Left": {
+            "Components": [
+                { "Frequency": "1", "Pulse": "cos(x)" }
+            ]
+        },
+        "Right": {
+            "Components": [
+                { "Frequency": "1", "Pulse": "-channel(n, 1)" }
+            ]
+        }
+    }
+}

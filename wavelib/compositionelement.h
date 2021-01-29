@@ -10,8 +10,9 @@ public:
     headerdata header;
 
     channelfunction thechannelfunction;
+    int16_t totalChannels, writeableChannels;
     compositionelement(const nlohmann::json& json, const std::map<std::string, double>& constants);
-    compositionelement(const nlohmann::json& json, const std::map<std::string, double>& constants, const int16_t channels);
+    compositionelement(const nlohmann::json& json, const std::map<std::string, double>& constants, int16_t totalChannels, int16_t writeableChannels);
 
     void calculate(); //writes out a temp file
 
@@ -24,5 +25,6 @@ private:
     std::ifstream ifstemp;
 
     static int32_t trackLength(const nlohmann::json& j);
+    static int16_t countWritableChannels(const nlohmann::json& j); // as opposed to ones that are just calculation only
 };
 

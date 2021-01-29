@@ -24,10 +24,12 @@ double compositionreader::get_next(int n, int16_t channel)
 {
     if (n != nNext)
     {
+        std::cerr << "Called get_next with n out of sequence, n = " << n << ", nNext = " << nNext << ", channel = " << channel << std::endl;
         throw std::runtime_error("Called get_next with n out of sequence");
     }
     if (channel != channelNext)
     {
+        std::cerr << "Called get_next with channel out of sequence, channel = " << channel << ", channelNext = " << channelNext << std::endl;
         throw std::runtime_error("Called get_next with channel out of sequence");
     }
 

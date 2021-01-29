@@ -29,7 +29,7 @@ int main(int argc, char** args)
 
         compositionreader cr(ce);
 
-        wavfuncs::write_wav(ofs, ce.header, ce.channels.size(), cr);
+        wavfuncs::write_wav(ofs, ce.header, ce.writeableChannels, cr);
 
         ofs.close();
 
@@ -37,7 +37,7 @@ int main(int argc, char** args)
         
         return 0;
     }
-    catch (std::runtime_error ex)
+    catch (const std::runtime_error& ex)
     {
         std::cout << ex.what() << std::endl;
         return 1;

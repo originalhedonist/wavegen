@@ -4,16 +4,27 @@
 using json = nlohmann::json;
 
 compositionelement::compositionelement(const nlohmann::json &j, const std::map<std::string, double> &constants)
-    : compositionelement(j, constants, (int16_t)j["Channels"].size()) {}
+    : compositionelement(j, constants, j["Channels"].size(), countWritableChannels(j) ) {}
 
-compositionelement::compositionelement(const nlohmann::json &j, const std::map<std::string, double> &constants, const int16_t numChannels)
-    : header(trackLength(j), numChannels), constants(constants) , thechannelfunction(numChannels)
+compositionelement::compositionelement(const nlohmann::json &j, const std::map<std::string, double> &constants, int16_t totalChannels, int16_t writeableChannels)
+    : totalChannels(totalChannels), writeableChannels(writeableChannels), header(trackLength(j), writeableChannels), constants(constants) , thechannelfunction(totalChannels)
 {
     int channelindex = 0;
     for (auto channeljson : j["Channels"])
     {
         channels.push_back(channel(channeljson, constants, (double)(channelindex++), header, &thechannelfunction));
     }
+}
+
+int16_t compositionelement::countWritableChannels(const nlohmann::json& j)
+{
+    int16_t retval = 0;
+    for (auto channeljson : j["Channels"])
+    {
+        bool isCalculationOnly = channeljson.contains("CalculationOnly") && channeljson["CalculationOnly"].get<bool>();
+        if(!isCalculationOnly) retval++;
+    }
+    return retval;
 }
 
 int32_t compositionelement::trackLength(const nlohmann::json &j)
@@ -38,13 +49,11 @@ void compositionelement::calculate()
         for (int n = 0; n < header.N; n++)
         {
             double t = (double)header.length_seconds * (double)n / header.N;
-            int channelIndex = 0;
+            int channelIndex = 0, writeableChannelIndex = 0;
 
             for (std::vector<channel>::iterator channelit = channels.begin(); channelit != channels.end(); channelit++)
             {
-
                 double a = 1;
-
                 std::map<std::string, double> maxGroups;
                 std::vector<double> ungroupedComponentValues;
 
@@ -61,18 +70,21 @@ void compositionelement::calculate()
                     a *= athis;
                 }
 
-                if (a < -1 || a > 1)
-                    throw std::runtime_error("Amplitude must be -1 to 1");
-
-
                 thechannelfunction.channelValues[channelIndex] = a;
                 thechannelfunction.lastNCheck[channelIndex] = n;
 
-                double newmax = std::max(maxPerChannel[channelIndex], abs(a));
-                maxPerChannel[channelIndex] = newmax;
-                channelIndex++;
+                if(!channelit->calculationOnly)
+                {
+                    if (a < -1 || a > 1)
+                        throw std::runtime_error("Amplitude must be -1 to 1");
 
-                ofstemp.write(reinterpret_cast<char *>(&a), sizeof(a));
+                    double newmax = std::max(maxPerChannel[writeableChannelIndex], abs(a));
+                    maxPerChannel[writeableChannelIndex] = newmax;
+                    ofstemp.write(reinterpret_cast<char *>(&a), sizeof(a));
+                    writeableChannelIndex++;
+                }
+
+                channelIndex++;
             }
         }
 

@@ -1,20 +1,34 @@
 {
     "TrackLength": "00:01:00",
     "Channels": {
-        "Phase": {
+        "0_Phase": {
             "CalculationOnly": true,
             "Components": [
-                { "Frequency": "1", "Pulse": "x-floor(x)" }
+                { "Frequency": "0.5", "Pulse": "sin(x)" }
             ]
         },
-        "Left": {
+        "1_LeftPulse": {
+            "CalculationOnly": true,
             "Components": [
                 { "Frequency": "1", "Pulse": "cos(x)" }
             ]
         },
-        "Right": {
+        "2_RightPulse": {
+            "CalculationOnly": true,
             "Components": [
-                { "Frequency": "1", "Pulse": "-channel(n, 1)" }
+                { "Frequency": "1", "Pulse": "(channel(n, 0) - channel(n, 1) ) / 2" }
+            ]
+        },
+        "3_Left": {
+            "Components": [
+                { "Frequency": "1", "Pulse": "channel(n,1)" },
+                { "Frequency": "600", "Pulse": "sin(x)" }
+            ]
+        },
+        "4_Right": {
+            "Components": [
+                { "Frequency": "1", "Pulse": "channel(n,2)" },
+                { "Frequency": "600", "Pulse": "sin(x) " }
             ]
         }
     }

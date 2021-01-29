@@ -17,7 +17,7 @@ double FrequencyFunctionWaveFile::sinorcos(double channelindex, double arg)
     return channelindex == 1 ? sin(arg) : cos(arg);
 }
 
-FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const nlohmann::json j, const std::map<std::string, double>& constants, double channelindex, const headerdata& h, channelfunction* thechannelfunction) :
+FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const nlohmann::json j, const std::map<std::string, double>& constants, double channelindex, const headerdata& h, channelfunction* thechannelfunction, bool calculationOnly) :
     t(new double(0)),
     tprev(new double(0)),
     n(new double(-1)),
@@ -34,7 +34,8 @@ FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const nlohmann::json j, con
     startTime(-1),
     endTime(-1),
     everFiltered(false),
-    thechannelfunction(thechannelfunction)
+    thechannelfunction(thechannelfunction),
+    calculationOnly(calculationOnly)
 {
     std::string frequencyExpressionOrFile, pulseExpressionOrFile;
 
@@ -83,7 +84,8 @@ FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const FrequencyFunctionWave
     startTime(other.startTime),
     endTime(other.endTime),
     everFiltered(other.everFiltered),
-    thechannelfunction(other.thechannelfunction)
+    thechannelfunction(other.thechannelfunction),
+    calculationOnly(other.calculationOnly)
 {
 }
 
@@ -251,9 +253,9 @@ double FrequencyFunctionWaveFile::Amplitude(double t, int32_t n)
     {
         throw std::runtime_error("Pulse expression returned NaN");
     }
-    if(a < -1 || a > 1)
+    if(!calculationOnly && (a < -1 || a > 1))
     {
-        std::cout << "a=" << a << std::endl;
+        std::cerr << "n=" << n << ", a=" << a << std::endl;
         throw std::runtime_error("Pulse expression returned out of range value");
     }
 

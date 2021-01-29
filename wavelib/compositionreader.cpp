@@ -43,7 +43,7 @@ double compositionreader::get_next(int n, int16_t channel)
     }
     if(std::isnan(aNorm) || aNorm < -1 || aNorm > 1)
     {
-        std::cout << "a=" << a << ", maxPerChannel=" << maxPerChannel[channel] << ", aNorm=" << aNorm << std::endl;
+        std::cerr << "n=" << n << ", a=" << a << ", maxPerChannel=" << maxPerChannel[channel] << ", aNorm=" << aNorm << std::endl;
         throw std::runtime_error("aNorm out of range");
     }
     return aNorm;

@@ -64,6 +64,10 @@ void compositionelement::calculate()
                 if (a < -1 || a > 1)
                     throw std::runtime_error("Amplitude must be -1 to 1");
 
+
+                thechannelfunction.channelValues[channelIndex] = a;
+                thechannelfunction.lastNCheck[channelIndex] = n;
+
                 double newmax = std::max(maxPerChannel[channelIndex], abs(a));
                 maxPerChannel[channelIndex] = newmax;
                 channelIndex++;

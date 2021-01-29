@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "FrequencyFunctionWaveFileGroup.h"
 
-FrequencyFunctionWaveFileGroup::FrequencyFunctionWaveFileGroup(const nlohmann::json j, const std::map<std::string, double>& constants, double channelindex, const headerdata& h, const channelfunction* thechannelfunction)
+FrequencyFunctionWaveFileGroup::FrequencyFunctionWaveFileGroup(const nlohmann::json j, const std::map<std::string, double>& constants, double channelindex, const headerdata& h, channelfunction* thechannelfunction)
 {
     // this probably leaks memory - as they are not deleted. can't delete in destructor as copy constructed instance will try again.
     // but process will end soon enough. if it were a web server could use smart pointers

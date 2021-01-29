@@ -20,8 +20,8 @@ public:
     static int nextid;
     int id = nextid++;
 
-    const channelfunction* thechannelfunction;
-    FrequencyFunctionWaveFile(const nlohmann::json j, const std::map<std::string, double>& constants, double channel, const headerdata& h, const channelfunction* thechannelfunction);
+    channelfunction* thechannelfunction;
+    FrequencyFunctionWaveFile(const nlohmann::json j, const std::map<std::string, double>& constants, double channel, const headerdata& h, channelfunction* thechannelfunction);
     FrequencyFunctionWaveFile(const FrequencyFunctionWaveFile& other);
 
     bool initialized;

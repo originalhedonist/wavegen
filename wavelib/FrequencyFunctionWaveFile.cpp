@@ -17,7 +17,7 @@ double FrequencyFunctionWaveFile::sinorcos(double channelindex, double arg)
     return channelindex == 1 ? sin(arg) : cos(arg);
 }
 
-FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const nlohmann::json j, const std::map<std::string, double>& constants, double channelindex, const headerdata& h, const channelfunction* thechannelfunction) :
+FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const nlohmann::json j, const std::map<std::string, double>& constants, double channelindex, const headerdata& h, channelfunction* thechannelfunction) :
     t(new double(0)),
     tprev(new double(0)),
     n(new double(-1)),
@@ -106,6 +106,7 @@ void FrequencyFunctionWaveFile::initialize()
     symbol_table_pulse.add_function("randomdouble", FrequencyFunctionWaveFile::randomdouble);
     symbol_table_pulse.add_function("randombetween", FrequencyFunctionWaveFile::randombetween);
     symbol_table_pulse.add_function("sinorcos", FrequencyFunctionWaveFile::sinorcos);
+    symbol_table_pulse.add_function("channel", *thechannelfunction);
     symbol_table_pulse.add_pi();
 
     symbol_table_frequency.add_constant("N", h.N);

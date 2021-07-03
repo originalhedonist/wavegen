@@ -7,6 +7,7 @@ class channel
 {
 public:
     bool calculationOnly;
+    bool normalize;
     std::vector<FrequencyFunctionWaveFileGroup> components;
     channel(const nlohmann::json& j, const std::map<std::string, double>& constants, double channelindex, const headerdata& h, channelfunction* thechannelfunction);
 };

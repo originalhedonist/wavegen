@@ -78,8 +78,14 @@ void compositionelement::calculate()
                     if (a < -1 || a > 1)
                         throw std::runtime_error("Amplitude must be -1 to 1");
 
-                    double newmax = std::max(maxPerChannel[writeableChannelIndex], abs(a));
-                    maxPerChannel[writeableChannelIndex] = newmax;
+                    if(channelit->normalize)
+                    {
+                        double newmax = std::max(maxPerChannel[writeableChannelIndex], abs(a));
+                        maxPerChannel[writeableChannelIndex] = newmax;
+                    }
+                    else 
+                        maxPerChannel[writeableChannelIndex] = 1;
+
                     ofstemp.write(reinterpret_cast<char *>(&a), sizeof(a));
                     writeableChannelIndex++;
                 }

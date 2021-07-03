@@ -36,6 +36,7 @@ double compositionreader::get_next(int n, int16_t channel)
     double a;
     ifstemp.read(reinterpret_cast<char*>(&a), sizeof(a));
     double aNorm = a == 0 ? 0 : a / maxPerChannel[channel]; //normalization
+
     if (++channelNext >= header.channels)
     {
         nNext++;

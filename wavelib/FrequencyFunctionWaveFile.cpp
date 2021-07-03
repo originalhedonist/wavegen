@@ -120,6 +120,7 @@ void FrequencyFunctionWaveFile::initialize()
     symbol_table_frequency.add_function("randomdouble", FrequencyFunctionWaveFile::randomdouble);
     symbol_table_frequency.add_function("randombetween", FrequencyFunctionWaveFile::randombetween);
     symbol_table_frequency.add_function("sinorcos", FrequencyFunctionWaveFile::sinorcos);
+    symbol_table_frequency.add_function("channel", *thechannelfunction);
 
     symbol_table_frequency.add_constant("channelindex", channelindex);
     symbol_table_pulse.add_constant("channelindex", channelindex);

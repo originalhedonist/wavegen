@@ -5,8 +5,8 @@ waveliballsources := $(wavelibsources) $(wildcard wavelib/*.h) $(wildcard waveli
 wavegenallsources := $(wavegensources) $(wildcard wavegen/*.h) $(wildcard wavegen/*.hpp)
 symphgenallsources := $(symphgensources) $(wildcard symphgen/*.h) $(wildcard symphgen/*.hpp)
 
-CXX=g++-10
-CXXFLAGS=--std=c++17 -O3
+CXX=g++
+CXXFLAGS=--std=c++20 -O3
 wavelibobjs := $(patsubst wavelib/%, obj/wavelib/%, $(patsubst %.cpp, %.o, $(wavelibsources)))
 wavegenobjs := $(patsubst wavegen/%, obj/wavegen/%, $(patsubst %.cpp, %.o, $(wavegensources)))
 symphgenobjs := $(patsubst symphgen/%, obj/symphgen/%, $(patsubst %.cpp, %.o, $(symphgensources)))

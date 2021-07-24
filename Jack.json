@@ -3,7 +3,7 @@
     "Channels": {
         "Left": {
             "Components": [
-                { "Frequency": "Jack_Frequency.exprtk", "Pulse": "sin(x)" }
+                { "Frequency": "0", "Pulse": "sin(x)" }
             ]
         }
     }

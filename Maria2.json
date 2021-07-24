@@ -1,0 +1,21 @@
+{
+    "TrackLength": "01:00:00",
+    "Channels": {
+        "2_Left": {
+            "Components": [
+                { "Frequency": "Maria2Frequency.exprtk", "Pulse": "SinWithWetness.exprtk", ":wetness": 0.3, ":phasefactor": 0},
+                { "Frequency": "320", "Pulse": "sin(x)"},
+                { "Frequency": "0", "Pulse": "BreakEnvelope_FirstHalf.exprtk", ":numbreaks": 4},
+                { "Frequency": "0", "Pulse": "RiseEnvelope.exprtk", ":numsections": 7, ":riselength": 20, ":riseamount": 0.15}
+            ]
+        },
+        "3_Right": {
+            "Components": [
+                { "Frequency": "Maria2Frequency.exprtk", "Pulse": "SinWithWetness.exprtk", ":wetness": 0.3, ":phasefactor": 0.0026179},
+                { "Frequency": "1000", "Pulse": "sin(x)"},
+                { "Frequency": "0", "Pulse": "BreakEnvelope_FirstHalf.exprtk", ":numbreaks": 4},
+                { "Frequency": "0", "Pulse": "RiseEnvelope.exprtk", ":numsections": 7, ":riselength": 20, ":riseamount": 0.15}
+            ]
+        }
+    }
+}

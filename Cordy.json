@@ -1,0 +1,23 @@
+{
+    "TrackLength": "02:00:00",
+    "Channels": {
+        "Left": {
+            "Components": [                
+                { "Frequency": "FluctuatingWavelength.exprtk", ":periodicity": 300, ":minwavelength": 1, ":maxwavelength": 2, 
+                     "Pulse": "BubblyWaveWet.exprtk", ":bubbleamplitude": 0.25, ":bubblefrequencyfactor": 16, ":wetness": 0.2, ":bubblewetness": 0.1},
+                { "Frequency": "600", "Pulse": "sin(x)"},
+                { "Frequency": "0", "Pulse": "BreakEnvelope_FirstHalf.exprtk", ":numbreaks": 4},
+                { "Frequency": "0", "Pulse": "RiseEnvelope_FirstHalf.exprtk",  ":numsections": 3, ":riseamount": 0.2, ":riselength": 8 }
+            ]
+        },
+        "Right": {
+            "Components": [                
+                { "Frequency": "FluctuatingWavelength.exprtk", ":periodicity": 300, ":minwavelength": 1, ":maxwavelength": 2, 
+                     "Pulse": "BubblyWaveWetCos.exprtk", ":bubbleamplitude": 0.25, ":bubblefrequencyfactor": 16, ":wetness": 0.2, ":bubblewetness": 0.1},
+                { "Frequency": "600", "Pulse": "cos(x)"},
+                { "Frequency": "0", "Pulse": "BreakEnvelope_FirstHalf.exprtk", ":numbreaks": 4},
+                { "Frequency": "0", "Pulse": "RiseEnvelope_FirstHalf.exprtk",  ":numsections": 3, ":riseamount": 0.2, ":riselength": 8 }
+            ]
+        }
+    }
+}

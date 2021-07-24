@@ -1,0 +1,33 @@
+{
+    "TrackLength": "01:00:00",
+    "Channels": {
+        "0_FrequencyDrop": {
+            "CalculationOnly": true,
+            "Components": [
+                { "Frequency": "1", "Pulse": "RiseEnvelope.exprtk", ":numsections": 10, ":riseamount": 1.2, ":riselength": 10, "CalculationOnly": true }
+            ]
+        },
+        "1_PhaseBetweenChannels": {
+            "CalculationOnly": true,
+            "Components": [
+                { "Frequency": "0.01", "Pulse": "sin(x)" }
+            ]
+        },
+        "2_Left": {
+            "Components": [
+                { "Frequency": "1654 - 1200 * channel(n,0)", "Pulse": "sin(x)" , "Description": "carrier"},
+                { "Frequency": "0.5", "Pulse": "SinWithWetness.exprtk", ":wetness": 0.4, "Description": "pulse" },
+                { "Frequency": "1", "Pulse": "0.95 - 0.05 * channel(n,1)"}
+
+            ]
+        },
+        "3_Right": {
+            "Components": [
+                { "Frequency": "1800 - 238 * channel(n,0)", "Pulse": "sin(x)" , "Description": "carrier"},
+                { "Frequency": "0.5", "Pulse": "SinWithWetness.exprtk", ":wetness": 0.4, "Description": "pulse" },
+                { "Frequency": "1", "Pulse": "0.95 + 0.05 * channel(n,1)"}
+
+            ]
+        }
+    }
+}

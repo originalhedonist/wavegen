@@ -11,15 +11,15 @@ if(t >= timebetweenboosts)
     if(t-timeoflastboost <= up)
     {
         var proportionalong := (t-timeoflastboost)/up;
-        att + (1-att)*proportionalong
+        (att + (1-att)*proportionalong) * basevalue
     }
     else
     {
         var proportionalong := (t-timeoflastboost-up) / (timebetweenboosts-up);
-        1-(1-att)*proportionalong
+        (1-(1-att)*proportionalong) * basevalue
     }
 }
 else
 {
-    att;
+    att * basevalue
 };

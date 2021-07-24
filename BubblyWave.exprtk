@@ -1,0 +1,2 @@
+(sin(x)+ bubbleamplitude * ( sin( x*bubblefrequencyfactor ) * sin(x) ) ) / (1 + bubbleamplitude);
+/* multiply the bubble by sin(x) so it's less amplitude near the cross-over, as it can otherwise be weird */

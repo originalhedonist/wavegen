@@ -1,0 +1,47 @@
+{
+    "TrackLength": "01:30:00",
+    "Channels": {
+        "0_Phase": {
+            "CalculationOnly": true,
+            "Components": [
+                { "Frequency": "0.05", "Pulse": "sin(x)" }
+            ]
+        },
+        "1_PhaseGrad": {
+            "CalculationOnly": true,
+            "Components": [
+                { "Frequency": "0.05", "Pulse": "cos(x)" }
+            ]
+        },
+        "2_LeftPulse": {
+            "CalculationOnly": true,
+            "Components": [
+                { "Frequency": "1", "Pulse": "BoostEnvelopeWithGradualDecline.exprtk", ":start": 120, ":end": 60, ":up": 5, ":att": 0.83, ":basevalue": 1 },
+                { "Frequency": "BoostEnvelopeWithGradualDecline.exprtk", ":start": 120, ":end": 60, ":up": 5, ":att": 0.625, ":basevalue": 0.8, "comment": "normally 0.5Hz but gets faster to 0.8Hz in line with the booster above ", "Pulse": "SinWithWetness.exprtk", ":wetness": 0.5 },
+                { "Frequency": "1", "Pulse": "BreakEnvelope.exprtk",  ":numbreaks": 10 }                
+            ]
+        },
+        "3_RightPulse": {
+            "CalculationOnly": true,
+            "Components": [
+                { "Frequency": "1", "Pulse": "(channel(n, 0) - channel(n, 2) ) / 2" }
+            ]
+        },
+        "4_Left": {
+            "Components": [
+                { "Frequency": "1", "Pulse": "channel(n,2)" },
+                { "Frequency": "600", "Pulse": "sin(x)" },
+                { "Frequency": "1", "Pulse": "(channel(n,1)*0.04)+0.96", "Description": "emphasize the left or right slightly depending on phase"},
+                { "Frequency": "1", "Pulse": "0.8+(0.2*n/N)" }
+            ]
+        },
+        "5_Right": {
+            "Components": [
+                { "Frequency": "1", "Pulse": "channel(n,3)" },
+                { "Frequency": "600", "Pulse": "sin(x)" },
+                { "Frequency": "1", "Pulse": "(channel(n,1)*-0.04)+0.96", "Description": "emphasize the left or right slightly depending on phase" },
+                { "Frequency": "1", "Pulse": "0.8+(0.2*n/N)" }
+            ]
+        }
+    }
+}

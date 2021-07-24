@@ -1,0 +1,15 @@
+var fastpoints[6] := {60, 17*60, 30*60, 41*60, 48*60, 53*60};
+
+var addition := 0;
+
+for(var i := 0; i < 6; i+=1)
+{
+    if(t >= fastpoints[i] and t < fastpoints[i] + 30)
+    {
+        var proportionalong := (t - fastpoints[i]) / 30;
+
+        addition := 1.4 * proportionalong;
+    };
+};
+
+0.1 + addition

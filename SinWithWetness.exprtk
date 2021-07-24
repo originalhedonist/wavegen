@@ -1,2 +1,2 @@
-    var power := (cos(x) + 1) / 2;
+    var power := (sin(x + phasefactor * t) + 1) / 2;
     1-power*(1-wetness)

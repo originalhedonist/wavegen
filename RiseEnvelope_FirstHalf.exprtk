@@ -1,0 +1,38 @@
+/* pass in:
+numsections
+riselength
+riseamount
+ */
+
+ var attenuation := 1/(1+riseamount);
+
+var sectionlength := (0.5*T)/numsections;
+var section := (n >= N/2 ? (numsections - 1) : floor(numsections*n/(0.5*N)) );
+var startofsection := section * sectionlength;
+var endofsection := (section + 1) * sectionlength;
+var startoflastrise := startofsection - riselength/2;
+var endoflastrise := startofsection + riselength/2;
+
+var startofnextrise := endofsection - riselength/2;
+var endofnextrise := endofsection + riselength/2;
+
+var nextsectionquiescent := attenuation^(numsections-section-2);
+var thissectionquiescent := attenuation^(numsections-section-1);
+var lastsectionquiescent := attenuation^(numsections-section);
+
+thissectionquiescent
+
+if(t < endoflastrise and section > 0)
+{
+    var proportion := (t-startoflastrise)/(endoflastrise-startoflastrise);
+    min(1, lastsectionquiescent + (proportion * (thissectionquiescent - lastsectionquiescent)))
+}
+else if(t > startofnextrise)
+{
+    var proportion := (t-startofnextrise)/(endofnextrise-startofnextrise);
+    min(1, thissectionquiescent + (proportion * (nextsectionquiescent - thissectionquiescent)))
+}
+else
+{
+    thissectionquiescent
+};

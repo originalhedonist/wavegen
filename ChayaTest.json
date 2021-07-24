@@ -1,0 +1,11 @@
+{
+    "TrackLength": "00:05:00",
+    "Channels": {
+        "0_Phase": {
+            "Components": [
+                { "Frequency": "1", "Pulse": "BoostEnvelopeWithGradualDecline.exprtk", ":start": 120, ":end": 60, ":up": 5, ":att": 0.83, ":basevalue": 1 },
+                { "Frequency": "BoostEnvelopeWithGradualDecline.exprtk", ":start": 120, ":end": 60, ":up": 5, ":att": 0.625, ":basevalue": 0.8, "comment": "normally 0.5Hz but gets faster to 0.8Hz in line with the booster above ", "Pulse": "SinWithWetness.exprtk", ":wetness": 0.5 }
+            ]
+        }
+    }
+}

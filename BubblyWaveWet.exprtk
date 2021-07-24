@@ -1,0 +1,8 @@
+var basepower := (sin(x)+1)/2;
+var bubbleamplitudethis := bubbleamplitude*(1-basepower*(1-bubblewetness));
+
+var baseamp := (sin(x)+ bubbleamplitudethis * ( sin( x*bubblefrequencyfactor ) ) ) / (1 + bubbleamplitudethis);
+/* bubbleamplitude should be greater than wetness */
+
+var power := (1+baseamp)/2;
+1-power*(1-wetness)

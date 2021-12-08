@@ -25,10 +25,10 @@ obj/wavegen:
 obj/symphgen:
 	mkdir -p obj/symphgen
 
-%.wav: %.json bin/wavegen
+%.wav: %.json bin/wavegen *.exprtk
 	bin/wavegen $< $@
 
-%.mp3 : %.wav
+%.mp3 : %.wav *.exprtk
 	lame $<
 
 bin:

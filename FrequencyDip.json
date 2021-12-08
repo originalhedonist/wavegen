@@ -1,0 +1,22 @@
+{
+  "Version": 2,
+  "TrackLength": "01:00:00",
+  "Channels": {
+    "Left": {
+      "Components": [
+        {"Frequency": "FluctuatingWavelength.exprtk", ":periodicity": 30, ":minwavelength": 1.6, ":maxwavelength": 4, "Pulse": "(sin(x)+(0.1*sin(x*11)))/1.1" },
+        {"Frequency": "FrequencyDip.exprtk", "Pulse": "sin(x)"},
+        {"Frequency": "1", "Pulse": "BreakEnvelope_FirstHalf.exprtk", ":numbreaks": 4},
+        {"Frequency": "1", "Pulse": "0.5+0.5t/T"}
+      ]
+    },
+    "Right": {
+      "Components": [
+        {"Frequency": "FluctuatingWavelength.exprtk", ":periodicity": 30, ":minwavelength": 1.6, ":maxwavelength": 4, "Pulse": "(cos(x)+(0.1*cos(x*11)))/1.1" },
+        {"Frequency": "FrequencyDip.exprtk", "Pulse": "sin(x)"},
+        {"Frequency": "1", "Pulse": "BreakEnvelope_FirstHalf.exprtk", ":numbreaks": 4},
+        {"Frequency": "1", "Pulse": "0.5+0.5t/T"}
+      ]
+    }
+  }
+}

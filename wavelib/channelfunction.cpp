@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "channelfunction.h"
 
 channelfunction::channelfunction(const channelfunction& other) : channelfunction(other.numChannels) {}

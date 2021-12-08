@@ -37,7 +37,7 @@ int main(int argc, char** args)
         
         return 0;
     }
-    catch (const std::runtime_error& ex)
+    catch (const std::exception& ex)
     {
         std::cout << ex.what() << std::endl;
         return 1;

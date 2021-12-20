@@ -1,0 +1,16 @@
+/* starts off at maxf, then after dippoint, dips periodically (cos wave) nearer and nearer to minf */
+/* pass in minf, maxf, dippoint */
+
+var fluctuationfrequency := 1/300;
+if(t < dippoint)
+{
+    maxf
+}
+else
+{
+    var proportion := (t-dippoint)/(T - dippoint);
+    var minfthis := maxf - (maxf - minf) * proportion;
+    var wave := cos(2*pi*fluctuationfrequency*(t - dippoint)); /* -1 to 1 */
+    var wavenormalized := (wave + 1)/2; /* 0 to 1 */
+    wavenormalized * (maxf - minfthis) + minfthis
+}

@@ -1,0 +1,11 @@
+{
+  "Version": 2,
+  "TrackLength": "01:00:00",
+  "Channels": {
+    "Left": {
+      "Components": [
+        { "Frequency": "0", "Pulse": "FrequencyDipSmooth.exprtk", ":maxf": 0.8800, ":minf": 0.250, "PulseSubstitutions": "dippoint=T*0.1" }
+      ]
+    }
+  }
+}

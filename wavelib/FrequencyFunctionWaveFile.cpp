@@ -17,6 +17,7 @@ double FrequencyFunctionWaveFile::sinorcos(double channelindex, double arg)
     return channelindex == 1 ? sin(arg) : cos(arg);
 }
 
+
 FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const nlohmann::json j, const std::map<std::string, double>& constants, double channelindex, const headerdata& h, channelfunction* thechannelfunction, bool calculationOnly) :
     t(new double(0)),
     tprev(new double(0)),
@@ -42,8 +43,23 @@ FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const nlohmann::json j, con
     j["Frequency"].get_to(frequencyExpressionOrFile);
     this->frequency = get_expression(frequencyExpressionOrFile);
 
+    if (j.contains("FrequencySubstitutions"))
+    {
+        std::string frequencySubstitutions;
+        j["FrequencySubstitutions"].get_to(frequencySubstitutions);
+        make_substitutions(this->frequency, frequencySubstitutions);
+    }
+
     j["Pulse"].get_to(pulseExpressionOrFile);
     this->pulse = get_expression(pulseExpressionOrFile);
+
+    if (j.contains("PulseSubstitutions"))
+    {
+        std::string pulseSubstitutions;
+        j["PulseSubstitutions"].get_to(pulseSubstitutions);
+        make_substitutions(this->pulse, pulseSubstitutions);
+    }
+
 
     for(nlohmann::json::const_iterator it = j.begin(); it != j.end(); it++)
     {
@@ -66,6 +82,36 @@ FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const nlohmann::json j, con
     }
 }
 
+void FrequencyFunctionWaveFile::make_substitutions(std::string& input, const std::string& substitutions)
+{
+    std::string retval(input);
+    std::istringstream subsstream(substitutions);
+    std::string substitution;
+    while (std::getline(subsstream, substitution, ';'))
+    {
+        size_t equalspos = substitution.find('=');
+        if (equalspos == std::string::npos)
+        {
+            std::cerr << substitutions << std::endl;
+            std::cerr << substitution << std::endl;
+            throw std::runtime_error("Invalid substitution");
+        }
+        const std::string from = substitution.substr(0, equalspos);
+        const std::string to = substitution.substr(equalspos + 1);
+        replace_all(input, from, to);
+    }
+}
+
+void FrequencyFunctionWaveFile::replace_all(std::string& str, const std::string& from, const std::string& to) {
+    if (from.empty())
+        return;
+    size_t start_pos = 0;
+    while ((start_pos = str.find(from, start_pos)) != std::string::npos) {
+        str.replace(start_pos, from.length(), to);
+        start_pos += to.length(); // In case 'to' contains 'from', like replacing 'x' with 'yx'
+    }
+}
+
 FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const FrequencyFunctionWaveFile& other) :
     t(new double(*other.t)),
     tprev(new double(*other.tprev)),
@@ -75,6 +121,7 @@ FrequencyFunctionWaveFile::FrequencyFunctionWaveFile(const FrequencyFunctionWave
     gradient(new double(*other.gradient)),
     gradientprev(new double(*other.gradientprev)),
     aLast(other.aLast),
+    f(other.f),
     h(other.h),
     frequency(other.frequency),
     pulse(other.pulse),
@@ -93,6 +140,22 @@ FrequencyFunctionWaveFile::~FrequencyFunctionWaveFile()
 {
 }
 
+template<typename T>
+struct boo : public exprtk::ivararg_function<T>
+{
+    inline T operator()(const std::vector<T>& arglist)
+    {
+        T result = T(0);
+        std::cout << "In vararg function!" << std::endl;
+        for (std::size_t i = 0; i < arglist.size(); ++i)
+        {
+            result += arglist[i] / arglist[i > 0 ? (i - 1) : 0];
+        }
+        return 0.7;
+        //return result;
+    }
+};
+
 void FrequencyFunctionWaveFile::initialize()
 {
     exprtk::parser<double> parser_frequency, parser_pulse;
@@ -109,6 +172,7 @@ void FrequencyFunctionWaveFile::initialize()
     symbol_table_pulse.add_function("randombetween", FrequencyFunctionWaveFile::randombetween);
     symbol_table_pulse.add_function("sinorcos", FrequencyFunctionWaveFile::sinorcos);
     symbol_table_pulse.add_function("channel", *thechannelfunction);
+    symbol_table_pulse.add_function("mixin", themixinfunction);
     symbol_table_pulse.add_pi();
 
     symbol_table_frequency.add_constant("N", h.N);
@@ -121,9 +185,15 @@ void FrequencyFunctionWaveFile::initialize()
     symbol_table_frequency.add_function("randombetween", FrequencyFunctionWaveFile::randombetween);
     symbol_table_frequency.add_function("sinorcos", FrequencyFunctionWaveFile::sinorcos);
     symbol_table_frequency.add_function("channel", *thechannelfunction);
+    
 
+    /// <summary>
+    /// 
+    /// </summary>
     symbol_table_frequency.add_constant("channelindex", channelindex);
     symbol_table_pulse.add_constant("channelindex", channelindex);
+
+    //themixinfunction.somefunc();
 
     for(std::map<std::string, double>::const_iterator it = _constants.begin(); it != _constants.end(); it++)
     {

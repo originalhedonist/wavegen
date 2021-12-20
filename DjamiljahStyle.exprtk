@@ -1,0 +1,18 @@
+var fFast := 1;
+var fSlow := 0.2;
+
+if(fcurrent = 0)
+{
+    fcurrent := fFast;
+}
+
+var res := sin(x*fcurrent);
+if(abs(res) >= 0.5)
+{
+    fcurrent := fSlow;
+}
+else
+{
+    fcurrent := fFast;
+}
+res

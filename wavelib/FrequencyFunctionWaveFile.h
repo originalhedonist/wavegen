@@ -3,6 +3,47 @@
 #include "exprtk.hpp"
 #include "channelfunction.h"
 
+class mixinfunction : public exprtk::ivararg_function<double>
+{
+public:
+    virtual inline double operator() (const std::vector<double>& params)
+    {
+        double t = params[0];
+        double T = params[1];
+        double value = 0;
+        double max = 0;
+        if (t == 0) return 0;
+        bool debug = false;
+
+        for (size_t i = 3; i < params.size(); i += 2)
+        {
+            double component = params[i- 1];
+            double start = params[i];
+            debug |= std::abs(component) >= 0.99999;
+            if (t >= start)
+            {
+                double proportion = (t - start) / (T - start);
+                value += proportion * component;
+                max += proportion;
+            }
+        }
+        double retval = value / max;
+#ifdef exprtk_enable_debugging
+        std::cout << "mixin ";
+        int i = 0;
+        for (std::vector<double>::const_iterator it = params.begin(); it != params.end(); it++)
+        {
+            std::cout << (i++ == 0 ? "(" : ", ");
+            std::cout << *it;
+        }
+        std::cout << ") = " << retval << ", max = " << max << std::endl;
+#endif
+        return retval;
+    }
+
+    virtual ~mixinfunction() {}
+};
+
 class FrequencyFunctionWaveFileOrGroup
 {
 public:
@@ -21,6 +62,8 @@ public:
     int id = nextid++;
 
     channelfunction* thechannelfunction;
+    mixinfunction themixinfunction;
+
     FrequencyFunctionWaveFile(const nlohmann::json j, const std::map<std::string, double>& constants, double channel, const headerdata& h, channelfunction* thechannelfunction, bool calculationOnly);
     FrequencyFunctionWaveFile(const FrequencyFunctionWaveFile& other);
 
@@ -42,6 +85,9 @@ public:
     static double randomdouble();
     static double randombetween(double bottom, double top);
     static double sinorcos(double index, double arg);
+
+    static void make_substitutions(std::string& input, const std::string& substitutions);
+    static void replace_all(std::string& str, const std::string& from, const std::string& to);
 
     headerdata h;
     void initialize();

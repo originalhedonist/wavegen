@@ -13,13 +13,11 @@ public:
         double value = 0;
         double max = 0;
         if (t == 0) return 0;
-        bool debug = false;
 
         for (size_t i = 3; i < params.size(); i += 2)
         {
             double component = params[i- 1];
             double start = params[i];
-            debug |= std::abs(component) >= 0.99999;
             if (t >= start)
             {
                 double proportion = (t - start) / (T - start);
@@ -28,20 +26,34 @@ public:
             }
         }
         double retval = value / max;
-#ifdef exprtk_enable_debugging
-        std::cout << "mixin ";
-        int i = 0;
-        for (std::vector<double>::const_iterator it = params.begin(); it != params.end(); it++)
-        {
-            std::cout << (i++ == 0 ? "(" : ", ");
-            std::cout << *it;
-        }
-        std::cout << ") = " << retval << ", max = " << max << std::endl;
-#endif
         return retval;
     }
 
     virtual ~mixinfunction() {}
+};
+
+class normalizefunction : public exprtk::ivararg_function<double>
+{
+public:
+    static const int NORMALIZE_MEM_SIZE = 44100;
+
+    double max[NORMALIZE_MEM_SIZE]; // a second
+    normalizefunction()
+    {
+        memset(max, 0, sizeof(double) * NORMALIZE_MEM_SIZE);
+    }
+
+    virtual inline double operator() (const std::vector<double>& params)
+    {
+        int n = (long)params[0];
+        double val = params[1];
+        int nBase = n % NORMALIZE_MEM_SIZE;
+        max[nBase] = abs(val);
+        double maxVal = *std::max_element(max, max + NORMALIZE_MEM_SIZE);        
+        return maxVal == 0 ? -0.3 : val / maxVal;
+    }
+
+    virtual ~normalizefunction() {}
 };
 
 class FrequencyFunctionWaveFileOrGroup
@@ -63,6 +75,7 @@ public:
 
     channelfunction* thechannelfunction;
     mixinfunction themixinfunction;
+    normalizefunction thenormalizefunction;
 
     FrequencyFunctionWaveFile(const nlohmann::json j, const std::map<std::string, double>& constants, double channel, const headerdata& h, channelfunction* thechannelfunction, bool calculationOnly);
     FrequencyFunctionWaveFile(const FrequencyFunctionWaveFile& other);

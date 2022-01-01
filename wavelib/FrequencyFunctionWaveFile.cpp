@@ -140,22 +140,6 @@ FrequencyFunctionWaveFile::~FrequencyFunctionWaveFile()
 {
 }
 
-template<typename T>
-struct boo : public exprtk::ivararg_function<T>
-{
-    inline T operator()(const std::vector<T>& arglist)
-    {
-        T result = T(0);
-        std::cout << "In vararg function!" << std::endl;
-        for (std::size_t i = 0; i < arglist.size(); ++i)
-        {
-            result += arglist[i] / arglist[i > 0 ? (i - 1) : 0];
-        }
-        return 0.7;
-        //return result;
-    }
-};
-
 void FrequencyFunctionWaveFile::initialize()
 {
     exprtk::parser<double> parser_frequency, parser_pulse;
@@ -173,6 +157,8 @@ void FrequencyFunctionWaveFile::initialize()
     symbol_table_pulse.add_function("sinorcos", FrequencyFunctionWaveFile::sinorcos);
     symbol_table_pulse.add_function("channel", *thechannelfunction);
     symbol_table_pulse.add_function("mixin", themixinfunction);
+    symbol_table_pulse.add_function("mixin", themixinfunction);
+    symbol_table_pulse.add_function("normalize", thenormalizefunction);
     symbol_table_pulse.add_pi();
 
     symbol_table_frequency.add_constant("N", h.N);
@@ -192,8 +178,6 @@ void FrequencyFunctionWaveFile::initialize()
     /// </summary>
     symbol_table_frequency.add_constant("channelindex", channelindex);
     symbol_table_pulse.add_constant("channelindex", channelindex);
-
-    //themixinfunction.somefunc();
 
     for(std::map<std::string, double>::const_iterator it = _constants.begin(); it != _constants.end(); it++)
     {

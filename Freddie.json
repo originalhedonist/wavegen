@@ -26,7 +26,7 @@
     "Right": {
       "Components": [
         {"Frequency": "FluctuatingWavelength.exprtk", ":periodicity": 30, ":minwavelength": 1.25, ":maxwavelength": 4, "Pulse": "BobbleWithWetness.exprtk", "PulseSubstitutions": "WAVFUNC=cos;phaseshift=pi/2" },
-        {"Frequency": "1", "Pulse": "normalize(n, 200, mixin(t, T,  channel(n,4),0, channel(n,6),0, channel(n,8), 0, channel(n,1),0, channel(n,3),0.2T, channel(n,2),0.4T, channel(n,5),0.4T, channel(n,0),0.6T, channel(n,7),0.6T))" },
+        {"Frequency": "1", "Pulse": "normalize(n, 200, mixin(t, T,  channel(n,4),0, channel(n,6),0, channel(n,8), 0, channel(n,1),0, channel(n,3),0.25T, channel(n,2),0.45T, channel(n,5),0.55T, channel(n,0),0.65T, channel(n,7),0.75T))" },
         {"Frequency": "0", "Pulse": "BreakEnvelope_FirstHalf.exprtk", ":numbreaks": 4},
         {"Frequency": "0", "Pulse": "RiseEnvelope.exprtk", ":numsections": 5, ":riselength": 30, ":riseamount": 0.1}
       ]

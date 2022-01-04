@@ -4,7 +4,7 @@
 using json = nlohmann::json;
 
 compositionelement::compositionelement(const nlohmann::json &j, const std::map<std::string, double> &constants)
-    : compositionelement(j, constants, j["Channels"].size(), countWritableChannels(j) ) {}
+    : compositionelement(j, constants, (int16_t)j["Channels"].size(), countWritableChannels(j) ) {}
 
 compositionelement::compositionelement(const nlohmann::json &j, const std::map<std::string, double> &constants, int16_t totalChannels, int16_t writeableChannels)
     : totalChannels(totalChannels), writeableChannels(writeableChannels), header(trackLength(j), writeableChannels), constants(constants) , thechannelfunction(totalChannels)

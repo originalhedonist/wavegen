@@ -64,7 +64,7 @@ int main(int argc, char** args)
                 compositionelement* ce = new compositionelement(wavfuncs::read_json(profile), constants);
                 if(CHANNEL_COUNT == -1) // they can have any number of channels, but they must all have the same number, once CHANNEL_COUNT is first set, they must all have that number of channels
                 {
-                    CHANNEL_COUNT = ce->channels.size();
+                    CHANNEL_COUNT = (int)ce->channels.size();
                 }
                 else if (ce->channels.size() != CHANNEL_COUNT)
                 {

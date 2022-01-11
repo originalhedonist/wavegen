@@ -35,18 +35,7 @@ class normalizefunction : public exprtk::ivararg_function<double>
 {
     normalizationlist thelist;
 public:
-    // static const int NORMALIZE_MEM_SIZE = 44100*10; //10 seconds
-
-    // double mem[NORMALIZE_MEM_SIZE]; // a second
-    // normalizefunction()
-    // {
-    //     memset(mem, 0, sizeof(double) * NORMALIZE_MEM_SIZE);
-    //     for(int i = 0; i < NORMALIZE_MEM_SIZE; i++)
-    //     {
-    //         mem[i] = (i%2) * 2 - 1;
-    //     }
-    // }
-
+    
     virtual inline double operator() (const std::vector<double>& params)
     {
         try
@@ -54,11 +43,6 @@ public:
             int n = (long)params[0];
             int scan = (long)params[1];
             double val = params[2];
-
-            // int nBase = n % scan;
-            // mem[nBase] = val;
-            // double maxVal = *std::max_element(mem, mem + scan);        
-            // double minVal = *std::min_element(mem, mem + scan);
 
             thelist.add(val, scan);
 

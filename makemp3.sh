@@ -16,5 +16,5 @@ echo $commitmessage
 git add --all && git commit -m "$commitmessage"
 commit=`git rev-parse --short HEAD`
 wavname=$1_$commit.wav
-bin/x64/wavegen.exe $json $wavname
+x64/Release/wavegen.exe $json $wavname
 lame $wavname

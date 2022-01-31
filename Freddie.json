@@ -1,6 +1,6 @@
 {
   "Version": 2,
-  "TrackLength": "00:05:00",
+  "TrackLength": "01:30:00",
   "Channels": {
     "00_C": { "CalculationOnly": true, "Components": [{ "Frequency": "573", "Pulse": "sin(x)" }], "Comment": "seems to be present in djamiljah" },
     "01_C": { "CalculationOnly": true, "Components": [{ "Frequency": "809", "Pulse": "sin(x)" }] },

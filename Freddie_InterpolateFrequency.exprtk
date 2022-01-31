@@ -1,5 +1,8 @@
 var proportion := (channel(n,13)+1)/2; /* see Freddie.json for channel 13 */
 var maxw := 1/minf;
 var minw := 1/maxf;
-var w := minw + (maxw - minw) * (proportion);
+var minhff := 0.2; /* high frequency factor - the higher the power, the greater proportion of the time it spends at lower wavelengths (higher frequencies) */
+var maxhff := 2.5;
+var hff := minhff + (t/T)^0.7 * (maxhff - minhff); /* the power here determines how fast we want hff to rise towards maxhff... low power to rise faster. */ 
+var w := minw + (maxw - minw) * (proportion ^ hff);
 1/w

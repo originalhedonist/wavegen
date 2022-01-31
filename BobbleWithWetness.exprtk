@@ -2,7 +2,7 @@ var bobblefactor := 0.12; /* (amplitude as proportion of the main wave) e.g. 0.0
 var bobblefrequency := 11; /* this is also relative to the main wave */
 
 var minw := 0.4;
-var maxw := 0.9;
+var maxw := 0.8;
 
 var wetness;
 if(f >= maxf)

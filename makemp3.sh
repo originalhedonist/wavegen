@@ -11,10 +11,13 @@ if [ ! -f $json ]; then
     exit 1
 fi
 
+# purpose of this script is to tag all mp3 with a commit reference that we can go back to to reproduce that file, and tweak it if desired.
+# it doesn't make the program, will need to manually make sure it is compiled against the sources from the commit.
+
 commitmessage="Committing all files prior to making "$1
 echo $commitmessage
 git add --all && git commit -m "$commitmessage"
 commit=`git rev-parse --short HEAD`
 wavname=$1_$commit.wav
 x64/Release/wavegen.exe $json $wavname
-lame $wavname
+lame $wavname && rm $wavname

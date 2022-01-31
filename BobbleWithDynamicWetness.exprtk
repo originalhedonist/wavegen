@@ -1,7 +1,23 @@
 var bobblefactor := 0.12; /* (amplitude as proportion of the main wave) e.g. 0.075 */
 var bobblefrequency := 11; /* this is also relative to the main wave */
 
-var wetness := 0.4;
+var minw := 0.4;
+var maxw := 0.8;
+
+var wetness;
+if(f >= maxf)
+{
+    wetness := maxw;
+}
+else if (f < minf)
+{
+    wetness := minw;
+}
+else
+{
+    var proportion := (f - minf) / (maxf - minf);
+    wetness := minw + proportion * (maxw - minw);
+}
 
 var drywave := (WAVFUNC(x+phaseshift)+(bobblefactor*WAVFUNC(x*bobblefrequency)))/(1+bobblefactor);
 var power := (drywave + 1) / 2;

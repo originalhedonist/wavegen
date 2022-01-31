@@ -1,6 +1,6 @@
 {
   "Version": 2,
-  "TrackLength": "01:30:00",
+  "TrackLength": "00:09:59",
   "Channels": {
     "00_C": { "CalculationOnly": true, "Components": [{ "Frequency": "573", "Pulse": "sin(x)" }], "Comment": "seems to be present in djamiljah" },
     "01_C": { "CalculationOnly": true, "Components": [{ "Frequency": "809", "Pulse": "sin(x)" }] },
@@ -15,6 +15,12 @@
     "10_C": { "CalculationOnly": true, "Components": [{ "Frequency": "830.6094", "Pulse": "sin(x)" }], "Comment": "A flat"  },
     "11_C": { "CalculationOnly": true, "Components": [{ "Frequency": "1661.219", "Pulse": "sin(x)" }], "Comment": "A flat"  },
     "12_C": { "CalculationOnly": true, "Components": [{ "Frequency": "3322.438", "Pulse": "sin(x)" }], "Comment": "A flat"  },
+    "13_Wetness_Frequency": {
+      "CalculationOnly": true,
+      "Components": [
+        {"Frequency": "RandomFrequency.exprtk", "Pulse": "RandomPulse.exprtk" }
+      ]
+    },
     "Left": {
       "Components": [
         {"Frequency": "FluctuatingWavelength.exprtk", ":periodicity": 30, ":minwavelength": 6, ":maxwavelength": 10, "Pulse": "SinWithWetness.exprtk", ":wetness": 0.6, ":phasefactor": 0 },
@@ -25,7 +31,7 @@
     },
     "Right": {
       "Components": [
-        {"Frequency": "FluctuatingWavelength.exprtk", ":periodicity": 30, ":minwavelength": 1.25, ":maxwavelength": 4, "Pulse": "BobbleWithWetness.exprtk", "PulseSubstitutions": "WAVFUNC=cos;phaseshift=pi/2" },
+        {"Frequency": "minf + (maxf - minf) * (channel(n,13)+1)/2",":minf": 0.001666, ":maxf": 1,  "Pulse": "BobbleWithWetness.exprtk", "PulseSubstitutions": "WAVFUNC=cos;phaseshift=pi/2" },
         {"Frequency": "1", "Pulse": "normalize(n, 200, mixin(t, T,  channel(n,4),0, channel(n,6),0, channel(n,8), 0, channel(n,1),0, channel(n,3),0.25T, channel(n,2),0.45T, channel(n,5),0.55T, channel(n,0),0.65T, channel(n,7),0.75T))" },
         {"Frequency": "0", "Pulse": "BreakEnvelope_FirstHalf.exprtk", ":numbreaks": 4},
         {"Frequency": "0", "Pulse": "RiseEnvelope.exprtk", ":numsections": 5, ":riselength": 30, ":riseamount": 0.1}

@@ -1,0 +1,5 @@
+var proportion := (channel(n,13)+1)/2; /* see Freddie.json for channel 13 */
+var maxw := 1/minf;
+var minw := 1/maxf;
+var w := minw + (maxw - minw) * (proportion);
+1/w

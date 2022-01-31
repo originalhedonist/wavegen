@@ -1,6 +1,6 @@
 {
   "Version": 2,
-  "TrackLength": "00:09:59",
+  "TrackLength": "00:05:00",
   "Channels": {
     "00_C": { "CalculationOnly": true, "Components": [{ "Frequency": "573", "Pulse": "sin(x)" }], "Comment": "seems to be present in djamiljah" },
     "01_C": { "CalculationOnly": true, "Components": [{ "Frequency": "809", "Pulse": "sin(x)" }] },
@@ -23,10 +23,7 @@
     },
     "Left": {
       "Components": [
-        {"Frequency": "FluctuatingWavelength.exprtk", ":periodicity": 30, ":minwavelength": 6, ":maxwavelength": 10, "Pulse": "SinWithWetness.exprtk", ":wetness": 0.6, ":phasefactor": 0 },
-        {"Frequency": "1", "Pulse": "normalize(n, 200, mixin(t, T,  channel(n,10),0, channel(n,11),0.2T, channel(n,12),0.4T, channel(n,9),0.6T ))" },
-        {"Frequency": "0", "Pulse": "BreakEnvelope_FirstHalf.exprtk", ":numbreaks": 4},
-        {"Frequency": "0", "Pulse": "RiseEnvelope.exprtk", ":numsections": 5, ":riselength": 30, ":riseamount": 0.1}
+        {"Frequency":"0", "Pulse": "channel(n,13)"}
       ]
     },
     "Right": {

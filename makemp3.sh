@@ -14,3 +14,6 @@ fi
 commitmessage="Committing all files prior to making "$1
 echo $commitmessage
 git add --all && git commit -m "$commitmessage"
+commit=`git rev-parse --short HEAD`
+wavname=$1_$commit.wav
+echo $wavname

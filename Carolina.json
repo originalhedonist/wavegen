@@ -1,0 +1,16 @@
+{
+  "Version": 2,
+  "TrackLength": "00:02:00",
+  "Channels": {
+    "Left": {
+      "Components": [
+        {"Frequency": "FluctuatingWavelength.exprtk", ":periodicity": 30, ":minwavelength": 2, ":maxwavelength": 5, "Pulse": "SinWithWetness.exprtk", ":wetness": 0.6, ":phasefactor": 0 }
+      ]
+    },
+    "Right": {
+      "Components": [
+        {"Frequency": "1", "Pulse": "RandomPulsesCarolina.exprtk" }
+      ]
+    }
+  }
+}

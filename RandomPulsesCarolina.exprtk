@@ -1,0 +1,12 @@
+if((sin(x) > 0 and sin(xprev) <= 0) or (sin(x) <= 0 and sin(xprev) > 0))
+{
+    sequence := sequence + 1
+}
+if(sequence = 10)
+{
+    abs(sin(x))
+}
+else
+{
+    0
+}

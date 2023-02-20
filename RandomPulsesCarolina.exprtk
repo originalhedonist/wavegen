@@ -3,20 +3,20 @@ if(next_pulse = 0)
     next_pulse := floor(randomdoublebetween(10, 12));
 }
 
-if((sin(x) > 0 and sin(xprev) <= 0) or (sin(x) <= 0 and sin(xprev) > 0))
+if(sin(x) >= 0 and sin(xprev) < 0)
 {
     sequence := sequence + 1;
     if(sequence = next_pulse)
     {
         in_pulse := 1;
     };
-    if(sequence = next_pulse + 1)
-    {
-        in_pulse := 0;
-    };
 }
 if(in_pulse = 1)
 {
+    if(sin(x) < 0 and sin(xprev) >= 0)
+    {
+        in_pulse := 0;
+    };
     abs(sin(x))
 }
 else

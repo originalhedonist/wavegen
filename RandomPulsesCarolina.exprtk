@@ -1,6 +1,6 @@
 if(next_pulse = 0)
 {
-    next_pulse := floor(randomdoublebetween(3, 20));
+    next_pulse := floor(randomdoublebetween(1, 45));
 };
 
 if(sin(x) >= 0 and sin(xprev) < 0)

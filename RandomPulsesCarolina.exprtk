@@ -1,8 +1,16 @@
 if((sin(x) > 0 and sin(xprev) <= 0) or (sin(x) <= 0 and sin(xprev) > 0))
 {
-    sequence := sequence + 1
+    sequence := sequence + 1;
+    if(sequence = 10)
+    {
+        in_pulse := 1;
+    }
+    if(sequence = 11)
+    {
+        in_pulse := 0;
+    }
 }
-if(sequence = 10)
+if(in_pulse = 1)
 {
     abs(sin(x))
 }

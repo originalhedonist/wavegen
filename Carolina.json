@@ -9,7 +9,8 @@
     },
     "Right": {
       "Components": [
-        {"Frequency": "1", "Pulse": "RandomPulsesCarolina.exprtk" }
+        {"Frequency": "1", "Pulse": "RandomPulsesCarolina.exprtk" },
+        {"Frequency": "1200", "Pulse": "sin(x)"}
       ]
     }
   }

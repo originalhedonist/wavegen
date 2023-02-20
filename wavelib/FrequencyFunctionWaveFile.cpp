@@ -149,6 +149,7 @@ void FrequencyFunctionWaveFile::initialize()
     symbol_table_pulse.add_variable("tprev", *tprev);
     symbol_table_pulse.add_variable("n", *n);
     symbol_table_pulse.add_variable("x", *x);
+    symbol_table_pulse.add_variable("xprev", *xprev);
     symbol_table_pulse.add_variable("m", *gradient);
     symbol_table_pulse.add_variable("mprev", *gradientprev);
     symbol_table_pulse.add_variable("f", *f);
@@ -167,6 +168,7 @@ void FrequencyFunctionWaveFile::initialize()
     symbol_table_frequency.add_variable("n", *n);
     symbol_table_frequency.add_variable("m", *gradient);
     symbol_table_frequency.add_variable("mprev", *gradientprev);
+    symbol_table_frequency.add_variable("xprev", *xprev);
     symbol_table_frequency.add_function("randomdouble", FrequencyFunctionWaveFile::randomdouble);
     symbol_table_frequency.add_function("randombetween", FrequencyFunctionWaveFile::randombetween);
     symbol_table_frequency.add_function("sinorcos", FrequencyFunctionWaveFile::sinorcos);

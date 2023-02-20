@@ -1,10 +1,19 @@
 {
   "Version": 2,
-  "TrackLength": "00:02:00",
+  "TrackLength": "00:48:00",
   "Channels": {
     "Left": {
       "Components": [
-        {"Frequency": "FluctuatingWavelength.exprtk", ":periodicity": 30, ":minwavelength": 2, ":maxwavelength": 5, "Pulse": "SinWithWetness.exprtk", ":wetness": 0.6, ":phasefactor": 0 }
+        {"Frequency": "FluctuatingWavelength.exprtk",
+              ":periodicity": 30,
+              ":minwavelength": 2,
+              ":maxwavelength": 5,
+          "Pulse": "BobbleWithWetness.exprtk",
+              "PulseSubstitutions": "WAVFUNC=sin",
+              ":bobblefactor": 0.05,
+              ":wetness": 0.6,
+              ":phasefactor": 0 },
+        {"Frequency": "1200", "Pulse": "sin(x)" }
       ]
     },
     "Right": {

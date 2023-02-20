@@ -1,23 +1,10 @@
 {
   "Version": 2,
-  "TrackLength": "00:01:00",
+  "TrackLength": "00:02:00",
   "Channels": {
-    "00_C": { "CalculationOnly": true, "Components": [{ "Frequency": "573", "Pulse": "sin(x)" }], "Comment": "seems to be present in djamiljah" },
-    "01_C": { "CalculationOnly": true, "Components": [{ "Frequency": "809", "Pulse": "sin(x)" }] },
-    "02_C": { "CalculationOnly": true, "Components": [{ "Frequency": "1157", "Pulse": "sin(x)" }] },
-    "03_C": { "CalculationOnly": true, "Components": [{ "Frequency": "1627", "Pulse": "sin(x)" }] },
-    "04_C": { "CalculationOnly": true, "Components": [{ "Frequency": "1709", "Pulse": "sin(x)" }], "Comment": "seems to be present in djamiljah"  },
-    "05_C": { "CalculationOnly": true, "Components": [{ "Frequency": "2297", "Pulse": "sin(x)" }] },
-    "06_C": { "CalculationOnly": true, "Components": [{ "Frequency": "2854", "Pulse": "sin(x)" }], "Comment": "seems to be present in djamiljah"  },
-    "07_C": { "CalculationOnly": true, "Components": [{ "Frequency": "3253", "Pulse": "sin(x)" }] },
-    "08_C": { "CalculationOnly": true, "Components": [{ "Frequency": "3988", "Pulse": "sin(x)" }], "Comment": "seems to be present in djamiljah"  },
-    "09_C": { "CalculationOnly": true, "Components": [{ "Frequency": "415.3047", "Pulse": "sin(x)" }], "Comment": "A flat"  },
-    "10_C": { "CalculationOnly": true, "Components": [{ "Frequency": "830.6094", "Pulse": "sin(x)" }], "Comment": "A flat"  },
-    "11_C": { "CalculationOnly": true, "Components": [{ "Frequency": "1661.219", "Pulse": "sin(x)" }], "Comment": "A flat"  },
-    "12_C": { "CalculationOnly": true, "Components": [{ "Frequency": "3322.438", "Pulse": "sin(x)" }], "Comment": "A flat"  },
     "Left": {
       "Components": [
-        {"Frequency": "1", "Pulse": "mixin(t, T,  channel(n,10),0)" }
+        {"Frequency": "0.1", "Pulse": "BobbleWithWetness.exprtk", "PulseSubstitutions": "WAVFUNC=sin", ":bobblefactor": 0.05 }
       ]
     }
   }

@@ -81,7 +81,7 @@ const nlohmann::json wavfuncs::read_json(const std::string& file)
 
 void wavfuncs::write_double_as_short(std::ostream& ofs, double a)
 {
-    int aL = ((a + 1) * ((double)65535 / 2) - 32768);
+    int aL = (int)((a + 1) * ((double)65535 / 2) - 32768);
     if (aL > SHRT_MAX) throw std::runtime_error("Exceeded SHRT_MAX");
     if (aL < SHRT_MIN)
     {

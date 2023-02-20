@@ -157,6 +157,8 @@
     <ClInclude Include="compositionreader.h" />
     <ClInclude Include="exprtk.hpp" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="MixinFunction.h" />
+    <ClInclude Include="NormalizeFunction.h" />
     <ClInclude Include="FrequencyFunctionWaveFile.h" />
     <ClInclude Include="FrequencyFunctionWaveFileGroup.h" />
     <ClInclude Include="headerdata.h" />
@@ -171,6 +173,7 @@
     <ClCompile Include="compositionreader.cpp" />
     <ClCompile Include="FrequencyFunctionWaveFile.cpp" />
     <ClCompile Include="FrequencyFunctionWaveFileGroup.cpp" />
+    <ClCompile Include="FrequencyFunctionWaveFileOrGroup.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

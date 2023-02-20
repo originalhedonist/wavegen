@@ -1,0 +1,10 @@
+var minwavelength := 2;
+var maxwavelength := 30;
+
+if(currentfrequency = 0 or (mprev < 0 and m >= 0))
+{
+    var currentwavelength := randombetween(minwavelength, maxwavelength);
+    currentfrequency := 1 / currentwavelength;
+};
+
+currentfrequency

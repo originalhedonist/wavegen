@@ -1,0 +1,14 @@
+var current := sin(x);
+if(negativemultiplier = 0 or (current >= 0 and lastamplitude < 0))
+{
+    negativemultiplier := randombetween(0.1, 1)
+};
+
+if(positivemultiplier = 0 or (current >= 0 and lastamplitude < 0))
+{
+    positivemultiplier := randombetween(0.1, 1)
+};
+
+var multiplier := current > 0 ? positivemultiplier : negativemultiplier;
+lastamplitude := current;
+current * multiplier;

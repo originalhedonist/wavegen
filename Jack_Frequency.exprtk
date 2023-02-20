@@ -1,13 +1,13 @@
 if(currentamplitude = 0)
 {
-    currentamplitude := randombetween(0.2, 1);
+    currentamplitude := randomdoublebetween(0.2, 1);
 };
 
 y := sin(2pi*t) * currentamplitude;
 
 if(sgn(prev) != sgn(y))
 {
-    currentamplitude := randombetween(0.2, 1);
+    currentamplitude := randomdoublebetween(0.2, 1);
 };
 
 prev := y;

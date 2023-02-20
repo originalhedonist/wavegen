@@ -107,7 +107,7 @@ public:
     static std::string get_expression(const std::string& expression);
     static std::vector<std::string> get_missing_variables(exprtk::symbol_table<double> symbol_table, const std::string& expression);
     static double randomdouble();
-    static double randombetween(double bottom, double top);
+    static double randomdoublebetween(double bottom, double top);
     static double sinorcos(double index, double arg);
 
     static void make_substitutions(std::string& input, const std::string& substitutions);

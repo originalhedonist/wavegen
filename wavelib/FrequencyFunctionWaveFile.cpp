@@ -2,7 +2,7 @@
 #include "FrequencyFunctionWaveFile.h"
 #include "unknownsymbolresolver.h"
 
-double FrequencyFunctionWaveFile::randombetween(double bottom, double top)
+double FrequencyFunctionWaveFile::randomdoublebetween(double bottom, double top)
 {
     return bottom + (FrequencyFunctionWaveFile::randomdouble() * (top - bottom));
 }
@@ -154,7 +154,7 @@ void FrequencyFunctionWaveFile::initialize()
     symbol_table_pulse.add_variable("mprev", *gradientprev);
     symbol_table_pulse.add_variable("f", *f);
     symbol_table_pulse.add_function("randomdouble", FrequencyFunctionWaveFile::randomdouble);
-    symbol_table_pulse.add_function("randombetween", FrequencyFunctionWaveFile::randombetween);
+    symbol_table_pulse.add_function("randomdoublebetween", FrequencyFunctionWaveFile::randomdoublebetween);
     symbol_table_pulse.add_function("sinorcos", FrequencyFunctionWaveFile::sinorcos);
     symbol_table_pulse.add_function("channel", *thechannelfunction);
     symbol_table_pulse.add_function("mixin", themixinfunction);
@@ -170,7 +170,7 @@ void FrequencyFunctionWaveFile::initialize()
     symbol_table_frequency.add_variable("mprev", *gradientprev);
     symbol_table_frequency.add_variable("xprev", *xprev);
     symbol_table_frequency.add_function("randomdouble", FrequencyFunctionWaveFile::randomdouble);
-    symbol_table_frequency.add_function("randombetween", FrequencyFunctionWaveFile::randombetween);
+    symbol_table_frequency.add_function("randomdoublebetween", FrequencyFunctionWaveFile::randomdoublebetween);
     symbol_table_frequency.add_function("sinorcos", FrequencyFunctionWaveFile::sinorcos);
     symbol_table_frequency.add_function("channel", *thechannelfunction);
     

@@ -18,7 +18,7 @@
     },
     "Right": {
       "Components": [
-        {"Frequency": "0.4 - 0.35t/T", "Pulse": "RandomPulsesCarolina.exprtk" },
+        {"Frequency": "0.1 - 0.05t/T", "Pulse": "RandomPulsesCarolina.exprtk" },
         {"Frequency": "1200", "Pulse": "sin(x) * (0.5 + 0.5t/T)"}
       ]
     }

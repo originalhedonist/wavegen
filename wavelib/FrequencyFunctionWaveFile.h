@@ -5,6 +5,7 @@
 #include "MixinFunction.h"
 #include "NormalizeFunction.h"
 #include "FrequencyFunctionWaveFileOrGroup.h"
+#include "RandomSequencePassFilterFunction.h"
 
 class FrequencyFunctionWaveFile : public FrequencyFunctionWaveFileOrGroup
 {
@@ -15,6 +16,7 @@ public:
     channelfunction* thechannelfunction;
     mixinfunction themixinfunction;
     normalizefunction thenormalizefunction;
+    randomsequencepassfilterfunction therandomsequencepassfilterfunction;
 
     FrequencyFunctionWaveFile(const nlohmann::json j, const std::map<std::string, double>& constants, double channel, const headerdata& h, channelfunction* thechannelfunction, bool calculationOnly);
     FrequencyFunctionWaveFile(const FrequencyFunctionWaveFile& other);

@@ -160,6 +160,7 @@ void FrequencyFunctionWaveFile::initialize()
     symbol_table_pulse.add_function("mixin", themixinfunction);
     symbol_table_pulse.add_function("mixin", themixinfunction);
     symbol_table_pulse.add_function("normalize", thenormalizefunction);
+    symbol_table_pulse.add_function("rsp_filter", therandomsequencepassfilterfunction);
     symbol_table_pulse.add_pi();
 
     symbol_table_frequency.add_constant("N", h.N);

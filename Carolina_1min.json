@@ -1,0 +1,26 @@
+{
+  "Version": 2,
+  "TrackLength": "00:01:00",
+  "Channels": {
+    "Left": {
+      "Components": [
+        {"Frequency": "FluctuatingWavelength.exprtk",
+              ":periodicity": 30,
+              ":minwavelength": 2,
+              ":maxwavelength": 5,
+          "Pulse": "BobbleWithWetness.exprtk",
+              "PulseSubstitutions": "WAVFUNC=sin",
+              ":bobblefactor": 0.05,
+              ":wetness": 0.6,
+              ":phasefactor": 0 },
+        {"Frequency": "1200", "Pulse": "sin(x) * (0.5 + 0.5t/T)" }
+      ]
+    },
+    "Right": {
+      "Components": [
+        {"Frequency": "1", "Pulse": "RandomPulsesCarolina.exprtk" },
+        {"Frequency": "1200", "Pulse": "sin(x) * (0.5 + 0.5t/T)"}
+      ]
+    }
+  }
+}

@@ -23,6 +23,17 @@
               "Pulse": "SinWithWetness.exprtk",
               ":wetness": 0.5 }
       ]
+    },
+    "Right": {
+      "Components": [
+        {"Pulse": "channel(n,0)", "Frequency": "1"},
+        {"Frequency": "FluctuatingWavelength.exprtk",
+              ":periodicity": 30,
+              ":minwavelength": 3,
+              ":maxwavelength": 5,
+              "Pulse": "CosWithWetness.exprtk",
+              ":wetness": 0.5 }
+      ]
     }
   }
 }

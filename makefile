@@ -34,10 +34,10 @@ obj/symphgen:
 bin:
 	mkdir bin
 
-bin/wavegen: $(wavegenobjs) $(wavelibobjs)
+bin/wavegen: outdirs wavelibdeps.d wavegendeps.d $(wavegenobjs) $(wavelibobjs)
 	$(CXX) $(wavegenobjs) $(wavelibobjs) -o bin/wavegen
 
-bin/symphgen: $(symphgenobjs) $(wavelibobjs)
+bin/symphgen: outdirs wavelibdeps.d symphgendeps.d $(symphgenobjs) $(wavelibobjs)
 	$(CXX) $(symphgenobjs) $(wavelibobjs) -o bin/symphgen
 
 wavelibdeps.d: $(waveliballsources) makedeps.sh

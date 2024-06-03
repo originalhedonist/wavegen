@@ -1,19 +1,25 @@
-/* frequency starts off constant, but then drops gradually
+/* frequency starts off constant, but then at dropstarttime, it drops gradually
+until dropendtime, at which point it stays at endfrequency
 going by the principle of y = mx + c
 (m being negative)
 pass in:
-timeatwhichfrequencydrops
+dropstarttime
+dropendtime
 startfrequency
 endfrequency
  */
 
-if(t < timeatwhichfrequencydrops)
+if(t < dropstarttime)
 {
   startfrequency
 }
+else if (t > dropendtime)
+{
+  endfrequency
+}
 else
 {
-  var frequencydropequation_m := (startfrequency - endfrequency) / (timeatwhichfrequencydrops - T);
-  var frequencydropequation_c := startfrequency - timeatwhichfrequencydrops * frequencydropequation_m;
+  var frequencydropequation_m := (startfrequency - endfrequency) / (dropstarttime - dropendtime);
+  var frequencydropequation_c := startfrequency - dropstarttime * frequencydropequation_m;
   frequencydropequation_m * t + frequencydropequation_c;
 }

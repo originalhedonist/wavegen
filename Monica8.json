@@ -5,7 +5,7 @@
     "CarrierAndEnvelope": {
       "CalculationOnly": true,
       "Components": [
-        {"Frequency": "1", "Pulse": "if(t >= 1200) { 1 } else { (4/5)*(t/1200) + (1/5) }"},
+        {"Frequency": "1", "Pulse": "if(t >= 1200) { 1 } else { (7/8)*(t/1200) + (1/8) }"},
         { "Pulse": "sin(x)",
           "Frequency": "FrequencyDrop.exprtk",
           ":startfrequency": 1200,

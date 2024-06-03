@@ -28,7 +28,7 @@ obj/symphgen:
 %.wav: %.json bin/wavegen *.exprtk
 	bin/wavegen $< $@
 
-%.mp3 : %.wav *.exprtk
+%.mp3 : %.wav
 	lame $<
 
 bin:

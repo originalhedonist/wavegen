@@ -1,0 +1,5 @@
+Monica gradually increases in amplitude up until the 20 minute mark - by a factor of either 3, 5 or 8.
+During this first 20 minutes the carrier frequency stays at 1200Hz.
+Then at 20 minutes, once it has reached maximum amplitude, it starts dropping the carrier frequency,
+gradually decreasing until it reaches 320Hz by the 40 minute mark.
+Then, it stays at maximum amplitude and 320Hz for the last 20 minutes.

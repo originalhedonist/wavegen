@@ -1,2 +1,7 @@
-    var power := (sin(x + phasefactor * t) + 1) / 2;
+    /*
+    Introduced shift (to what what I thought phasefactor did).
+    So for 'alternating' sequences, i.e. one high while the other's low, do one with shift=0 and one with shift=1.
+    No idea what phasefactor is.
+    */
+    var power := (sin(x + phasefactor * t + shift * pi) + 1) / 2;
     1-power*(1-wetness)

@@ -1,0 +1,22 @@
+{
+  "Version": 2,
+  "TrackLength": "00:02:00",
+  "Channels": {
+    "Left": {
+      "Components": [
+        {"Frequency": "FluctuatingWavelength.exprtk",
+              ":periodicity": 30,
+              ":minwavelength": 3,
+              ":maxwavelength": 5,
+              "Pulse": "SinWithWetness.exprtk",
+              ":wetness": 0.5 },
+        {"Frequency": "1", "Pulse": "if(t > 900) { 1 } else { 0.8t/60 + 0.2 }"},
+        { "Pulse": "sin(x)",
+          "Frequency": "FrequencyDropAfterACertainTime.exprtk",
+          ":startfrequency": 1200,
+          ":endfrequency": 370,
+          ":timeatwhichfrequencydrops": 900 }
+      ]
+    }
+  }
+}
